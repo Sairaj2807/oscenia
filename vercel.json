@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/erp-guide", "destination": "/erp-guide.html" },
+    { "source": "/erp/(.*)", "destination": "/erp/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

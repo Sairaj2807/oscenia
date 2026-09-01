@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-navy-950 text-white font-sans antialiased;
+  margin: 0;
+  /* Scroll reveals travel in horizontally (see components/Reveal.jsx). On a
+     narrow screen a full-width element offset by a few rem extends past the
+     viewport, which on mobile shows up as a sideways scroll and a page that
+     drifts. Nothing here is meant to scroll sideways, so clip it. */
+  overflow-x: hidden;
+}
+
+/* Shared background: deep navy gradient used across pages */
+.bg-oscenia {
+  background:
+    radial-gradient(120% 80% at 50% -10%, #12233f 0%, rgba(18, 35, 63, 0) 55%),
+    linear-gradient(180deg, #060b16 0%, #04070f 100%);
+}
+
+/* The home page runs almost black between its full-bleed media bands, lifting
+   back to navy at the foot of the testimonials — sampled from the reference,
+   where the section behind the quote card fades #05090c -> #0c1620. */
+.bg-abyss {
+  background: linear-gradient(180deg, #000000 0%, #05090c 38%, #0a1220 78%, #0d1a2a 100%);
+}
+
+/* Thin gold hairline divider */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(198, 161, 91, 0.6), transparent);
+}
+
+/* Fraunces sets much heavier on the page than the Cormorant Garamond it
+   replaced, and these layouts were drawn around a light, high-contrast serif at
+   large sizes. Light is the closest of the four weights the brand pack permits,
+   so the serif roles default to it and the pages keep the airiness they were
+   designed with. Sits in @layer components so an explicit weight utility still
+   wins if a heading ever needs one.
+
+   opsz is Fraunces' optical-size axis: it is what keeps one family working as
+   both a display face and running text. Headings get the high-contrast display
+   cut, body copy the sturdier text cut. */
+@layer components {
+  .font-display {
+    font-weight: 300;
+    font-variation-settings: 'opsz' 144;
+  }
+
+  .font-serif {
+    font-weight: 300;
+    font-variation-settings: 'opsz' 72;
+  }
+}
+
+@layer components {
+  /* Gold outline pill button */
+  .btn-pill {
+    @apply inline-flex items-center justify-center rounded-full border border-gold/70 px-8 py-3
+      text-xs tracking-[0.2em] uppercase text-white/90 transition-all duration-300
+      hover:border-gold hover:bg-gold hover:text-navy-950;
+  }
+
+  /* Solid gold pill — the Contact Us call to action, and the site's primary
+     button. Extracted here because it was duplicated inline in the desktop nav
+     and the mobile drawer, and is now also used by the intro's skip control;
+     "the same as Contact Us" only stays true if there is one definition of it. */
+  .btn-gold {
+    @apply inline-flex items-center justify-center rounded-full bg-gold px-6 py-2.5
+      text-xs tracking-[0.18em] uppercase text-navy-950 transition-all duration-300
+      hover:bg-gold-light;
+  }
+
+  /* Dark solid pill button */
+  .btn-solid {
+    @apply inline-flex items-center justify-center rounded-full bg-black/60 border border-white/20 px-8 py-3
+      text-xs tracking-[0.2em] uppercase text-white transition-all duration-300
+      hover:bg-gold hover:text-navy-950 hover:border-gold;
+  }
+
+  /* Section eyebrow label */
+  .eyebrow {
+    @apply text-[11px] tracking-[0.4em] uppercase text-gold/80;
+  }
+
+  /* "Start your event" — the home page's only primary action, and a piece of
+     glass rather than a flat button: a barely-there fill, a hairline rim, and a
+     bright crescent caught along the inside of the lower edge. Those three
+     shadows are what make it read as blown glass over the video instead of a
+     translucent rectangle, so they are spelled out rather than approximated
+     with a ring utility. */
+  .btn-glass {
+    /* 230 x 88 at a 1600-wide viewport, which is what the reference measures
+       for both the hero and the closing button. */
+    @apply relative inline-flex items-center justify-center rounded-full
+      border border-white/30 bg-white/[0.06] px-8 py-5 font-serif
+      text-lg leading-none text-white/90 backdrop-blur-[2px]
+      transition-[color,border-color,box-shadow,background-color] duration-500
+      sm:px-[2.6rem] sm:py-8 sm:text-[1.35rem];
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      inset 0 -10px 14px -10px rgba(255, 255, 255, 0.95),
+      0 18px 40px -24px rgba(0, 0, 0, 0.9);
+  }
+
+  .btn-glass:hover,
+  .btn-glass:focus-visible {
+    @apply border-gold/80 bg-gold/10 text-white outline-none;
+    box-shadow:
+      inset 0 1px 0 rgba(224, 199, 137, 0.45),
+      inset 0 -10px 14px -10px rgba(224, 199, 137, 0.95),
+      0 0 34px -4px rgba(198, 161, 91, 0.55);
+  }
+}
+
+::selection {
+  background: rgba(198, 161, 91, 0.35);
+}
+
+/* Anything driven by a rAF loop (the intro's orbit, the scroll-drawn gold
+   thread) is switched off wholesale under reduced motion by the components
+   themselves; these two cover the purely declarative animations. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-ken-burns,
+  .animate-marquee,
+  .animate-sheen {
+    animation: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Shared by the hero headline (KineticHeadline) and its CTA reveal: words and
+   other elements land one after another rather than as a block, each lifting
+   a little as it arrives. */
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.word-in {
+  animation: word-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* The hero's three lines hang off the block centre by different amounts, which
+   is a wide-screen refinement: below the point where the sentence stops
+   wrapping there is no room to give away, and the shift only pushes the first
+   line past the edge. */
+.headline-line {
+  transform: none;
+}
+
+@media (min-width: 1280px) {
+  .headline-line {
+    transform: translateX(var(--line-shift, 0));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word-in {
+    animation-duration: 1ms !important;
+  }
+}

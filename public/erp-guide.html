@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oscenia ERP — Prototype Walkthrough</title>
+<meta name="description" content="A guided walkthrough of the Oscenia ERP prototype — what each screen does and how the flow works." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy-950:#04070f; --navy-900:#060b16; --navy-800:#0a1424; --navy-700:#0f1d33;
+    --gold:#c6a15b; --gold-light:#e0c789; --line:rgba(255,255,255,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:Inter,system-ui,sans-serif;color:rgba(255,255,255,.85);
+    background:
+      radial-gradient(120% 80% at 100% -10%, #12233f 0%, rgba(18,35,63,0) 55%),
+      linear-gradient(180deg, #060b16 0%, #04070f 100%);
+    background-attachment:fixed;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  a{color:var(--gold-light);text-decoration:none}
+  .eyebrow{font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:rgba(198,161,91,.85);font-weight:600}
+  .display{font-family:Cinzel,serif}
+  .hair{height:1px;background:linear-gradient(90deg,transparent,rgba(198,161,91,.5),transparent);margin:0}
+
+  /* header */
+  header{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;
+    background:rgba(4,7,15,.75);backdrop-filter:blur(10px)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:Cinzel,serif;letter-spacing:.35em;color:var(--gold-light);font-size:16px}
+  .brand small{display:block;font-family:Inter;letter-spacing:.3em;font-size:8px;color:rgba(255,255,255,.4);margin-top:3px}
+  .btn{display:inline-flex;align-items:center;gap:8px;border-radius:10px;padding:10px 18px;font-size:13px;
+    font-weight:600;letter-spacing:.02em;transition:.2s}
+  .btn-gold{background:var(--gold);color:var(--navy-950)}
+  .btn-gold:hover{background:var(--gold-light)}
+  .btn-ghost{border:1px solid rgba(255,255,255,.2);color:#fff}
+  .btn-ghost:hover{border-color:var(--gold)}
+
+  /* hero */
+  .hero{padding:72px 0 48px;text-align:center}
+  .hero h1{font-family:Cinzel,serif;font-size:clamp(30px,5vw,50px);color:#fff;line-height:1.15;margin:16px 0}
+  .hero p{max-width:620px;margin:0 auto 28px;color:rgba(255,255,255,.6);font-size:17px}
+  .hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .link-pill{display:inline-block;margin-top:22px;font-family:ui-monospace,monospace;font-size:13px;
+    color:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:999px;padding:6px 16px}
+
+  section{padding:44px 0}
+  h2{font-family:Cinzel,serif;font-size:24px;color:#fff;margin-bottom:6px}
+  .sub{color:rgba(255,255,255,.5);margin-bottom:26px;max-width:680px}
+
+  .cards{display:grid;gap:16px}
+  @media(min-width:640px){.cards.two{grid-template-columns:1fr 1fr}}
+  .card{border:1px solid var(--line);border-radius:14px;background:rgba(10,20,36,.55);padding:20px}
+  .card h3{font-size:16px;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+  .num{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:rgba(198,161,91,.15);
+    color:var(--gold-light);font-size:12px;font-weight:700;flex:none;font-family:Cinzel,serif}
+  .card .role{font-size:11px;color:rgba(198,161,91,.8);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+  .card p{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:8px}
+  .try{font-size:13px;color:rgba(255,255,255,.85);border-left:2px solid var(--gold);padding-left:10px;margin-top:8px}
+  .try b{color:var(--gold-light)}
+
+  /* note cards */
+  .notes{display:grid;gap:14px}
+  @media(min-width:720px){.notes{grid-template-columns:1fr 1fr}}
+  .note{display:flex;gap:14px;border:1px solid var(--line);border-radius:12px;background:rgba(10,20,36,.4);padding:16px}
+  .note .ico{font-size:20px;flex:none}
+  .note b{color:#fff}
+
+  /* flow */
+  .flow{border:1px solid rgba(198,161,91,.25);border-radius:14px;background:rgba(198,161,91,.05);
+    padding:24px;text-align:center;font-family:ui-monospace,monospace;font-size:14px;color:rgba(255,255,255,.85);
+    line-height:2.2;overflow-x:auto}
+  .flow .g{color:var(--gold-light)}
+
+  /* steps list */
+  ol.path{list-style:none;counter-reset:s;display:grid;gap:10px}
+  ol.path li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;
+    border:1px solid var(--line);border-radius:12px;background:rgba(10,20,36,.4);padding:14px 16px}
+  ol.path li::before{content:counter(s);display:grid;place-items:center;width:26px;height:26px;flex:none;
+    border-radius:50%;background:var(--gold);color:var(--navy-950);font-weight:700;font-size:13px}
+  ol.path b{color:#fff}
+
+  ul.fb{list-style:none;display:grid;gap:12px}
+  ul.fb li{border:1px solid var(--line);border-radius:12px;background:rgba(10,20,36,.4);padding:14px 16px;font-size:14px}
+  ul.fb b{color:var(--gold-light)}
+
+  .callout{border:1px solid rgba(198,161,91,.25);background:rgba(198,161,91,.06);border-radius:14px;padding:20px;text-align:center}
+
+  footer{border-top:1px solid var(--line);padding:32px 0;text-align:center;color:rgba(255,255,255,.4);font-size:13px;margin-top:40px}
+  .tag{display:inline-block;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-light);
+    border:1px solid rgba(198,161,91,.4);border-radius:999px;padding:4px 12px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <div class="brand">OSCENIA<small>ERP · PROTOTYPE GUIDE</small></div>
+    <a class="btn btn-gold" href="/erp">Open the prototype →</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="tag">Interactive Prototype · For Review</span>
+    <h1>Oscenia ERP<br>Prototype Walkthrough</h1>
+    <p>An interactive prototype of the Oscenia ERP, built directly from your concept deck. Click through the real screens, see the flow, and tell us what to change — before we build the real thing.</p>
+    <div class="cta">
+      <a class="btn btn-gold" href="/erp">Launch the prototype</a>
+      <a class="btn btn-ghost" href="#screens">See the screen guide</a>
+    </div>
+    <div class="link-pill">oscenia-web.vercel.app/erp</div>
+  </div>
+
+  <div class="hair"></div>
+
+  <!-- BEFORE YOU START -->
+  <section>
+    <span class="eyebrow">Before you start</span>
+    <h2>4 things to know</h2>
+    <div class="notes">
+      <div class="note"><span class="ico">🧪</span><div><b>It's a demonstration.</b> The clients, projects and figures are realistic sample data — nothing is connected to a live database yet. Refreshing the page resets everything. That's expected.</div></div>
+      <div class="note"><span class="ico">👤</span><div><b>Switch who you are.</b> Top-right has a role switcher — view as <b>CEO</b>, <b>Sales &amp; Marketing</b>, or <b>Warehouse &amp; Ops</b>. Each role sees only its relevant screens.</div></div>
+      <div class="note"><span class="ico">🌐</span><div><b>Two languages.</b> The <b>EN / ID</b> toggle switches the interface between English and Bahasa Indonesia.</div></div>
+      <div class="note"><span class="ico">⚡</span><div><b>The big idea.</b> Everything hangs off one <b>Project ID</b>, and a status change in one place auto-triggers the next step elsewhere. Watch for the small <b>"auto"</b> pop-ups — that's the system working on its own.</div></div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section>
+    <span class="eyebrow">The overall flow</span>
+    <h2>How a job moves through the system</h2>
+    <p class="sub">A single event travels left-to-right through the whole business — without anyone re-typing the same information twice.</p>
+    <div class="flow">
+      <span class="g">QUOTE</span> → DOWN PAYMENT → <span class="g">PROJECT CREATED</span> → DESIGN → APPROVAL → VENDORS<br>
+      → <span class="g">EXECUTION</span> → CLIENT FEEDBACK → CREW PAID → <span class="g">BOOKS UPDATED</span>
+    </div>
+  </section>
+
+  <div class="hair"></div>
+
+  <!-- SCREENS -->
+  <section id="screens">
+    <span class="eyebrow">Screen by screen</span>
+    <h2>What each screen does</h2>
+    <p class="sub">The screens below follow the same order as the flow — from the first quote to the closed, paid, accounted-for event.</p>
+
+    <div class="cards two">
+
+      <div class="card"><h3><span class="num">1</span>Dashboard</h3><div class="role">CEO</div>
+        <p>The company at a glance — pipeline value, average event margin, money owed to you, active projects, with revenue and margin charts.</p>
+        <div class="try"><b>Look for:</b> the right top-level numbers to open the system to.</div></div>
+
+      <div class="card"><h3><span class="num">2</span>Quotations &amp; MoU</h3><div class="role">Sales</div>
+        <p>Where every deal begins. Draft a quotation, send it, and on acceptance the system generates the MoU/contract and hands Finance a ready deal.</p>
+        <div class="try"><b>Try:</b> <b>New Quotation</b>, or <b>Mark accepted</b> on a sent quote — download the MoU PDF.</div></div>
+
+      <div class="card"><h3><span class="num">3</span>Finance &amp; Invoicing</h3><div class="role">CEO / Sales</div>
+        <p>Installment invoicing (DP / progress / final) and the key trigger: confirming the down payment.</p>
+        <div class="try"><b>Try:</b> <b>Confirm Down Payment</b> → watch the "auto" cascade create the project, start the pipeline &amp; update the books.</div></div>
+
+      <div class="card"><h3><span class="num">4</span>Projects — Pipeline Board</h3><div class="role">Everyone</div>
+        <p>Your production workflow across the seven milestones, with a Timeline (Gantt) tab filterable by division.</p>
+        <div class="try"><b>Look for:</b> whether these seven stages match how your projects really flow.</div></div>
+
+      <div class="card"><h3><span class="num">5</span>Project Detail</h3><div class="role">Everyone</div>
+        <p>One project up close — milestone progress, design files with version control &amp; approval, and a threaded discussion with @mentions.</p></div>
+
+      <div class="card"><h3><span class="num">6</span>Project P&amp;L</h3><div class="role">CEO / Sales</div>
+        <p>A live profit-and-loss for a single event — revenue, cost breakdown and margin, kept separate from office overheads.</p></div>
+
+      <div class="card"><h3><span class="num">7</span>Accounting</h3><div class="role">CEO</div>
+        <p>The books, generated automatically — double-entry journal, Income Statement and Balance Sheet built from daily transactions.</p></div>
+
+      <div class="card"><h3><span class="num">8</span>Budgeting</h3><div class="role">CEO</div>
+        <p>Spending ceilings per category vs. actual, with an automatic red-flag when a category goes over budget.</p>
+        <div class="try"><b>Try:</b> <b>Log unplanned cost</b> → watch a category breach and raise an alarm.</div></div>
+
+      <div class="card"><h3><span class="num">9</span>Profit Simulator</h3><div class="role">CEO</div>
+        <p>A "what-if" tool — drag sliders for contract value, vendor cost, crew, and watch margin, profit and break-even recalculate live.</p></div>
+
+      <div class="card"><h3><span class="num">10</span>CRM &amp; Clients</h3><div class="role">CEO / Sales</div>
+        <p>Your client database — lifetime value, preferences, satisfaction, birthdays.</p>
+        <div class="try"><b>Try:</b> click any row for the <b>Client 360</b> — profile, interaction history, vendors used &amp; per-event ratings.</div></div>
+
+      <div class="card"><h3><span class="num">11</span>Automated Cron</h3><div class="role">CEO / Sales</div>
+        <p>Background jobs that run daily on their own — notably scanning for client birthdays and alerting Sales ahead of time with ready WhatsApp/Email drafts.</p>
+        <div class="try"><b>Try:</b> <b>Run daily jobs</b> → <b>Preview draft</b> to see the message.</div></div>
+
+      <div class="card"><h3><span class="num">12</span>Client Survey</h3><div class="role">Client-facing</div>
+        <p>The post-event rating form (1–10). The client's score feeds crew bonuses automatically.</p>
+        <div class="try"><b>Reach it via</b> Crew &amp; Incentives → "Open client survey".</div></div>
+
+      <div class="card"><h3><span class="num">13</span>Vendors</h3><div class="role">CEO</div>
+        <p>Approved suppliers, a 3-vendor cost comparison that flags the lowest quote, a third-party equipment catalog with live availability, and 1–5 scorecards.</p></div>
+
+      <div class="card"><h3><span class="num">14</span>Procurement &amp; Petty Cash</h3><div class="role">CEO / Warehouse</div>
+        <p>Expense requests through Draft → Pending → Approved → Paid, with proof-of-payment upload and an auto-deducting petty-cash balance.</p></div>
+
+      <div class="card"><h3><span class="num">15</span>Warehouse</h3><div class="role">CEO / Warehouse</div>
+        <p>Dual-logic inventory — consumables (used up → cost) vs fixed assets (rented gear that goes in-transit and is checked back in) — plus signed delivery orders.</p>
+        <div class="try"><b>Try:</b> <b>Check in</b> an in-transit item to return it to the warehouse.</div></div>
+
+      <div class="card"><h3><span class="num">16</span>Crew &amp; Incentives</h3><div class="role">CEO</div>
+        <p>Performance-based crew pay — bonuses from the client's post-event rating × each crew member's base rate.</p></div>
+
+      <div class="card"><h3><span class="num">17</span>Sales Report</h3><div class="role">CEO / Sales</div>
+        <p>A leaderboard of the sales team by closed deals, with automatic commission calculations.</p></div>
+
+    </div>
+  </section>
+
+  <div class="hair"></div>
+
+  <!-- 5 MIN PATH -->
+  <section>
+    <span class="eyebrow">If you only have 5 minutes</span>
+    <h2>A suggested path</h2>
+    <ol class="path">
+      <li><div><b>Quotations</b> → accept a quote → <b>Finance</b> → <b>Confirm Down Payment</b> (watch the auto-notifications)</div></li>
+      <li><div><b>Projects</b> → see the new project appear → click <b>advance</b> a couple of times</div></li>
+      <li><div><b>CRM</b> → open a client's <b>360</b> view</div></li>
+      <li><div><b>Automated Cron</b> → <b>Run daily jobs</b> → <b>Preview</b> a message draft</div></li>
+      <li><div>Flip the <b>EN / ID</b> toggle and the <b>role switcher</b> to see how it adapts</div></li>
+    </ol>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section>
+    <span class="eyebrow">Over to you</span>
+    <h2>What we'd love your feedback on</h2>
+    <ul class="fb">
+      <li><b>Screens &amp; fields</b> — anything missing? Any field we capture that you don't need, or one we don't that you do?</li>
+      <li><b>Your workflow</b> — do the seven project milestones and approval steps match how Oscenia actually works?</li>
+      <li><b>Roles &amp; permissions</b> — is CEO / Sales / Warehouse the right split, or do you need more roles?</li>
+      <li><b>Numbers &amp; reports</b> — are these the figures and reports your team relies on day to day?</li>
+      <li><b>Anything unclear or awkward</b> as you click around.</li>
+    </ul>
+    <div class="callout" style="margin-top:20px">
+      Note anything that comes to mind — <b style="color:#fff">screen name + your comment</b> is perfect. There are no wrong answers; this is exactly the stage to shape it.
+      <div style="margin-top:18px"><a class="btn btn-gold" href="/erp">Launch the prototype →</a></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    A clickable prototype for review only — sample data, no live backend yet. Once your feedback is captured, it becomes the blueprint for the real system.<br>
+    <span style="color:rgba(255,255,255,.3)">© Oscenia Events</span>
+  </div>
+</footer>
+
+</body>
+</html>
