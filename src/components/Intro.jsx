@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { MARK_EMBLEM, MARK_GOLD, MARK_TEXT, MARK_VIEWBOX } from '../data/markGeometry'
 import { useI18n } from '../i18n/LanguageContext'
 import BackdropVideo from './BackdropVideo'
 import BrandMark from './BrandMark'
@@ -6,12 +7,48 @@ import BrandMark from './BrandMark'
 // The opening sequence: a held logo on navy velvet that the visitor starts
 // themselves, then Oscenia's own company film, playing in full, then the site.
 //
-// Earlier drafts re-staged the film as a set of short animated text chapters
-// (see git history / components/IntroOrbit.jsx if that is ever wanted back).
-// This plays the real footage instead — public/media/showreel.mp4 — so what
-// the visitor sees during the intro is the actual company profile film rather
-// than a paraphrase of it.
-const SPLASH_EXIT_MS = 1100
+// The handover between the two is a camera push *through* the mark, matching
+// "Video Project.mp4" in the repo root — that recording is a screen capture of
+// the intended prototype, so every number below is measured off it rather than
+// chosen. Click lands at 3.00s in that clip; times here are relative to the
+// click.
+//
+//   0-80ms      nothing moves
+//   80-260ms    the ink brightens gold -> cream -> white. Measured samples:
+//               (197,186,153) -> (211,199,171) -> (249,241,228) -> white.
+//               It only ever brightens; it never darkens or passes through grey.
+//   80-400ms    still no movement. The reference holds dead still here, and the
+//               pause is most of what makes the push afterwards feel deliberate.
+//   400-1300ms  the mark scales away from the viewer on an exponential curve,
+//               until one of its strokes covers the viewport outright.
+//   1300-1450ms it keeps accelerating past that point rather than easing to a
+//               stop, which is the difference between a push and an object
+//               inflating.
+//
+// After that the screen is a flat cream field, and so is the first ~1.8s of
+// showreel.mp4 — so the swap from the wipe to the film has nothing to hide.
+const SPLASH_EXIT_MS = 1450
+const COLOR_FROM_MS = 80
+const PUSH_FROM_MS = 400
+const COVER_MS = 1300
+
+// Past this the wordmark is well outside the frame, so it stops being drawn and
+// the expensive high-zoom frames repaint one path instead of fourteen.
+const TEXT_DROP_SCALE = 4.5
+
+// A little past bare coverage, since the solver samples a grid rather than
+// every pixel.
+const COVER_MARGIN = 1.06
+
+// Ink colour over time. The last stop is showreel.mp4's own opening frame
+// (sampled: 241,239,236) rather than white, so that when the splash unmounts
+// and the film is what's left, there is no step in the colour at all.
+const INK_STOPS = [
+  { at: COLOR_FROM_MS, value: [201, 167, 99] },
+  { at: 200, value: [249, 241, 228] },
+  { at: 260, value: [255, 255, 255] },
+  { at: COVER_MS, value: [241, 239, 236] },
+]
 
 // -2 splash, -1 splash leaving, 0 video playing, 1 done.
 const STAGE = { SPLASH: -2, SPLASH_LEAVING: -1, VIDEO: 0, DONE: 1 }
@@ -20,24 +57,289 @@ const prefersReduced = () =>
   typeof window !== 'undefined' &&
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 
+function mixStops(stops, t) {
+  if (t <= stops[0].at) return stops[0].value
+  const last = stops[stops.length - 1]
+  if (t >= last.at) return last.value
+  for (let i = 0; i < stops.length - 1; i++) {
+    const from = stops[i]
+    const to = stops[i + 1]
+    if (t >= from.at && t <= to.at) {
+      const k = (t - from.at) / (to.at - from.at)
+      return from.value.map((v, c) => v + (to.value[c] - v) * k)
+    }
+  }
+  return last.value
+}
+
+const rgb = ([r, g, b]) => `rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})`
+
+// Draws the mark into an offscreen canvas so its ink can be measured. Same
+// origin, so the pixels can be read back.
+//
+// The height comes from the viewBox rather than from naturalWidth/Height: the
+// file carries a viewBox and no width/height, and what an <img> reports as its
+// intrinsic size in that case is not consistent between browsers. drawImage is
+// given an explicit box, so the raster is the same everywhere.
+function rasteriseMark(src, w = 420) {
+  return new Promise((resolve) => {
+    const img = new Image()
+    img.onload = () => {
+      const h = Math.max(1, Math.round((MARK_VIEWBOX.h / MARK_VIEWBOX.w) * w))
+      const canvas = document.createElement('canvas')
+      canvas.width = w
+      canvas.height = h
+      const ctx = canvas.getContext('2d', { willReadFrequently: true })
+      if (!ctx) return resolve(null)
+      ctx.drawImage(img, 0, 0, w, h)
+      try {
+        const { data } = ctx.getImageData(0, 0, w, h)
+        const ink = new Uint8Array(w * h)
+        for (let i = 0; i < ink.length; i++) ink[i] = data[i * 4 + 3] > 128 ? 1 : 0
+        resolve({ ink, w, h })
+      } catch {
+        resolve(null)
+      }
+    }
+    img.onerror = () => resolve(null)
+    img.src = src
+  })
+}
+
+// Where to push into: the centre of the largest circle that fits inside the
+// ink, found with a two-pass chamfer distance transform. That is by
+// construction the point with the most artwork around it, so it is the one
+// place the camera can travel into without the frame breaking up into gaps.
+//
+// Fitting the same fixed point off the reference recording independently gives
+// ~19%/16% of the mark's box, which is the sanity check on this.
+const ANCHOR_FALLBACK = { x: 0.19, y: 0.16 }
+
+function findAnchor(raster) {
+  if (!raster) return ANCHOR_FALLBACK
+  const { ink, w, h } = raster
+  const D = 1.41421356
+  const d = new Float32Array(w * h)
+  for (let i = 0; i < d.length; i++) d[i] = ink[i] ? 1e9 : 0
+
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = y * w + x
+      if (!ink[i]) continue
+      let v = d[i]
+      if (x > 0) v = Math.min(v, d[i - 1] + 1)
+      if (y > 0) v = Math.min(v, d[i - w] + 1)
+      if (x > 0 && y > 0) v = Math.min(v, d[i - w - 1] + D)
+      if (x < w - 1 && y > 0) v = Math.min(v, d[i - w + 1] + D)
+      d[i] = v
+    }
+  }
+  for (let y = h - 1; y >= 0; y--) {
+    for (let x = w - 1; x >= 0; x--) {
+      const i = y * w + x
+      if (!ink[i]) continue
+      let v = d[i]
+      if (x < w - 1) v = Math.min(v, d[i + 1] + 1)
+      if (y < h - 1) v = Math.min(v, d[i + w] + 1)
+      if (x < w - 1 && y < h - 1) v = Math.min(v, d[i + w + 1] + D)
+      if (x > 0 && y < h - 1) v = Math.min(v, d[i + w - 1] + D)
+      d[i] = v
+    }
+  }
+
+  let best = 0
+  let at = -1
+  for (let i = 0; i < d.length; i++) {
+    if (d[i] > best) {
+      best = d[i]
+      at = i
+    }
+  }
+  if (at < 0) return ANCHOR_FALLBACK
+  return { x: (at % w) / w, y: Math.floor(at / w) / h }
+}
+
+// Maps a viewport point back into the mark's own coordinates at a given scale.
+// `view` carries the viewBox the mark sits in at rest (see the click handler).
+function toMarkSpace(view, s, px, py) {
+  const { ax, ay, minX0, minY0, vw0, vh0, vpW, vpH } = view
+  const minX = ax - (ax - minX0) / s
+  const minY = ay - (ay - minY0) / s
+  return [minX + (px / vpW) * (vw0 / s), minY + (py / vpH) * (vh0 / s)]
+}
+
+// How far the mark has to travel before its ink covers the viewport outright.
+// Solved against the actual artwork rather than assumed: the mark is a set of
+// ribbons, not a disc, so what eventually fills the screen is a stroke's length
+// and curvature, and no closed-form radius predicts it. Binary search over a
+// sampled grid, which is cheap enough to run on the click.
+function solveCoverScale(raster, view) {
+  if (!raster) return 80
+  const { ink, w, h } = raster
+  // Dense enough that a leftover sliver of velvet can't hide between samples;
+  // still only ~20k lookups across the whole search.
+  const COLS = 49
+  const ROWS = 29
+
+  const covers = (s) => {
+    for (let r = 0; r < ROWS; r++) {
+      const py = (r / (ROWS - 1)) * view.vpH
+      for (let c = 0; c < COLS; c++) {
+        const px = (c / (COLS - 1)) * view.vpW
+        const [ux, uy] = toMarkSpace(view, s, px, py)
+        const ix = Math.round((ux / MARK_VIEWBOX.w) * w)
+        const iy = Math.round((uy / MARK_VIEWBOX.h) * h)
+        if (ix < 0 || iy < 0 || ix >= w || iy >= h) return false
+        if (!ink[iy * w + ix]) return false
+      }
+    }
+    return true
+  }
+
+  let lo = 1
+  let hi = 8
+  while (hi < 4096 && !covers(hi)) {
+    lo = hi
+    hi *= 2
+  }
+  if (!covers(hi)) return hi
+  for (let i = 0; i < 14; i++) {
+    const mid = (lo + hi) / 2
+    if (covers(mid)) hi = mid
+    else lo = mid
+  }
+  return hi
+}
+
 export default function Intro() {
   const { t } = useI18n()
   const [reduced] = useState(prefersReduced)
   const [stage, setStage] = useState(STAGE.SPLASH)
   const [progress, setProgress] = useState(0)
   const startRef = useRef(null)
+  const markRef = useRef(null)
   const skipRef = useRef(null)
   const videoRef = useRef(null)
+  // The zooming mark, its ink group, and the wordmark that gets dropped once it
+  // is off screen.
+  const wipeRef = useRef(null)
+  const inkRef = useRef(null)
+  const textRef = useRef(null)
+  const rasterRef = useRef(null)
+  const viewRef = useRef(null)
+  const rafRef = useRef(0)
+  const leaveTimerRef = useRef(0)
 
-  const finish = useCallback(() => setStage(STAGE.DONE), [])
+  const finish = useCallback(() => {
+    cancelAnimationFrame(rafRef.current)
+    clearTimeout(leaveTimerRef.current)
+    setStage(STAGE.DONE)
+  }, [])
+
+  // Measured once, up front, while the splash is just sitting there waiting to
+  // be clicked — the work is off the critical path and the result is reused.
+  useEffect(() => {
+    if (reduced) return undefined
+    let cancelled = false
+    rasteriseMark('/brand/mark-stacked-gold.svg').then((raster) => {
+      if (!cancelled) rasterRef.current = raster
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [reduced])
 
   const start = useCallback(() => {
+    if (stage !== STAGE.SPLASH) return
+
+    if (reduced) {
+      setStage(STAGE.DONE)
+      return
+    }
+
+    const rect = markRef.current?.getBoundingClientRect()
+    const vpW = window.innerWidth
+    const vpH = window.innerHeight
+    if (!rect || !rect.width) {
+      setStage(STAGE.VIDEO)
+      videoRef.current?.play()
+      return
+    }
+
+    const raster = rasterRef.current
+    const anchor = findAnchor(raster)
+    const ax = anchor.x * MARK_VIEWBOX.w
+    const ay = anchor.y * MARK_VIEWBOX.h
+
+    // The wipe is a viewport-sized <svg>, so its viewBox at rest is whatever
+    // region of the mark's coordinate space the viewport corresponds to when
+    // the mark is drawn exactly where the splash logo sits. k is the px-per-unit
+    // scale that puts it there.
+    const k = rect.width / MARK_VIEWBOX.w
+    const view = {
+      ax,
+      ay,
+      minX0: -rect.left / k,
+      minY0: -rect.top / k,
+      vw0: vpW / k,
+      vh0: vpH / k,
+      vpW,
+      vpH,
+    }
+    view.coverScale = solveCoverScale(raster, view) * COVER_MARGIN
+    viewRef.current = view
+
     setStage(STAGE.SPLASH_LEAVING)
-    setTimeout(
-      () => setStage(reduced ? STAGE.DONE : STAGE.VIDEO),
-      reduced ? 0 : SPLASH_EXIT_MS,
-    )
-  }, [reduced])
+
+    // Exponential: a constant multiplicative rate, which is what a camera
+    // travelling at a steady speed toward an object actually produces. The
+    // reference measures ×1.46 per 100ms; the rate here falls out of the
+    // distance this particular viewport has to cover in the same time, because
+    // holding the sequence's rhythm matters more than matching its px/s.
+    const rate = Math.log(view.coverScale) / (COVER_MS - PUSH_FROM_MS)
+    let played = false
+    let textDropped = false
+
+    const startTime = performance.now()
+    const tick = () => {
+      const ms = performance.now() - startTime
+      const s = ms <= PUSH_FROM_MS ? 1 : Math.exp(rate * (ms - PUSH_FROM_MS))
+
+      const svg = wipeRef.current
+      if (svg) {
+        const minX = ax - (ax - view.minX0) / s
+        const minY = ay - (ay - view.minY0) / s
+        svg.setAttribute('viewBox', `${minX} ${minY} ${view.vw0 / s} ${view.vh0 / s}`)
+      }
+      inkRef.current?.setAttribute('fill', rgb(mixStops(INK_STOPS, ms)))
+
+      if (!textDropped && s > TEXT_DROP_SCALE && textRef.current) {
+        textRef.current.style.display = 'none'
+        textDropped = true
+      }
+
+      // Started with the push rather than on the click, so the film's own
+      // cream opening still has most of its length left when the wipe lands on
+      // top of it.
+      if (!played && ms >= PUSH_FROM_MS) {
+        played = true
+        videoRef.current?.play()
+      }
+
+      rafRef.current = ms < SPLASH_EXIT_MS ? requestAnimationFrame(tick) : 0
+    }
+    rafRef.current = requestAnimationFrame(tick)
+
+    leaveTimerRef.current = setTimeout(() => setStage(STAGE.VIDEO), SPLASH_EXIT_MS)
+  }, [reduced, stage])
+
+  useEffect(
+    () => () => {
+      cancelAnimationFrame(rafRef.current)
+      clearTimeout(leaveTimerRef.current)
+    },
+    [],
+  )
 
   // Announced once, however the intro ended — the film finishing on its own,
   // Skip, or Escape.
@@ -75,6 +377,7 @@ export default function Intro() {
 
   const splash = stage <= STAGE.SPLASH_LEAVING
   const leaving = stage === STAGE.SPLASH_LEAVING
+  const view = viewRef.current
 
   return (
     <div
@@ -83,9 +386,26 @@ export default function Intro() {
       aria-label={t.intro.showreelLabel}
       aria-modal="true"
     >
-      {splash ? (
+      {/* Underneath everything, and covered by the splash until the wipe has
+          taken the screen. Reduced motion never shows the film at all. */}
+      {!reduced && (
+        <video
+          ref={videoRef}
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/media/showreel.mp4"
+          poster="/media/showreel-poster.jpg"
+          muted
+          playsInline
+          preload="auto"
+          onEnded={finish}
+        />
+      )}
+
+      {splash && (
         <div className="absolute inset-0">
-          {/* The brand's own navy velvet, from the vector pack's video assets. */}
+          {/* The brand's own navy velvet, from the vector pack's video assets.
+              It stays visible behind the mark for the whole push — the mark's
+              own ink is what covers it, nothing masks it out. */}
           <BackdropVideo
             eager
             className="absolute inset-0 h-full w-full object-cover"
@@ -100,27 +420,28 @@ export default function Intro() {
               type="button"
               onClick={start}
               aria-label={t.intro.clickLogo}
-              className="group focus:outline-none"
-              style={{
-                // Taking the mark to white and pushing it past the frame is the
-                // handover: the last thing the splash does is stop being gold.
-                transform: leaving ? 'scale(2.7)' : 'scale(1)',
-                filter: leaving ? 'brightness(0) invert(1)' : 'none',
-                opacity: leaving ? 0.92 : 1,
-                transitionProperty: 'transform, filter, opacity',
-                transitionDuration: `${SPLASH_EXIT_MS}ms`,
-                transitionTimingFunction: 'cubic-bezier(0.7, 0, 0.2, 1)',
-              }}
+              // Handing over to the drawn mark below, which covers exactly the
+              // same pixels in exactly the same gold, so the swap has nothing
+              // to show.
+              className={`group focus:outline-none ${
+                leaving ? 'opacity-0 transition-opacity duration-150' : ''
+              }`}
             >
-              <BrandMark
-                as="plain"
-                variant="stacked"
-                className="h-40 transition-transform duration-700 group-hover:scale-[1.04] sm:h-52"
-              />
+              {/* The hover nudge sits on this wrapper rather than on the mark
+                  itself so that measuring it picks the transform up: a click
+                  almost always lands while hovering, and the drawn mark has to
+                  start from where the logo actually is on screen, not from
+                  where it would be unhovered. */}
+              <span
+                ref={markRef}
+                className="inline-block transition-transform duration-700 group-hover:scale-[1.04]"
+              >
+                <BrandMark as="plain" variant="stacked" className="h-40 sm:h-52" />
+              </span>
             </button>
 
             <span
-              className={`mt-24 font-serif text-sm tracking-[0.06em] text-white/70 transition-opacity duration-500 ${
+              className={`mt-24 font-serif text-sm tracking-[0.06em] text-white/70 transition-opacity duration-300 ${
                 leaving ? 'opacity-0' : 'animate-pulse-soft'
               }`}
             >
@@ -128,19 +449,34 @@ export default function Intro() {
             </span>
           </div>
         </div>
-      ) : (
-        <>
-          <video
-            ref={videoRef}
-            className="absolute inset-0 h-full w-full object-cover"
-            src="/media/showreel.mp4"
-            poster="/media/showreel-poster.jpg"
-            autoPlay
-            muted
-            playsInline
-            onEnded={finish}
-          />
+      )}
 
+      {/* The mark again, this time as real geometry rather than an <img>: the
+          push takes it tens of times past its own size, and only vector paths
+          re-render sharp at that scale. Zoomed by rewriting the viewBox, which
+          is what forces that re-render — a CSS transform would scale the
+          rasterised texture instead and go to mush. */}
+      {leaving && view && (
+        <svg
+          ref={wipeRef}
+          className="pointer-events-none absolute inset-0 h-full w-full"
+          viewBox={`${view.minX0} ${view.minY0} ${view.vw0} ${view.vh0}`}
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <g ref={inkRef} fill={MARK_GOLD}>
+            <path d={MARK_EMBLEM} />
+            <g ref={textRef}>
+              {MARK_TEXT.map((d, i) => (
+                <path key={i} d={d} />
+              ))}
+            </g>
+          </g>
+        </svg>
+      )}
+
+      {stage === STAGE.VIDEO && (
+        <>
           <button
             ref={skipRef}
             type="button"
