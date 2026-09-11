@@ -358,3 +358,34 @@ body {
     animation-duration: 1ms !important;
   }
 }
+
+/* A "What we direct" card under the pointer (Home.jsx, FormatCard): it swells
+   and then keeps floating — about ±5px, once a second, measured off the
+   reference with the page and the pointer both still. The reference grows the
+   card ~14%, but its gutter is 88px; ours is 48px, and 8% is what keeps a
+   hovered card clear of its neighbour. It grows from its foot so the caption
+   underneath stays uncovered. The float waits for the swell to mostly land. */
+.format-card-lift {
+  transform-origin: 50% 100%;
+  transition: scale 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .group:hover .format-card-lift {
+    scale: 1.08;
+    animation: card-float 1.05s ease-in-out 600ms infinite;
+  }
+}
+
+@keyframes card-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  25% {
+    translate: 0 -5px;
+  }
+  75% {
+    translate: 0 5px;
+  }
+}

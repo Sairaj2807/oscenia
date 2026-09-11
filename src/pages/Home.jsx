@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { THREAD_ONE, THREAD_TWO, threadTwoPath } from '../data/formatsMotion'
 import { headlineDurationMs } from '../data/headline'
 import { FORMAT_IMAGES } from '../data/site'
 import { useI18n } from '../i18n/LanguageContext'
@@ -9,6 +10,7 @@ import GoldThread from '../components/GoldThread'
 import KineticHeadline from '../components/KineticHeadline'
 import LogoMarquee from '../components/LogoMarquee'
 import Reveal from '../components/Reveal'
+import useCardToss from '../components/useCardToss'
 
 export default function Home() {
   return (
@@ -83,15 +85,74 @@ function HeroFilm() {
   )
 }
 
-// The gold hairline that leaves the champagne film, loops through the gap and
-// comes down onto the first card.
-const THREAD =
-  'M 40 -70 C 120 90, 40 250, 300 300 C 610 358, 740 250, 690 130 C 650 34, 500 62, 500 190 C 500 286, 486 332, 470 372'
+// Where an element's top-left corner sits inside `root`, from layout offsets
+// only. The cards' captions are mid-flight half the time, and offsetTop ignores
+// transforms where getBoundingClientRect wouldn't.
+function offsetWithin(el, root) {
+  let x = 0
+  let y = 0
+  let n = el
+  while (n && n !== root) {
+    x += n.offsetLeft
+    y += n.offsetTop
+    n = n.offsetParent
+  }
+  return n === root ? { x, y } : null
+}
 
 function Formats() {
   const { t } = useI18n()
+  const gridBox = useRef(null)
+  const lastTitle = useRef(null)
+  const [threadTwo, setThreadTwo] = useState(null)
+
+  // The second thread starts behind "Experience Systems", so its box is placed
+  // from that caption's position, and again whenever the grid reflows — fonts
+  // arriving, a resize, or a language switch changing the copy.
+  useEffect(() => {
+    const box = gridBox.current
+    const title = lastTitle.current
+    if (!box || !title) return undefined
+    const place = () => {
+      const at = offsetWithin(title, box)
+      if (!at) return
+      const vw = window.innerWidth
+      // The words' own width. A range's rect moves with the flight, but the
+      // caption only ever slides, so its width is the same mid-air.
+      const range = document.createRange()
+      range.selectNodeContents(title)
+      const words = range.getBoundingClientRect().width
+      const align = getComputedStyle(title).textAlign
+      const left = at.x + (align === 'right' || align === 'end' ? title.offsetWidth - words : 0)
+      const x = left + words * THREAD_TWO.startAlong
+      // Into the thread's own 1920-wide units: its box is the full screen width,
+      // centred on this column.
+      const boxX = ((x - (box.clientWidth - vw) / 2) * 1920) / vw
+      setThreadTwo({
+        top: Math.round(at.y + title.offsetHeight / 2 - (THREAD_TWO.anchorY / 1080) * window.innerHeight),
+        d: threadTwoPath(Math.max(boxX - THREAD_TWO.startX, THREAD_TWO.minShift)),
+      })
+    }
+    place()
+    const ro = new ResizeObserver(place)
+    ro.observe(box)
+    window.addEventListener('resize', place)
+    document.fonts?.ready.then(place)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener('resize', place)
+    }
+  }, [])
+
   return (
-    <section className="relative bg-black">
+    // z-10 so the second thread's tail, which runs on past this section's foot,
+    // draws over the testimonials rather than under their background.
+    // overflow-x-clip because a card waiting for its toss is parked off the side
+    // of the screen, and on a phone that otherwise widens the page — iOS Safari
+    // doesn't take body's overflow-x as a reason not to pan. Clip rather than
+    // hidden, so nothing becomes a scroll box and the tail can still run on
+    // below the section.
+    <section className="relative z-10 overflow-x-clip bg-black">
       <div className="relative h-[62svh] overflow-hidden sm:h-[78svh]">
         <BackdropVideo
           className="absolute inset-0 h-full w-full object-cover"
@@ -111,15 +172,35 @@ function Formats() {
         </div>
       </div>
 
-      <div className="relative mx-auto max-w-[82rem] px-6 pb-28 pt-24 md:px-8 xl:px-0 sm:pb-40 sm:pt-[20vh]">
+      {/* This box's top edge is the film's bottom edge — both threads measure
+          from it. They span the full width of the screen, not this column: the
+          first starts at the left edge of the film, the second leaves by the
+          right edge of the page. */}
+      <div
+        ref={gridBox}
+        className="relative mx-auto max-w-[82rem] px-6 pb-28 pt-24 md:px-8 xl:px-0 sm:pb-40 sm:pt-[20vh]"
+      >
         <GoldThread
-          d={THREAD}
-          viewBox="0 0 900 520"
-          className="left-0 top-[-22vh] hidden h-[62vh] w-full sm:block"
+          {...THREAD_ONE}
+          className="left-1/2 top-[-50vh] hidden h-[84vh] w-screen -translate-x-1/2 sm:block"
         />
+        {threadTwo && (
+          <GoldThread
+            {...THREAD_TWO}
+            d={threadTwo.d}
+            className="left-1/2 hidden h-[54vh] w-screen -translate-x-1/2 sm:block"
+            style={{ top: threadTwo.top }}
+          />
+        )}
         <ul className="relative grid gap-x-12 gap-y-16 sm:grid-cols-2 sm:gap-y-6">
           {t.direct.items.map((item, i) => (
-            <FormatCard key={item.title} item={item} src={FORMAT_IMAGES[i]} index={i} />
+            <FormatCard
+              key={item.title}
+              item={item}
+              src={FORMAT_IMAGES[i]}
+              index={i}
+              titleRef={i === t.direct.items.length - 1 ? lastTitle : undefined}
+            />
           ))}
         </ul>
       </div>
@@ -129,33 +210,46 @@ function Formats() {
 
 // Cards alternate: the left one rides high and titles from the left, the right
 // one hangs lower and titles from its centre — the offset pairing the reference
-// scrolls through.
-function FormatCard({ item, src, index }) {
+// scrolls through. Each is tossed in from its own side (components/useCardToss).
+//
+// Four layers, each owning one motion so none of them fight: the photo layer is
+// the toss; inside it, .format-card-lift is the hover swell and float; inside
+// that, the frame keeps its halo and its slow zoom of the photo. The caption is
+// split the same way — sideways on the figcaption, upward on the block within.
+function FormatCard({ item, src, index, titleRef }) {
   const low = index % 2 === 1
+  const toss = useCardToss(low ? 'right' : 'left')
   return (
-    <li className={low ? 'sm:mt-7' : ''}>
-      <Reveal from={low ? 'bottom-right' : 'bottom-left'} duration={1100} delay={low ? 140 : 0}>
-        <figure className="group">
-          <div className="overflow-hidden rounded-[1.25rem] shadow-[0_0_110px_-34px_rgba(198,161,91,0.85)] transition-shadow duration-700 group-hover:shadow-[0_0_130px_-24px_rgba(198,161,91,0.95)]">
-            <img
-              src={src}
-              alt={item.title}
-              loading="lazy"
-              className="aspect-[3/2] w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
-            />
+    <li ref={toss.slot} className={low ? 'sm:mt-7' : ''}>
+      <figure className="group">
+        <div ref={toss.photo}>
+          <div className="format-card-lift">
+            <div className="overflow-hidden rounded-[1.25rem] shadow-[0_0_110px_-34px_rgba(198,161,91,0.85)] transition-shadow duration-700 group-hover:shadow-[0_0_130px_-24px_rgba(198,161,91,0.95)]">
+              <img
+                src={src}
+                alt={item.title}
+                loading="lazy"
+                className="aspect-[3/2] w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
+              />
+            </div>
           </div>
-          <figcaption
-            className={`mt-1 font-serif text-[clamp(1.5rem,3.4vw,3.4rem)] text-white/95 ${
-              low ? 'pe-5 sm:text-right' : 'ps-5'
-            }`}
-          >
-            {item.title}
+        </div>
+        <figcaption
+          ref={toss.slide}
+          className={`mt-1 font-serif text-[clamp(1.5rem,3.4vw,3.4rem)] text-white/95 ${
+            low ? 'pe-5 sm:text-right' : 'ps-5'
+          }`}
+        >
+          <div ref={toss.rise}>
+            <span ref={titleRef} className="block">
+              {item.title}
+            </span>
             <span className="mt-2 block max-w-md font-sans text-sm leading-relaxed text-white/45 opacity-0 transition-opacity duration-500 group-hover:opacity-100 sm:ms-auto">
               {item.desc}
             </span>
-          </figcaption>
-        </figure>
-      </Reveal>
+          </div>
+        </figcaption>
+      </figure>
     </li>
   )
 }
@@ -165,8 +259,6 @@ const SLIDE_MS = 6000
 const prefersReduced = () =>
   typeof window !== 'undefined' &&
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-
-const TESTIMONIAL_THREAD = 'M 318 -70 C 318 -70, 208 96, 24 296'
 
 function Testimonials() {
   const { t } = useI18n()
@@ -192,12 +284,9 @@ function Testimonials() {
   const item = items[index]
 
   return (
+    // No thread of its own: the one that runs across the top of this section
+    // is the tail of the second thread, drawn from the formats above.
     <section className="bg-abyss relative flex min-h-[112svh] items-center overflow-hidden pt-24 pb-[calc(12svh+6rem)]">
-      <GoldThread
-        d={TESTIMONIAL_THREAD}
-        viewBox="0 0 320 260"
-        className="right-0 top-0 hidden h-[30vh] w-[30vw] sm:block"
-      />
 
       <div className="relative mx-auto max-w-content px-6">
         <Reveal>
