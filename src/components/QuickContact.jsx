@@ -3,15 +3,16 @@ import { useLocation } from 'react-router-dom'
 import { CONTACT } from '../data/site'
 import { useI18n } from '../i18n/LanguageContext'
 import Icon from './Icon'
+import useLiquidGlass from './useLiquidGlass'
 
 // Floating quick-contact button, per the client's note: it stands in for the
 // "Start Your Event" buttons removed from mid-page, so someone can reach out
 // "right away" without hunting for the form.
 //
-// A round bead of dark glass with a gold rim and a gold glyph, sitting well up
-// the right-hand edge rather than in the corner — that is where the reference
-// parks it, high enough that it never lands on the footer links it would
-// otherwise duplicate.
+// A round bead of liquid glass with a gold rim and a gold glyph, sitting well
+// up the right-hand edge rather than in the corner — that is where the
+// reference parks it, high enough that it never lands on the footer links it
+// would otherwise duplicate. The material is .liquid-glass--bead in index.css.
 //
 // It appears once the hero has scrolled past, and never on Contact, where it
 // would point at the page you are already on.
@@ -25,6 +26,7 @@ export default function QuickContact() {
   const { t } = useI18n()
   const { pathname } = useLocation()
   const [show, setShow] = useState(false)
+  const glass = useLiquidGlass()
 
   useEffect(() => {
     const update = () => {
@@ -47,18 +49,21 @@ export default function QuickContact() {
 
   return (
     <a
+      ref={glass}
       href={CONTACT.whatsapp}
       target="_blank"
       rel="noreferrer"
       aria-label={t.common.chatWithUs}
       aria-hidden={!show}
       tabIndex={show ? 0 : -1}
-      className={`fixed bottom-8 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-black/75 ring-1 ring-white/45 backdrop-blur-sm transition-all duration-500 hover:bg-black hover:ring-gold-light active:scale-95 sm:bottom-[22%] sm:right-10 sm:h-16 sm:w-16 ${
+      className={`liquid-glass liquid-glass--bead fixed bottom-8 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full sm:bottom-[22%] sm:right-10 sm:h-16 sm:w-16 ${
         show ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
       }`}
-      style={{ boxShadow: '0 0 34px -6px rgba(224,199,137,0.55)' }}
     >
-      <Icon name="whatsapp" className="h-7 w-7 text-gold-light sm:h-8 sm:w-8" />
+      <Icon
+        name="whatsapp"
+        className="h-7 w-7 text-gold-light drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)] sm:h-8 sm:w-8"
+      />
     </a>
   )
 }
