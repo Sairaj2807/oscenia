@@ -3,9 +3,9 @@
 // (routes, client logos, portfolio images) align by index with the dict.
 
 export const CONTACT = {
-  phone: '+62 00-0000-0000',
+  phone: '+62 821-3330-2776',
   email: 'osceniaevents@gmail.com',
-  whatsapp: 'https://wa.me/6200000000',
+  whatsapp: 'https://wa.me/6282133302776',
   address:
     'Jl. Jenderal Sudirman No.45 - 46, RT.3/RW.4, Karet Semanggi, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12930',
   mapUrl:
@@ -22,7 +22,7 @@ export const SOCIALS = [
   { name: 'Instagram', href: 'https://instagram.com', icon: 'instagram' },
   { name: 'TikTok', href: 'https://tiktok.com', icon: 'tiktok' },
   { name: 'LinkedIn', href: 'https://linkedin.com', icon: 'linkedin' },
-  { name: 'WhatsApp', href: 'https://wa.me/6200000000', icon: 'whatsapp' },
+  { name: 'WhatsApp', href: 'https://wa.me/6282133302776', icon: 'whatsapp' },
 ]
 
 // Footer "Follow Along" list (brand names are language-independent)

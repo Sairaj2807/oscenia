@@ -19,6 +19,14 @@ const matches = (query) =>
 
 const set = (el, props) => Object.assign(el.style, props)
 
+// A cubic-bezier played backwards in time: the curve rotated 180° about its
+// centre. What braked on the way in accelerates on the way out.
+const reverseEase = (ease) => {
+  const [x1, y1, x2, y2] = ease.match(/-?[\d.]+/g).map(Number)
+  const f = (n) => +n.toFixed(3)
+  return `cubic-bezier(${f(1 - x2)}, ${f(1 - y2)}, ${f(1 - x1)}, ${f(1 - y1)})`
+}
+
 export default function useCardToss(side) {
   const slot = useRef(null)
   const photo = useRef(null)
@@ -35,6 +43,10 @@ export default function useCardToss(side) {
 
     const dir = side === 'left' ? -1 : 1
     let landed = false
+    // Set while the card is flying back out (or has flown out) on the way up,
+    // so a relaunch carries on from wherever it is instead of snapping to the
+    // parked position first.
+    let retreating = false
 
     const plan = () => {
       const vw = window.innerWidth
@@ -79,9 +91,12 @@ export default function useCardToss(side) {
     }
 
     const launch = () => {
-      const p = park()
       // Commit the parked position before handing over to the transitions, so
-      // the flight starts from it rather than from wherever the card last was.
+      // the flight starts from it rather than from wherever the card last was —
+      // unless it's on its way out, when turning round mid-air reads better
+      // than a jump back to the edge.
+      const p = retreating ? plan() : park()
+      retreating = false
       void pic.offsetWidth
       const k = p.small ? TOSS.small.durationMs / TOSS.durationMs : 1
       const d = TOSS.durationMs * k
@@ -111,6 +126,45 @@ export default function useCardToss(side) {
       landed = true
     }
 
+    // The toss played backwards: everything that happened at time t on the way
+    // in happens at (duration − t) on the way out, on the mirrored curve. So
+    // the photo lifts off gently, then flies up and out to its own side as it
+    // tilts; the caption drops and slides away in mirrored order; and on a
+    // phone the fade-in becomes a fade-out at the end.
+    const retreat = () => {
+      const p = plan()
+      const k = p.small ? TOSS.small.durationMs / TOSS.durationMs : 1
+      const d = TOSS.durationMs * k
+      const s = TOSS.captionSlide
+      const r = TOSS.captionRise
+      const fade = Math.round(d * 0.45)
+      set(pic, {
+        transition: [
+          `translate ${d}ms ${reverseEase(TOSS.moveEase)}`,
+          `rotate ${d}ms ${reverseEase(TOSS.tiltEase)}`,
+          p.small ? `opacity ${fade}ms ease-in ${d - fade}ms` : '',
+        ]
+          .filter(Boolean)
+          .join(', '),
+        translate: `${p.tx}px ${p.ty}px`,
+        rotate: `${p.tilt}deg`,
+        opacity: p.small ? '0' : '',
+      })
+      const slideDelay = (TOSS.durationMs - s.delayMs - s.durationMs) * k
+      set(cap, {
+        transition: `translate ${s.durationMs * k}ms ${reverseEase(s.ease)} ${slideDelay}ms`,
+        translate: `${p.cx}px 0px`,
+      })
+      const riseDelay = (TOSS.durationMs - r.delayMs - r.durationMs) * k
+      set(lift, {
+        transition: `translate ${r.durationMs * k}ms ${reverseEase(r.ease)} ${riseDelay}ms, opacity ${r.durationMs * k}ms ease-in ${riseDelay}ms`,
+        translate: `0px ${p.cy}px`,
+        opacity: String(TOSS.captionRise.fromOpacity),
+      })
+      landed = false
+      retreating = true
+    }
+
     // Parked before first paint, so a card below the fold never shows in place.
     park()
 
@@ -131,18 +185,40 @@ export default function useCardToss(side) {
       },
       { threshold: 0 },
     )
+    // The way back. Watches the upper part of the screen, down to the exit
+    // line: the slot dropping out of it with its top still on screen means the
+    // page is being scrolled up, so the card flies back out; the slot rising
+    // into it again means scrolling down, so it's thrown back in. Only
+    // crossings count — the first report just records where the slot starts,
+    // so a card that loads already in view isn't thrown out on arrival.
+    let inUpper = null
+    const exit = new IntersectionObserver(
+      ([e]) => {
+        const was = inUpper
+        inUpper = e.isIntersecting
+        if (was === null) return
+        if (was && !inUpper && landed && e.boundingClientRect.top > 0) retreat()
+        else if (!was && inUpper && !landed) launch()
+      },
+      { rootMargin: `0px 0px -${Math.round((1 - TOSS.exitLine) * 100)}% 0px`, threshold: 0 },
+    )
     enter.observe(cell)
     leave.observe(cell)
+    exit.observe(cell)
 
     // A resize can move a parked card's slot enough for it to peek on screen.
     const onResize = () => {
-      if (!landed) park()
+      if (!landed) {
+        retreating = false
+        park()
+      }
     }
     window.addEventListener('resize', onResize)
 
     return () => {
       enter.disconnect()
       leave.disconnect()
+      exit.disconnect()
       window.removeEventListener('resize', onResize)
       for (const el of [pic, cap, lift]) {
         set(el, { transition: '', translate: '', rotate: '', opacity: '' })

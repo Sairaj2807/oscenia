@@ -93,12 +93,19 @@ export default function GoldThread({
   pacing,
   className = '',
   style,
-  width = 1.4,
+  // Weight and colour measured off the reference recording: the line's
+  // cross-section integrates to ~2.2px of this pale champagne, which is far
+  // less orange than the brand gold (green ≈ 0.94 of red, blue ≈ 0.75).
+  width = 2.2,
 }) {
   const wrapRef = useRef(null)
   const pathRef = useRef(null)
   const [reduced] = useState(prefersReduced)
   const top = style?.top
+  // The link's height arrives as a new inline style. ResizeObserver would
+  // catch it, but a frame late; re-running on it keeps the first draw at the
+  // new height in step with the state change.
+  const height = style?.height
 
   useEffect(() => {
     const wrap = wrapRef.current
@@ -155,7 +162,7 @@ export default function GoldThread({
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', resized)
     }
-  }, [d, viewBox, from, to, pacing, reduced, top])
+  }, [d, viewBox, from, to, pacing, reduced, top, height])
 
   return (
     <div
@@ -173,7 +180,7 @@ export default function GoldThread({
         <path
           ref={pathRef}
           d={d}
-          stroke="rgba(214, 190, 138, 0.72)"
+          stroke="rgba(238, 225, 188, 0.92)"
           strokeWidth={width}
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"

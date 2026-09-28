@@ -17,10 +17,10 @@ import { useEffect, useRef, useState } from 'react'
 const CELL = 10
 
 // Per-step energy retained. Higher lingers longer; above ~0.98 the surface
-// never calms and the page reads as noisy. At 0.962 a wake stays alive for
-// roughly five seconds after the pointer stops, which is what makes it read as
-// water rather than as a cursor trail that switches off.
-const DAMP = 0.962
+// never calms and the page reads as noisy. At 0.95 a wake settles within about
+// a second and a half of the pointer stopping: still water rather than a trail
+// that switches off, but quiet enough to sit behind the page.
+const DAMP = 0.95
 
 // Radius of the disturbance the pointer pushes in, in cells, and how deep each
 // one dents the surface.
@@ -28,17 +28,19 @@ const DAMP = 0.962
 // Amplitude stays modest because the pointer injects on every move event,
 // ~60-120 times a second, so it accumulates fast. These numbers were measured
 // against the shading below rather than guessed: at 0.14 both a slow hover and
-// a drag peak around 204/255 alpha with ~10% of the wake clipping flat, which
-// is strong while the ripple keeps its internal structure. Going further --
+// a drag peak around 204/255 alpha with ~10% of the wake clipping flat. It's
+// now set lower, for a subtler wake: with 0.1, a 3-cell poke and OPACITY 0.65
+// the same sweep peaks around 75/255 and lights a fifth of the area, with
+// nothing clipping. (0.08 / 0.55 dropped it to ~50/255 — too faint to read.) Going further --
 // 0.22 and up -- clips half the wake, and a ripple that is 50% flat white is no
 // longer a ripple, it is a glow.
-const POKE = 4
-const AMPLITUDE = 0.14
+const POKE = 3
+const AMPLITUDE = 0.1
 
 // Converts height and slope into visible light. Slope carries most of it — a
 // wave is visible because it tilts, not because it is tall.
 const GAIN = 1.3
-const OPACITY = 0.8
+const OPACITY = 0.65
 
 // Crest and trough colours: gold-light and navy-500 from tailwind.config.js.
 const CREST = [224, 199, 137]

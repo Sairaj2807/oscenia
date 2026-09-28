@@ -188,18 +188,18 @@ body {
   .liquid-glass:focus-visible {
     --lg-rim: #f0dca8;
     outline: none;
-    background-color: rgb(224 199 137 / 0.1);
+    background-color: rgb(224 199 137 / 0.16);
     box-shadow:
-      inset 0 1px 1px rgb(240 220 168 / 0.55),
-      inset 0 -12px 14px -12px rgb(236 214 160 / 0.9),
-      inset 0 12px 20px -16px rgb(255 255 255 / 0.35),
+      inset 0 1px 1px rgb(240 220 168 / 0.6),
+      inset 0 -12px 14px -12px rgb(236 214 160 / 0.95),
+      inset 0 12px 20px -16px rgb(255 255 255 / 0.4),
       0 12px 30px -14px rgb(0 0 0 / 0.6),
-      0 0 34px -6px rgb(198 161 91 / 0.5);
+      0 0 60px -2px rgb(198 161 91 / 0.75);
   }
 
   .liquid-glass:hover::after,
   .liquid-glass:focus-visible::after {
-    opacity: 0.75;
+    opacity: 0.9;
   }
 
   .liquid-glass:active {
@@ -256,6 +256,22 @@ body {
   .btn-glass:hover,
   .btn-glass:focus-visible {
     @apply text-white;
+    /* Distinct from the press swell below (1.08): a lift on hover so a click
+       still reads as an additional jump rather than repeating the same scale
+       the hover already settled on. Scoped to .btn-glass rather than
+       .liquid-glass so the quick-contact bead, which shares the same
+       material, doesn't grow on hover too — this was asked for on the CTA
+       specifically, not as a change to the material itself. */
+    scale: 1.05;
+  }
+
+  /* A real click always arrives while hovered, so without this,
+     .btn-glass:hover and .liquid-glass:active would tie in specificity and
+     the cascade would fall back to source order — putting .btn-glass:hover
+     last and permanently capping the press at the hover value. Repeating the
+     value here, after :hover, is what lets the press still climb past it. */
+  .btn-glass:active {
+    scale: 1.08;
   }
 }
 
@@ -297,7 +313,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .liquid-glass:active {
+  .liquid-glass:active,
+  .btn-glass:hover,
+  .btn-glass:focus-visible {
     scale: none;
   }
 }
@@ -387,5 +405,31 @@ body {
   }
   75% {
     translate: 0 5px;
+  }
+}
+
+/* Intro showreel on a portrait screen (components/Intro.jsx): the whole frame,
+   letterboxed, since the film is kinetic type and a fill-crop cuts every
+   sentence. Its top and bottom edges are faded out so it melts into the bars,
+   which Intro paints in the film's own edge colours. In portrait the film is
+   always full width, so its height is 100vw·9/16 and each edge sits 28.125vw
+   either side of the middle. */
+@media (orientation: portrait) {
+  .showreel-letterbox {
+    --edge: 28.125vw;
+    --fade: 7vw;
+    object-fit: contain;
+    -webkit-mask-image: linear-gradient(
+      transparent calc(50% - var(--edge)),
+      #000 calc(50% - var(--edge) + var(--fade)),
+      #000 calc(50% + var(--edge) - var(--fade)),
+      transparent calc(50% + var(--edge))
+    );
+    mask-image: linear-gradient(
+      transparent calc(50% - var(--edge)),
+      #000 calc(50% - var(--edge) + var(--fade)),
+      #000 calc(50% + var(--edge) - var(--fade)),
+      transparent calc(50% + var(--edge))
+    );
   }
 }

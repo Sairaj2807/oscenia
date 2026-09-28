@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { THREAD_ONE, THREAD_TWO, threadTwoPath } from '../data/formatsMotion'
+import { THREAD_ONE, THREAD_TWO, buildLink, threadTwoPath } from '../data/formatsMotion'
 import { headlineDurationMs } from '../data/headline'
 import { FORMAT_IMAGES } from '../data/site'
 import { useI18n } from '../i18n/LanguageContext'
@@ -11,6 +11,7 @@ import KineticHeadline from '../components/KineticHeadline'
 import LogoMarquee from '../components/LogoMarquee'
 import Reveal from '../components/Reveal'
 import useCardToss from '../components/useCardToss'
+import { useIntroReady } from '../introReady'
 
 export default function Home() {
   return (
@@ -30,6 +31,10 @@ function HeroFilm() {
   const { t } = useI18n()
   const lines = t.hero.headline
   const ctaDelay = headlineDurationMs(lines) - 500
+  // Same reasoning as KineticHeadline's own gate: this section mounts while
+  // the intro overlay is still covering the screen, so the CTA's word-in
+  // delay must count from when the overlay actually clears, not from mount.
+  const ready = useIntroReady()
 
   return (
     // No overflow-hidden on the section: it would become the scrollport for
@@ -65,8 +70,8 @@ function HeroFilm() {
           className="mx-auto w-full max-w-[68rem]"
         />
         <div
-          className="word-in mt-10 sm:mt-[4.5rem]"
-          style={{ animationDelay: `${ctaDelay}ms`, animationDuration: '900ms' }}
+          className={`mt-10 sm:mt-[4.5rem] ${ready ? 'word-in' : 'opacity-0'}`}
+          style={ready ? { animationDelay: `${ctaDelay}ms`, animationDuration: '900ms' } : undefined}
         >
           <GlassCTA />
         </div>
@@ -104,11 +109,15 @@ function Formats() {
   const { t } = useI18n()
   const gridBox = useRef(null)
   const lastTitle = useRef(null)
+  const photos = useRef([])
   const [threadTwo, setThreadTwo] = useState(null)
+  const [link, setLink] = useState(null)
 
   // The second thread starts behind "Experience Systems", so its box is placed
   // from that caption's position, and again whenever the grid reflows — fonts
-  // arriving, a resize, or a language switch changing the copy.
+  // arriving, a resize, or a language switch changing the copy. The link
+  // between the two threads is placed from the same measurement, since its far
+  // end is thread two's start.
   useEffect(() => {
     const box = gridBox.current
     const title = lastTitle.current
@@ -117,6 +126,7 @@ function Formats() {
       const at = offsetWithin(title, box)
       if (!at) return
       const vw = window.innerWidth
+      const vh = window.innerHeight
       // The words' own width. A range's rect moves with the flight, but the
       // caption only ever slides, so its width is the same mid-air.
       const range = document.createRange()
@@ -128,10 +138,31 @@ function Formats() {
       // Into the thread's own 1920-wide units: its box is the full screen width,
       // centred on this column.
       const boxX = ((x - (box.clientWidth - vw) / 2) * 1920) / vw
-      setThreadTwo({
-        top: Math.round(at.y + title.offsetHeight / 2 - (THREAD_TWO.anchorY / 1080) * window.innerHeight),
-        d: threadTwoPath(Math.max(boxX - THREAD_TWO.startX, THREAD_TWO.minShift)),
-      })
+      const dx = Math.max(boxX - THREAD_TWO.startX, THREAD_TWO.minShift)
+      const top = Math.round(at.y + title.offsetHeight / 2 - (THREAD_TWO.anchorY / 1080) * vh)
+      setThreadTwo({ top, d: threadTwoPath(dx) })
+      // The link runs on under the second photo, out below its caption, and in
+      // under the last photo, so it needs where those actually are. Layout
+      // offsets, not rects, so a card mid-toss doesn't skew them.
+      const second = photos.current[1]
+      const last = photos.current[3]
+      const figure = second?.closest('figure')
+      const f = figure && offsetWithin(figure, box)
+      const c = last && offsetWithin(last, box)
+      // One column (below 640px) has no threads.
+      setLink(
+        f && c && vw >= 640
+          ? buildLink({
+              vw,
+              vh,
+              emergeY: f.y + figure.offsetHeight,
+              photoTop: c.y,
+              photoHeight: last.offsetHeight,
+              twoX: THREAD_TWO.startX + dx,
+              twoTop: top,
+            })
+          : null,
+      )
     }
     place()
     const ro = new ResizeObserver(place)
@@ -184,6 +215,20 @@ function Formats() {
           {...THREAD_ONE}
           className="left-1/2 top-[-50vh] hidden h-[84vh] w-screen -translate-x-1/2 sm:block"
         />
+        {/* One thread in three pieces: thread one, the link on under the
+            second photo and the last, and thread two out from behind its
+            caption. All sit before the grid so the cards paint over them. */}
+        {link && (
+          <GoldThread
+            d={link.d}
+            viewBox={link.viewBox}
+            from={link.from}
+            to={link.to}
+            pacing={link.pacing}
+            className="left-1/2 hidden w-screen -translate-x-1/2 sm:block"
+            style={{ top: link.top, height: link.height }}
+          />
+        )}
         {threadTwo && (
           <GoldThread
             {...THREAD_TWO}
@@ -200,6 +245,7 @@ function Formats() {
               src={FORMAT_IMAGES[i]}
               index={i}
               titleRef={i === t.direct.items.length - 1 ? lastTitle : undefined}
+              photoRef={(el) => (photos.current[i] = el)}
             />
           ))}
         </ul>
@@ -216,7 +262,7 @@ function Formats() {
 // the toss; inside it, .format-card-lift is the hover swell and float; inside
 // that, the frame keeps its halo and its slow zoom of the photo. The caption is
 // split the same way — sideways on the figcaption, upward on the block within.
-function FormatCard({ item, src, index, titleRef }) {
+function FormatCard({ item, src, index, titleRef, photoRef }) {
   const low = index % 2 === 1
   const toss = useCardToss(low ? 'right' : 'left')
   return (
@@ -224,7 +270,14 @@ function FormatCard({ item, src, index, titleRef }) {
       <figure className="group">
         <div ref={toss.photo}>
           <div className="format-card-lift">
-            <div className="overflow-hidden rounded-[1.25rem] shadow-[0_0_110px_-34px_rgba(198,161,91,0.85)] transition-shadow duration-700 group-hover:shadow-[0_0_130px_-24px_rgba(198,161,91,0.95)]">
+            <div
+              ref={photoRef}
+              // The gold halo only shows while the card is hovered, and only on
+              // devices that truly hover (a tap on a phone would leave it stuck
+              // on). At rest it's the same shadow at zero opacity, so it blooms
+              // in and out smoothly rather than popping.
+              className="overflow-hidden rounded-[1.25rem] shadow-[0_0_110px_-34px_rgba(198,161,91,0)] transition-shadow duration-700 [@media(hover:hover)]:group-hover:shadow-[0_0_130px_-24px_rgba(198,161,91,0.95)]"
+            >
               <img
                 src={src}
                 alt={item.title}
@@ -254,7 +307,7 @@ function FormatCard({ item, src, index, titleRef }) {
   )
 }
 
-const SLIDE_MS = 6000
+const SLIDE_MS = 4000
 
 const prefersReduced = () =>
   typeof window !== 'undefined' &&

@@ -53,6 +53,19 @@ const INK_STOPS = [
 // -2 splash, -1 splash leaving, 0 video playing, 1 done.
 const STAGE = { SPLASH: -2, SPLASH_LEAVING: -1, VIDEO: 0, DONE: 1 }
 
+// Plays the showreel with its soundtrack. If the browser still refuses sound
+// (no gesture it recognises), it falls back to playing muted rather than
+// leaving the intro frozen on a still frame.
+function playWithSound(video) {
+  if (!video) return
+  video.muted = false
+  video.play()?.catch((err) => {
+    if (err?.name !== 'NotAllowedError') return
+    video.muted = true
+    video.play()?.catch(() => {})
+  })
+}
+
 const prefersReduced = () =>
   typeof window !== 'undefined' &&
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
@@ -220,6 +233,7 @@ export default function Intro() {
   const markRef = useRef(null)
   const skipRef = useRef(null)
   const videoRef = useRef(null)
+  const letterboxRef = useRef(null)
   // The zooming mark, its ink group, and the wordmark that gets dropped once it
   // is off screen.
   const wipeRef = useRef(null)
@@ -257,12 +271,24 @@ export default function Intro() {
       return
     }
 
+    // The film plays with its sound, which browsers only allow from a user
+    // gesture. The real start is 400ms later, from the animation loop, and
+    // Safari doesn't count that as part of the click — so the element is
+    // unlocked here, inside the click: started and paused at once, before a
+    // single sample can be heard.
+    const video = videoRef.current
+    if (video) {
+      video.muted = false
+      video.play()?.catch(() => {})
+      video.pause()
+    }
+
     const rect = markRef.current?.getBoundingClientRect()
     const vpW = window.innerWidth
     const vpH = window.innerHeight
     if (!rect || !rect.width) {
       setStage(STAGE.VIDEO)
-      videoRef.current?.play()
+      playWithSound(videoRef.current)
       return
     }
 
@@ -323,7 +349,7 @@ export default function Intro() {
       // top of it.
       if (!played && ms >= PUSH_FROM_MS) {
         played = true
-        videoRef.current?.play()
+        playWithSound(videoRef.current)
       }
 
       rafRef.current = ms < SPLASH_EXIT_MS ? requestAnimationFrame(tick) : 0
@@ -373,6 +399,58 @@ export default function Intro() {
     return () => el.removeEventListener('timeupdate', onTime)
   }, [stage])
 
+  // On a portrait screen the film is letterboxed (it's kinetic type — cropping
+  // it to fill cuts every sentence), and the bars above and below it are
+  // painted, frame by frame, in the colours of the film's own top and bottom
+  // edges. Every scene sits on a flat cream, navy or black ground, so the film
+  // reads as filling the phone rather than floating in black. The frame is read
+  // at 16×9, which costs next to nothing. The colour goes on a layer behind the
+  // video (not the video's own background) because the film's edges are faded
+  // out with a mask (.showreel-letterbox in index.css), which would hide it.
+  useEffect(() => {
+    const video = videoRef.current
+    const box = letterboxRef.current
+    if (reduced || !video || !box) return undefined
+    const portrait = window.matchMedia('(orientation: portrait)')
+    const canvas = document.createElement('canvas')
+    canvas.width = 16
+    canvas.height = 9
+    const ctx = canvas.getContext('2d', { willReadFrequently: true })
+    const rowColour = (data, row) => {
+      let r = 0
+      let g = 0
+      let b = 0
+      for (let x = 0; x < 16; x++) {
+        const i = (row * 16 + x) * 4
+        r += data[i]
+        g += data[i + 1]
+        b += data[i + 2]
+      }
+      return `rgb(${Math.round(r / 16)},${Math.round(g / 16)},${Math.round(b / 16)})`
+    }
+    let raf = 0
+    const sample = () => {
+      raf = 0
+      if (video.paused || video.ended) return
+      if (portrait.matches && video.readyState >= 2) {
+        ctx.drawImage(video, 0, 0, 16, 9)
+        const { data } = ctx.getImageData(0, 0, 16, 9)
+        box.style.background = `linear-gradient(${rowColour(data, 0)} 50%, ${rowColour(data, 8)} 50%)`
+      } else {
+        box.style.background = ''
+      }
+      raf = requestAnimationFrame(sample)
+    }
+    const onPlay = () => {
+      if (!raf) raf = requestAnimationFrame(sample)
+    }
+    video.addEventListener('play', onPlay)
+    return () => {
+      video.removeEventListener('play', onPlay)
+      cancelAnimationFrame(raf)
+    }
+  }, [reduced])
+
   if (stage === STAGE.DONE) return null
 
   const splash = stage <= STAGE.SPLASH_LEAVING
@@ -388,13 +466,15 @@ export default function Intro() {
     >
       {/* Underneath everything, and covered by the splash until the wipe has
           taken the screen. Reduced motion never shows the film at all. */}
+      {!reduced && <div ref={letterboxRef} aria-hidden="true" className="absolute inset-0" />}
       {!reduced && (
         <video
           ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover"
+          // Fills the screen in landscape; letterboxed in portrait so no
+          // sentence of the film is cut off (bars painted by the effect above).
+          className="showreel-letterbox absolute inset-0 h-full w-full object-cover"
           src="/media/showreel.mp4"
           poster="/media/showreel-poster.jpg"
-          muted
           playsInline
           preload="auto"
           onEnded={finish}
