@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { MARK_EMBLEM, MARK_GOLD, MARK_TEXT, MARK_VIEWBOX } from '../data/markGeometry'
 import { useI18n } from '../i18n/LanguageContext'
 import BackdropVideo from './BackdropVideo'
@@ -243,6 +244,18 @@ export default function Intro() {
   const viewRef = useRef(null)
   const rafRef = useRef(0)
   const leaveTimerRef = useRef(0)
+
+  // The intro always hands over to the home page, whichever address it was
+  // loaded on (a refresh on /about, a shared /services link). Done as the
+  // overlay appears rather than when it ends, so Home is what warms up
+  // underneath and is ready the moment the film lifts. `replace`, so Back
+  // doesn't return to the page the intro covered.
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const [startPath] = useState(pathname)
+  useEffect(() => {
+    if (startPath !== '/') navigate('/', { replace: true })
+  }, [startPath, navigate])
 
   const finish = useCallback(() => {
     cancelAnimationFrame(rafRef.current)
