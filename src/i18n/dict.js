@@ -73,19 +73,22 @@ export const dict = {
     about: {
       eyebrow: 'About Us',
       title: 'About Us',
+      // The hero sets the second word in italic.
+      heroTitle: ['About', 'Us'],
       intro:
         'Oscenia was created from the belief that a powerful event is a business tool and an emotional memory at the same time. We shape atmosphere, narrative, and operational flow so every audience leaves with a clear feeling and every brand leaves with a story worth telling.',
       name: {
-        stylized: 'OS · CEN · IA',
+        // IPA for the name, set as the reference sets it. Fraunces has no ɒ or ɛ,
+        // so those two come from a Noto Serif subset (see index.html).
+        phonetic: '/ɒ.sɛ.ni.ə/',
         body: [
           'The name combines the sense of the ocean — scale, flow, depth, and limitless possibility — with an intentionally designed moment where stories come to life.',
           'It conveys an experience company that is expansive in vision, fluid in execution, elegant in expression, immersive in design, and memorable in impact.',
         ],
       },
       standsFor: {
-        pre: 'What ',
-        brand: 'Oscenia',
-        post: ' stands for',
+        heading: ['What Oscenia', 'Stands For'],
+        hint: 'Drag a bubble, or tap one to open it',
         intro:
           'Oscenia Events is a strategic event and experience company that turns business goals into polished, story-led, sensory experiences.',
         pillars: [
@@ -132,31 +135,17 @@ export const dict = {
     },
     services: {
       eyebrow: 'Portfolio & Clients',
-      heading: 'Corporate events and product launches we’ve directed.',
-      // Titles align by index with PORTFOLIO in site.js
-      portfolio: [
-        'Lamborghini Car Launch',
-        'Team Moments',
-        'Coca-Cola Activation',
-        'Meta Experience',
-        'Netflix TUDUM',
-        'Unilever Summit',
-        'TikTok Stage',
-        'Google Keynote',
-        'H&M Launch',
-      ],
-      featured: {
-        title: 'Lamborghini Car Launch',
-        desc: 'Short introduction / explanation about the event and also the impact of the event.',
-      },
-      // Opened by clicking a portfolio tile. `desc` is placeholder copy until
-      // the real event write-ups arrive — one per project.
+      // The ampersand is set large and gold, so it is split out here.
+      heading: ['Corporate Events', 'Product Launches We’ve Directed.'],
+      // Case pages. Placeholder copy until each project's write-up arrives;
+      // a project with its own entry in `cases` (keyed by slug) uses that.
       caseStudy: {
-        eventTypeLabel: 'Event type',
-        desc: 'Short introduction / explanation about the event and also the impact of the event.',
+        intro: 'Short introduction / explanation about the event and also the impact of the event.',
+        body: 'The full story of the event will sit here: the brief, the idea behind it, how the day ran for guests, and what it achieved for the brand.',
         galleryLabel: 'From the event',
-        viewProject: 'View project',
+        back: 'Back',
       },
+      cases: {},
     },
     contact: {
       heading: 'Tell us what you’re building.',
@@ -272,19 +261,21 @@ export const dict = {
     about: {
       eyebrow: 'Tentang Kami',
       title: 'Tentang Kami',
+      heroTitle: ['Tentang', 'Kami'],
       intro:
         'Oscenia lahir dari keyakinan bahwa acara yang berdampak adalah alat bisnis sekaligus kenangan emosional pada saat yang sama. Kami merancang atmosfer, narasi, dan alur operasional agar setiap audiens pulang dengan perasaan yang jelas dan setiap merek pulang dengan kisah yang layak diceritakan.',
       name: {
-        stylized: 'OS · CEN · IA',
+        // IPA for the name, set as the reference sets it. Fraunces has no ɒ or ɛ,
+        // so those two come from a Noto Serif subset (see index.html).
+        phonetic: '/ɒ.sɛ.ni.ə/',
         body: [
           'Nama ini memadukan kesan samudra — skala, aliran, kedalaman, dan kemungkinan tanpa batas — dengan momen yang dirancang khusus tempat kisah-kisah menjadi hidup.',
           'Ia menggambarkan perusahaan pengalaman yang luas dalam visi, luwes dalam eksekusi, elegan dalam ekspresi, imersif dalam desain, dan berkesan dalam dampak.',
         ],
       },
       standsFor: {
-        pre: 'Makna di balik ',
-        brand: 'Oscenia',
-        post: '',
+        heading: ['Makna di Balik', 'Oscenia'],
+        hint: 'Geser gelembung, atau ketuk untuk membukanya',
         intro:
           'Oscenia Events adalah perusahaan acara dan pengalaman strategis yang mengubah tujuan bisnis menjadi pengalaman sensorik yang matang dan digerakkan oleh cerita.',
         pillars: [
@@ -331,28 +322,14 @@ export const dict = {
     },
     services: {
       eyebrow: 'Portofolio & Klien',
-      heading: 'Acara korporat dan peluncuran produk yang telah kami arahkan.',
-      portfolio: [
-        'Peluncuran Mobil Lamborghini',
-        'Momen Tim',
-        'Aktivasi Coca-Cola',
-        'Pengalaman Meta',
-        'Netflix TUDUM',
-        'Summit Unilever',
-        'Panggung TikTok',
-        'Google Keynote',
-        'Peluncuran H&M',
-      ],
-      featured: {
-        title: 'Peluncuran Mobil Lamborghini',
-        desc: 'Pengantar / penjelasan singkat tentang acara dan juga dampak dari acara tersebut.',
-      },
+      heading: ['Acara Korporat', 'Peluncuran Produk yang Telah Kami Arahkan.'],
       caseStudy: {
-        eventTypeLabel: 'Jenis acara',
-        desc: 'Pengantar / penjelasan singkat tentang acara dan juga dampak dari acara tersebut.',
+        intro: 'Pengantar / penjelasan singkat tentang acara dan juga dampak dari acara tersebut.',
+        body: 'Kisah lengkap acara akan ditampilkan di sini: brief, gagasan di baliknya, bagaimana hari itu berjalan bagi tamu, dan apa yang dicapainya bagi merek.',
         galleryLabel: 'Dari acara',
-        viewProject: 'Lihat proyek',
+        back: 'Kembali',
       },
+      cases: {},
     },
     contact: {
       heading: 'Ceritakan apa yang Anda bangun.',

@@ -320,6 +320,35 @@ body {
   }
 }
 
+/* ---- About page ------------------------------------------------------- */
+
+/* The phonetic spelling. Fraunces has no ɒ or ɛ, so the browser takes those
+   two from the Noto Serif subset loaded in index.html. */
+.font-phonetic {
+  font-family: 'Fraunces', 'Noto Serif', Georgia, serif;
+  font-weight: 300;
+}
+
+/* A pillar bubble (components/GlassBubbles.jsx): the photographed bubble
+   lifted off the champagne by a soft warm shadow, glowing gold while held or
+   open. Values are the designer's prototype (oscenia-liquid-glass-v6.html). */
+.glass-orb {
+  cursor: grab;
+  filter: drop-shadow(0 18px 26px rgb(20 10 2 / 0.35)) drop-shadow(0 2px 8px rgb(20 10 2 / 0.22));
+  transition: filter 0.35s ease;
+  will-change: transform;
+}
+
+.glass-orb:active {
+  cursor: grabbing;
+}
+
+.glass-orb--active,
+.glass-orb:active {
+  filter: drop-shadow(0 22px 34px rgb(20 10 2 / 0.42)) drop-shadow(0 0 30px rgb(243 197 131 / 0.28))
+    brightness(1.04);
+}
+
 ::selection {
   background: rgba(198, 161, 91, 0.35);
 }
@@ -432,4 +461,17 @@ body {
       transparent calc(50% + var(--edge))
     );
   }
+}
+
+/* Portfolio tile -> case page (useViewTransitionNavigate). The tile and the
+   hero share a view-transition-name, so the photo grows into place; the rest
+   of the page crossfades. Eased and paced to the site's slow morphs. */
+::view-transition-group(*) {
+  animation-duration: 700ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 450ms;
 }

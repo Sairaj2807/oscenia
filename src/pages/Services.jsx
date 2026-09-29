@@ -1,160 +1,191 @@
 import { useState } from 'react'
-import {
-  EXPLORE_MORE_MIN_PROJECTS,
-  EXPLORE_MORE_TO,
-  FEATURED_GALLERY,
-  PORTFOLIO,
-} from '../data/site'
+import { Link } from 'react-router-dom'
+import { EVENT_RADIUS, PORTFOLIO } from '../data/site'
 import { useI18n } from '../i18n/LanguageContext'
-import CaseStudy from '../components/CaseStudy'
-import Media from '../components/Media'
+import useScrollProgress, { easeInOut, easeOut, span } from '../components/useScrollProgress'
+import useViewTransitionNavigate from '../components/useViewTransitionNavigate'
+import Curtains from '../components/Curtains'
+import LetterCurtain from '../components/LetterCurtain'
 import Reveal from '../components/Reveal'
-import CTA from '../components/CTA'
-import Icon from '../components/Icon'
+
+// The Services page follows the reference recording (video_refrence.mp4,
+// 2:36-3:36) and is built from the designer's Services material
+// (brand-assets/3. Services Page): the photographed curtains part on a curtain
+// made of the name that the pointer swings through, then draw back onto navy
+// velvet for the heading, and the six events fly in from a scattered collage
+// to settle as a grid. Each tile opens its own case page (pages/ServiceCase.jsx).
+
+
+const prefersReduced = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+
+const useReduced = () => useState(prefersReduced)[0]
 
 export default function Services() {
   return (
     <>
-      <Header />
-      <Gallery />
-      <Featured />
+      <Velvet />
+      <Stage />
+      <Portfolio />
     </>
   )
 }
 
-function Header() {
-  const { t } = useI18n()
+// The navy velvet the whole page sits on, held still behind everything. Fixed
+// rather than per-section so the stage and the grid share one continuous
+// ground — the reference never shows a seam between them. It sits under the
+// Layout's pointer ripple (-z-10), so the water still plays over the velvet.
+function Velvet() {
   return (
-    <section className="mx-auto max-w-content px-6 pb-8 pt-40">
-      <Reveal>
-        <p className="eyebrow mb-4">{t.services.eyebrow}</p>
-        <h1 className="max-w-3xl font-serif text-5xl text-gold-light sm:text-6xl">{t.services.heading}</h1>
-      </Reveal>
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-20">
+      <img src="/services/velvet.webp" alt="" className="h-full w-full object-cover" />
+      <div className="absolute inset-0 bg-navy-950/25" />
+    </div>
+  )
+}
+
+// 2:42. The stage, pinned while the page scrolls: the curtains part on
+// arrival, then as the page moves on the letters rise away and the curtains
+// draw fully off, leaving the velvet for the heading.
+function Stage() {
+  const reduced = useReduced()
+  const [ref, p] = useScrollProgress()
+  const lift = reduced ? 0 : easeInOut(span(p, 0.3, 0.75))
+  const open = reduced ? 0 : easeInOut(span(p, 0.35, 0.8))
+
+  return (
+    <section ref={ref} className={reduced ? '' : 'h-[250vh]'}>
+      <div className={`${reduced ? 'relative' : 'sticky top-0'} h-svh overflow-hidden`}>
+        <div
+          className="absolute inset-0"
+          style={{ transform: `translateY(${-lift * 110}%)`, opacity: 1 - span(p, 0.55, 0.75) }}
+        >
+          <LetterCurtain className="h-full w-full" />
+        </div>
+        <Curtains open={open} />
+      </div>
     </section>
   )
 }
 
-function Gallery() {
-  const { t } = useI18n()
-  const [openIndex, setOpenIndex] = useState(null)
+// Where each tile starts in the collage, as an offset from its grid slot
+// (vw, vh), a tilt and a scale. They converge on the grid as it scrolls in,
+// and scatter again if it scrolls back out.
+const SCATTER = [
+  { x: -14, y: -34, r: -6, s: 0.8 },
+  { x: 20, y: -48, r: 5, s: 0.72 },
+  { x: 30, y: 6, r: 7, s: 0.86 },
+  { x: -30, y: 22, r: -8, s: 0.9 },
+  { x: 8, y: 44, r: 3, s: 0.78 },
+  { x: 24, y: 58, r: -4, s: 0.74 },
+]
 
-  // Hidden until there are genuinely more projects than the grid shows and a
-  // real destination exists — it used to point at Contact Us, which the client
-  // flagged.
-  const showExploreMore = EXPLORE_MORE_TO && PORTFOLIO.length >= EXPLORE_MORE_MIN_PROJECTS
+// 3:03. Pulled up by a full screen so the heading scrolls in over the stage's
+// last pinned frame — empty velvet — instead of after it.
+function Portfolio() {
+  const { t } = useI18n()
+  const s = t.services
+  const reduced = useReduced()
+  const [gridRef, p] = useScrollProgress('pass')
+  const gather = reduced ? 1 : easeOut(span(p, 0.04, 0.42))
 
   return (
-    <section className="mx-auto max-w-content px-6 pb-8">
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
-        {PORTFOLIO.map((p, i) => {
-          const title = t.services.portfolio[i]
+    <section
+      className={`relative z-10 px-6 pb-28 ${reduced ? 'pt-24' : '-mt-[100svh] pt-[32svh]'}`}
+    >
+      <Reveal className="text-center" duration={1600}>
+        <p className="eyebrow mb-5">{s.eyebrow}</p>
+        <h1 className="mx-auto max-w-3xl font-serif text-3xl leading-snug text-white sm:text-5xl">
+          {s.heading[0]}{' '}
+          <span className="align-[-0.08em] font-display text-5xl italic text-gold sm:text-7xl">&amp;</span>{' '}
+          {s.heading[1]}
+        </h1>
+      </Reveal>
+
+      {/* The anchor a case page's Back returns to: scrolled so the grid sits
+          just under the header, where it has already gathered. */}
+      <div
+        id="portfolio"
+        ref={gridRef}
+        className="mx-auto mt-16 grid scroll-mt-28 max-w-content grid-cols-2 gap-3 sm:mt-24 sm:gap-5 md:grid-cols-3">
+        {PORTFOLIO.map((project, i) => {
+          const from = SCATTER[i % SCATTER.length]
+          const k = 1 - gather
           return (
-            <Reveal key={title} delay={(i % 3) * 80}>
-              {/* Desaturated until hover, when it colourises and the title
-                  arrives beneath — the interaction pattern from sg.gpj.com.
-                  Client mark sits bottom-right on the image, as there.
-                  A touch device has no hover, so every `group-hover:` state is
-                  mirrored under `[@media(hover:none)]:` — otherwise these tiles
-                  would sit grey and untitled forever on a phone. */}
-              <button
-                type="button"
-                onClick={() => setOpenIndex(i)}
-                className="group block w-full text-left focus:outline-none"
-              >
-                <figure className="relative aspect-[4/3] overflow-hidden rounded-md border border-white/10 transition-colors duration-500 group-hover:border-gold/40 group-focus-visible:border-gold [@media(hover:none)]:border-gold/30">
-                  <Media
-                    src={p.img}
-                    label={p.client || title}
-                    className="absolute inset-0 h-full w-full grayscale transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0 group-focus-visible:grayscale-0 [@media(hover:none)]:grayscale-0"
-                  />
-                  {/* Lifts on hover so the colour reads at full strength. */}
-                  <div className="absolute inset-0 bg-navy-950/45 transition-opacity duration-700 group-hover:opacity-0 [@media(hover:none)]:opacity-0" />
-
-                  <div className="absolute bottom-4 right-4">
-                    {p.logo ? (
-                      <img
-                        src={p.logo}
-                        alt={p.client}
-                        // Shadowed because the imagery is bright — a white mark
-                        // would otherwise disappear once the veil lifts.
-                        className="h-6 w-auto opacity-85 transition-opacity duration-500 group-hover:opacity-100 sm:h-7 [@media(hover:none)]:opacity-100 [filter:drop-shadow(0_1px_4px_rgba(0,0,0,0.65))]"
-                      />
-                    ) : (
-                      <span className="font-display text-[10px] tracking-[0.22em] text-white/75 drop-shadow transition-colors duration-500 group-hover:text-white sm:text-[11px] [@media(hover:none)]:text-white">
-                        {p.client}
-                      </span>
-                    )}
-                  </div>
-                </figure>
-
-                {/* Space is reserved so revealing the title doesn't reflow the
-                    grid. Taller on mobile, where the title always shows and
-                    wraps to more lines in a narrower column. */}
-                <div className="mt-3 min-h-[4.5rem] sm:mt-4 sm:min-h-[3.5rem]">
-                  <h3 className="translate-y-1 font-serif text-base leading-snug text-white opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:text-lg [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100">
-                    {title}
-                  </h3>
-                  <p className="mt-1 translate-y-1 text-[10px] uppercase tracking-[0.18em] text-gold-light/80 opacity-0 transition-all delay-75 duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100">
-                    {t.contact.eventTypes[p.type]}
-                  </p>
-                </div>
-              </button>
-            </Reveal>
+            <div
+              key={project.slug}
+              style={{
+                transform: `translate(${from.x * k}vw, ${from.y * k}vh) rotate(${from.r * k}deg) scale(${
+                  from.s + (1 - from.s) * gather
+                })`,
+                opacity: 0.35 + 0.65 * gather,
+              }}
+            >
+              <Tile project={project} />
+            </div>
           )
         })}
       </div>
-
-      {showExploreMore && (
-        <div className="mt-10 flex justify-end">
-          <CTA variant="solid" to={EXPLORE_MORE_TO}>
-            {t.common.exploreMore} <Icon name="arrow" className="ml-2 h-4 w-4" />
-          </CTA>
-        </div>
-      )}
-
-      {openIndex !== null && (
-        <CaseStudy
-          project={PORTFOLIO[openIndex]}
-          title={t.services.portfolio[openIndex]}
-          onClose={() => setOpenIndex(null)}
-        />
-      )}
     </section>
   )
 }
 
-function Featured() {
+// Grey until hovered, then colour, with the brand, the event type and the gold
+// logo badge over the image. A touch screen has no hover, so every hover state
+// is mirrored under [@media(hover:none)] — otherwise tiles would sit grey and
+// unlabelled on a phone.
+function Tile({ project }) {
   const { t } = useI18n()
-  const f = t.services.featured
+  const go = useViewTransitionNavigate()
+  const to = `/services/${project.slug}`
+  const type = t.contact.eventTypes[project.type]
+
   return (
-    <section className="mx-auto max-w-content px-6 py-20">
-      <Reveal>
-        <figure className="relative h-[60vh] min-h-[420px] overflow-hidden rounded-lg border border-white/10">
-          <Media src="" label="" className="absolute inset-0 h-full w-full" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/30 to-transparent" />
-          <figcaption className="absolute inset-x-0 bottom-0 p-8 sm:p-12">
-            <h2 className="font-serif text-4xl text-white sm:text-6xl">{f.title}</h2>
-          </figcaption>
-        </figure>
-      </Reveal>
+    <Link
+      to={to}
+      onClick={(e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
+        e.preventDefault()
+        go(to)
+      }}
+      className="group block rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+    >
+      <figure
+        className="relative aspect-[783/498] overflow-hidden shadow-[0_24px_50px_-28px_rgba(0,0,0,0.8)]"
+        style={{ ...EVENT_RADIUS, viewTransitionName: `case-${project.slug}` }}
+      >
+        <img
+          src={project.img}
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0 group-focus-visible:grayscale-0 [@media(hover:none)]:grayscale-0"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100 [@media(hover:none)]:opacity-100" />
+        <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-3 sm:p-4">
+          <div className="translate-y-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100">
+            <p className="text-base font-medium leading-tight text-white sm:text-xl">{project.client}</p>
+            <p className="mt-0.5 text-[10px] text-white/75 sm:text-xs">{type}</p>
+          </div>
+          <LogoBadge project={project} className="h-8 w-8 text-[8px] sm:h-10 sm:w-10 sm:text-[10px]" />
+        </figcaption>
+      </figure>
+    </Link>
+  )
+}
 
-      <Reveal delay={100}>
-        <p className="mx-auto mt-10 max-w-2xl text-center font-serif text-lg italic leading-relaxed text-white/70">
-          {f.desc}
-        </p>
-      </Reveal>
-
-      <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
-        {FEATURED_GALLERY.map((g, i) => (
-          <Reveal key={i} delay={(i % 3) * 80}>
-            <Media src={g} label="" className="aspect-[4/3] rounded-md border border-white/10" />
-          </Reveal>
-        ))}
-      </div>
-
-      <div className="mt-14 text-center">
-        <CTA variant="pill" />
-      </div>
-    </section>
+// The client's mark on a gold disc. Reads "Logo" until a file is supplied,
+// exactly as the reference's placeholder does.
+export function LogoBadge({ project, className = '' }) {
+  return (
+    <span
+      className={`flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-gold-light font-medium text-navy-950 shadow-[0_4px_14px_rgba(0,0,0,0.45)] ${className}`}
+    >
+      {project.logo ? (
+        <img src={project.logo} alt={project.client} className="h-[62%] w-[62%] object-contain" />
+      ) : (
+        'Logo'
+      )}
+    </span>
   )
 }

@@ -4,6 +4,7 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
+import ServiceCase from './pages/ServiceCase'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 
@@ -18,6 +19,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/:slug" element={<ServiceCase />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>

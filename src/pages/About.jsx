@@ -1,255 +1,346 @@
-import { useEffect, useRef, useState } from 'react'
-import { AUTO_REVEAL_MS, AUTO_REVEAL_STAGGER_MS, MOTION } from '../data/deckMotion'
+import { Fragment, useState } from 'react'
 import { useI18n } from '../i18n/LanguageContext'
-import Disclosure from '../components/Disclosure'
-import Media from '../components/Media'
+import useScrollProgress, { easeInOut, easeOut, span } from '../components/useScrollProgress'
+import BackdropVideo from '../components/BackdropVideo'
+import GlassBubbles from '../components/GlassBubbles'
+import GlassCTA from '../components/GlassCTA'
 import Reveal from '../components/Reveal'
-import CTA from '../components/CTA'
+import TypeOn from '../components/TypeOn'
 
-// Resting offset for an in-place reveal, keyed by the deck direction.
-const REVEAL_OFFSET = { up: 'translate-y-4', down: '-translate-y-4' }
+// The About page follows the reference recording (video_refrence.mp4, 1:30-2:36)
+// and is built from the designer's About material (brand-assets/2. About Us
+// Page): one continuous, scroll-played film. Blue satin opens it, the name is
+// spelled phonetically, the three pillars float as photographed champagne
+// bubbles over the looping flute, the vision is a card drawn out of a blue
+// envelope, and the values are separated by the two-colour satin.
+//
+// Web encodes of that material live in public/about (see brand-assets/README.md).
+// Every film is its source, full length, at full resolution, with light
+// compression (H.264 CRF 18): picture quality first, file size second. See
+// brand-assets/README.md.
+const MEDIA = {
+  blue: { src: '/about/fabric-blue.mp4', poster: '/about/fabric-blue-poster.jpg' },
+  champagne: { src: '/about/champagne.mp4', poster: '/about/champagne-poster.jpg' },
+  twoTone: { src: '/about/fabric-two.mp4', poster: '/about/fabric-two-poster.jpg' },
+  envelope: '/about/envelope.webp',
+  card: '/about/card.webp',
+}
+
+// The flute film's own backdrop, top to foot, so a wide screen can show it as
+// a column without a visible frame around it.
+const CHAMPAGNE_GROUND = 'bg-[linear-gradient(180deg,#04070f_0%,#031734_55%,#03204a_100%)]'
+
+const CREAM = 'text-[#efe3c4]'
 
 const prefersReduced = () =>
   typeof window !== 'undefined' &&
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 
+// Read once: every scene below renders its finished, unpinned state instead
+// when the visitor has asked for less motion.
+const useReduced = () => useState(prefersReduced)[0]
+
 export default function About() {
   return (
-    <>
-      <Intro />
+    <div className="bg-black">
+      <Hero />
       <NameMeaning />
       <StandsFor />
-      <Vision />
       <WhyOscenia />
       <OurValue />
+    </div>
+  )
+}
+
+// 1:33. Blue satin fills the screen with "About Us" over it. Scrolling folds the
+// satin up into a band across the top, carrying the title with it, and the
+// intro writes itself in on the black that opens up beneath.
+function Hero() {
+  const { t } = useI18n()
+  const a = t.about
+  const reduced = useReduced()
+  const [ref, p] = useScrollProgress()
+  const fold = reduced ? 1 : easeInOut(span(p, 0, 0.6))
+  // Share of the screen the satin still covers.
+  const band = 100 - fold * 58
+
+  return (
+    <section ref={ref} className={reduced ? '' : 'h-[210vh]'}>
+      <div className={`${reduced ? 'relative' : 'sticky top-0'} h-svh overflow-hidden bg-black`}>
+        <div className="absolute inset-x-0 top-0 overflow-hidden" style={{ height: `${band}%` }}>
+          <BackdropVideo
+            src={MEDIA.blue.src}
+            poster={MEDIA.blue.poster}
+            eager
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          {/* Blends the band's lower edge into the black as it folds up. */}
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-navy-950/10 via-navy-800/20 to-black"
+            style={{ opacity: 0.35 + fold * 0.65 }}
+          />
+          <div className="absolute inset-0 flex items-center justify-center px-6 pt-16">
+            <h1
+              className="text-center font-serif text-6xl text-white sm:text-8xl"
+              style={{ transform: `scale(${1 - fold * 0.18})` }}
+            >
+              {/* The entrance lives on an inner span: an animation's filled
+                  transform would otherwise override the scroll-driven scale. */}
+              <span className="word-in inline-block">
+                {a.heroTitle[0]}
+                <span className="italic">{a.heroTitle[1]}</span>
+              </span>
+            </h1>
+          </div>
+        </div>
+
+        <div
+          className="absolute inset-x-0 bottom-0 flex items-center justify-center px-6"
+          style={{ top: `${band}%` }}
+        >
+          <TypeOn
+            text={a.intro}
+            active={reduced || p > 0.4}
+            stagger={45}
+            className="max-w-2xl text-center text-sm leading-relaxed text-white/80 sm:text-base"
+          />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// 1:39. The name, spelled phonetically, over a navy panel; the two paragraphs
+// beneath write themselves in, left column then right.
+function NameMeaning() {
+  const { t } = useI18n()
+  const n = t.about.name
+  return (
+    <section className="bg-[linear-gradient(180deg,#0a1220_0%,#1b2c48_100%)] px-6 py-28 sm:py-40">
+      <Reveal from="scale" duration={1600}>
+        <p
+          lang="en-fonipa"
+          className="font-phonetic text-center text-4xl italic tracking-[0.3em] text-white sm:text-6xl"
+        >
+          {n.phonetic}
+        </p>
+      </Reveal>
+      <div className="mx-auto mt-14 grid max-w-3xl gap-8 text-sm leading-relaxed text-white/75 sm:text-base md:mt-20 md:grid-cols-2 md:gap-16">
+        {n.body.map((b, i) => (
+          // The second column waits for the first to finish writing.
+          <TypeOn key={i} text={b} delay={500 + i * 1700} stagger={55} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+// 1:45. The heading, then the champagne flute, blown up so the bowl fills the
+// screen, with the camera travelling down it as the page scrolls: the rim
+// rises in under the heading, the three pillars float over the champagne as
+// bubbles to play with, then drift off as the lower bowl arrives with the
+// vision's envelope, and "Why Oscenia" lands over the stem. One pinned scene,
+// so the glass never cuts away.
+function StandsFor() {
+  const { t } = useI18n()
+  const s = t.about.standsFor
+  const reduced = useReduced()
+
+  return (
+    <>
+      <section className="bg-black px-6 pb-10 pt-28 sm:pt-36">
+        <div className="mx-auto grid max-w-content items-end gap-8 md:grid-cols-[1.2fr_1fr] md:gap-16">
+          <Reveal from="left">
+            <h2 className="font-serif text-5xl italic leading-[1.05] text-gold-light sm:text-7xl">
+              <span className="block">{s.heading[0]}</span>
+              <span className="block">{s.heading[1]}</span>
+            </h2>
+          </Reveal>
+          <Reveal from="right" delay={250}>
+            <p className="max-w-sm text-sm leading-relaxed text-white/70 sm:text-base">{s.intro}</p>
+          </Reveal>
+        </div>
+      </section>
+      {reduced ? <StillGlass /> : <GlassScene />}
     </>
   )
 }
 
-// Slide 5. "OSCENIA" arrives from the left; the intro paragraph is the deck's
-// click-revealed body copy.
-function Intro() {
-  const { t } = useI18n()
-  const m = MOTION.aboutIntro
+// How tall the flute is drawn. The glass spans ~77% of the film's width at
+// mid-bowl, so drawing the film at 1.25x the screen width (2.22x in height, it
+// being 9:16) puts the bowl's walls at the screen's edges, as the reference
+// frames it — about three and a half screens of glass on a laptop. A phone is
+// too narrow for that to be tall enough to travel down, so there it is at
+// least 1.5 screens high and the walls sit just past the edges.
+//
+// The film is 720 wide, so on a large monitor this is an enlargement of about
+// 2.5x and reads soft; a higher-resolution export of the same loop is a
+// straight file swap.
+const FLUTE_H = 'max(222vw, 150svh)'
+
+// The flute film, centred and scrolled up by `pan` (0 = rim at the top of the
+// screen, 1 = foot of the stem at the bottom).
+function Flute({ pan = 0 }) {
   return (
-    <section className="mx-auto max-w-content px-6 pb-16 pt-40">
-      <Reveal from={m.heading.from}>
-        <p className="eyebrow mb-4">{t.about.eyebrow}</p>
-        <h1 className="mb-8 font-serif text-5xl text-gold-light sm:text-6xl">{t.about.title}</h1>
-      </Reveal>
-      {/* Arrives on its own — a "Read more" toggle in front of a single
-          paragraph was a speed bump, not an interaction. */}
-      <Reveal from="up" delay={320}>
-        <p className="max-w-3xl font-serif text-xl leading-relaxed text-white/80">
-          {t.about.intro}
-        </p>
-      </Reveal>
-    </section>
+    <div
+      className="absolute left-1/2 top-0"
+      style={{
+        height: FLUTE_H,
+        aspectRatio: '9 / 16',
+        transform: `translateX(-50%) translateY(calc((100svh - ${FLUTE_H}) * ${pan}))`,
+      }}
+    >
+      <BackdropVideo
+        src={MEDIA.champagne.src}
+        poster={MEDIA.champagne.poster}
+        className="h-full w-full object-cover"
+      />
+    </div>
   )
 }
 
-// Slide 6. The name paragraph exits upward, so it enters from above.
-function NameMeaning() {
+// Beats of the scene, as shares of its scroll. The camera travels down the
+// glass across `pan`, reaching the stem as "Why Oscenia" arrives: the last
+// screen of the runway (from about 0.69) is where that scrolls up over it, so
+// the vision is carried away just before.
+const BEAT = {
+  pan: [0, 0.8],
+  bubblesIn: [0, 0.1],
+  bubblesOut: [0.42, 0.52],
+  envelopeIn: [0.48, 0.57],
+  cardOut: [0.55, 0.64],
+  visionOut: [0.67, 0.75],
+}
+
+function GlassScene() {
   const { t } = useI18n()
-  const n = t.about.name
-  const m = MOTION.nameMeaning
+  const s = t.about.standsFor
+  const [ref, p] = useScrollProgress()
+  const at = (b) => span(p, b[0], b[1])
+
+  // Slow over the bowl while the bubbles and the envelope are in play, then
+  // gathering pace down to the stem, as the reference paces it (the bowl
+  // holds 1:46-2:07; the stem arrives 2:08-2:12).
+  const pan = at(BEAT.pan) ** 1.8
+  const bubblesY = (1 - easeOut(at(BEAT.bubblesIn))) * 70 - easeInOut(at(BEAT.bubblesOut)) * 115
+  const playing = p < BEAT.bubblesOut[0] + 0.02
+  const envelopeIn = easeOut(at(BEAT.envelopeIn))
+  const cardOut = easeOut(at(BEAT.cardOut))
+  const visionExit = easeInOut(at(BEAT.visionOut))
+
   return (
-    <section className="mx-auto max-w-content px-6 py-16">
-      <div className="grid items-center gap-12 md:grid-cols-2">
-        <Reveal from={m.heading.from}>
-          <div className="hairline mb-8 max-w-xs" />
-          <h2 className="font-serif text-5xl italic tracking-wide text-white sm:text-6xl">{n.stylized}</h2>
-        </Reveal>
-        <div className="space-y-5 border-l border-gold/30 pl-6">
-          {n.body.map((p, i) => (
-            <Reveal key={i} from={m.body.from} delay={200 + i * 180}>
-              <p className="text-lg leading-relaxed text-white/75">{p}</p>
-            </Reveal>
-          ))}
+    <section ref={ref} className={`h-[420vh] ${CHAMPAGNE_GROUND}`}>
+      <div className={`sticky top-0 h-svh overflow-hidden ${CHAMPAGNE_GROUND}`}>
+        <Flute pan={pan} />
+
+        <div className="absolute inset-0" style={{ transform: `translateY(${bubblesY}vh)` }}>
+          <GlassBubbles pillars={s.pillars} closeLabel={t.common.close} running={playing} />
+        </div>
+        <p
+          className="pointer-events-none absolute inset-x-0 bottom-24 px-6 text-center text-xs tracking-[0.2em] sm:bottom-8 text-white/55 transition-opacity duration-500"
+          style={{ opacity: playing && p > 0.06 ? 1 : 0 }}
+        >
+          {s.hint}
+        </p>
+
+        {/* Centred on a phone; on a wide screen it lands over the left of the
+            lower bowl. */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center md:justify-start md:pl-[7%]">
+          <div
+            className="w-[min(90vw,34rem)]"
+            style={{ transform: `translate(${(1 - envelopeIn) * -115}vw, ${visionExit * -115}vh)` }}
+          >
+            <VisionCard cardOut={cardOut} />
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-// The three circles open themselves in turn once the section is reached, and
-// close again when it leaves, so returning replays the reveal. Clicking still
-// toggles any of them. Copy is a step up in size — the previous text-sm was
-// called out as too small to read.
-function StandsFor() {
+// The vision on the paper card, drawn up out of the blue envelope (the
+// designer's two photographs), the words set on the card in the brand serif.
+function VisionCard({ cardOut = 1 }) {
+  const { t } = useI18n()
+  const v = t.about.vision
+  return (
+    <div className="relative pt-[26%]">
+      <img
+        src={MEDIA.envelope}
+        alt=""
+        aria-hidden="true"
+        className="absolute right-0 top-0 w-[80%] rotate-[8deg] drop-shadow-[0_24px_40px_rgba(0,0,0,0.55)]"
+      />
+      <div
+        className="relative w-[90%]"
+        style={{
+          transform: `translate(${(1 - cardOut) * 16}%, ${(1 - cardOut) * -34}%) rotate(${-1 - cardOut * 3}deg)`,
+          opacity: 0.25 + cardOut * 0.75,
+        }}
+      >
+        <img
+          src={MEDIA.card}
+          alt=""
+          aria-hidden="true"
+          className="block w-full drop-shadow-[0_30px_50px_rgba(0,0,0,0.6)]"
+        />
+        <div className="absolute inset-0 flex flex-col justify-center px-[9%] text-navy-900">
+          <p className="font-serif text-3xl leading-none sm:text-5xl">{v.eyebrow}</p>
+          <p className="mt-3 font-serif text-base italic leading-snug text-navy-800/85 sm:mt-5 sm:text-xl">
+            {v.text}
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Reduced motion: the same material, laid out flat. The bubbles stay where
+// they are but still open their cards; the vision card sits beneath.
+function StillGlass() {
   const { t } = useI18n()
   const s = t.about.standsFor
-  // A set, not an index: the three open themselves in turn once the section is
-  // reached, so more than one is open at a time. Clicking still toggles any of
-  // them individually.
-  // Reduced motion gets all three open from the start, with no timers.
-  const [reduced] = useState(prefersReduced)
-  const [open, setOpen] = useState(() =>
-    reduced ? new Set(t.about.standsFor.pillars.map((_, i) => i)) : new Set(),
-  )
-  const [touched, setTouched] = useState(false)
-  const sectionEl = useRef(null)
-  const count = s.pillars.length
-
-  useEffect(() => {
-    if (reduced || touched) return undefined
-    const el = sectionEl.current
-    if (!el) return undefined
-    let timers = []
-    const clear = () => {
-      timers.forEach(clearTimeout)
-      timers = []
-    }
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          for (let i = 0; i < count; i += 1) {
-            timers.push(
-              setTimeout(
-                () => setOpen((prev) => new Set(prev).add(i)),
-                AUTO_REVEAL_MS + i * AUTO_REVEAL_STAGGER_MS,
-              ),
-            )
-          }
-        } else {
-          // Reset so the three open again next time the section is reached.
-          clear()
-          setOpen(new Set())
-        }
-      },
-      { threshold: 0.35 },
-    )
-    io.observe(el)
-    return () => {
-      io.disconnect()
-      clear()
-    }
-  }, [reduced, touched, count])
-
-  const toggle = (i) => {
-    setTouched(true)
-    setOpen((prev) => {
-      const next = new Set(prev)
-      if (next.has(i)) next.delete(i)
-      else next.add(i)
-      return next
-    })
-  }
-
   return (
-    <section ref={sectionEl} className="mx-auto max-w-content px-6 py-20">
-      <Reveal from={MOTION.standsFor.heading.from} className="text-center">
-        <h2 className="font-serif text-4xl text-gold-light sm:text-5xl">
-          {s.pre}
-          <span className="italic">{s.brand}</span>
-          {s.post}
-        </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/70">{s.intro}</p>
-      </Reveal>
-
-      <div className="mt-16 grid gap-12 sm:grid-cols-3">
-        {s.pillars.map((p, i) => {
-          const isOpen = open.has(i)
-          return (
-            <Reveal key={p.title} delay={i * 120} className="text-center">
-              {/* The explanation lives inside the circle. Two layers crossfade
-                  in place so nothing reflows, and the circles are sized so the
-                  text fits the inscribed square (diameter / root-2) rather than
-                  spilling past the curve. */}
-              <button
-                type="button"
-                onClick={() => toggle(i)}
-                aria-expanded={isOpen}
-                className={`relative mx-auto flex h-72 w-72 items-center justify-center rounded-full border transition-all duration-500 focus:outline-none focus-visible:ring-1 focus-visible:ring-gold sm:h-80 sm:w-80 ${
-                  isOpen
-                    ? 'border-gold/70 bg-[radial-gradient(circle_at_30%_30%,#1f3760,#0a1424)] shadow-[0_0_80px_-16px_rgba(198,161,91,0.65)]'
-                    : 'border-gold/30 bg-[radial-gradient(circle_at_30%_30%,#16294a,#060b16)] shadow-[0_0_60px_-20px_rgba(198,161,91,0.4)] hover:scale-[1.03] hover:border-gold/60'
-                }`}
-              >
-                {/* Resting: the word, plus a cue that it opens. */}
-                <span
-                  className={`absolute inset-0 flex flex-col items-center justify-center gap-3 transition-opacity duration-500 ${
-                    isOpen ? 'pointer-events-none opacity-0' : 'opacity-100'
-                  }`}
-                >
-                  <span className="font-serif text-3xl text-white sm:text-5xl">{p.title}</span>
-                  <span aria-hidden="true" className="text-2xl font-light leading-none text-gold">
-                    +
-                  </span>
-                </span>
-
-                {/* Open: the explanation, in the circle. Slides 7->8 bring this
-                    description up from below (and 8->9 send it back down), so it
-                    rises rather than simply cross-fading. Direction comes from
-                    the deck table. */}
-                <span
-                  className={`absolute inset-0 flex flex-col items-center justify-center gap-2 px-8 text-center transition-all duration-500 sm:gap-3 sm:px-12 ${
-                    isOpen
-                      ? 'translate-y-0 opacity-100'
-                      : `pointer-events-none opacity-0 ${REVEAL_OFFSET[MOTION.standsFor.revealFrom]}`
-                  }`}
-                >
-                  <span className="font-serif text-xl text-gold-light sm:text-2xl">{p.title}</span>
-                  <span className="text-sm leading-relaxed text-white/90 sm:text-lg">{p.desc}</span>
-                </span>
-              </button>
-            </Reveal>
-          )
-        })}
-      </div>
-    </section>
+    <>
+      <section className={`relative h-svh min-h-[560px] overflow-hidden ${CHAMPAGNE_GROUND}`}>
+        <Flute pan={0.15} />
+        <GlassBubbles pillars={s.pillars} closeLabel={t.common.close} />
+      </section>
+      <section className={`px-6 py-24 ${CHAMPAGNE_GROUND}`}>
+        <div className="mx-auto w-[min(90vw,34rem)]">
+          <VisionCard />
+        </div>
+      </section>
+    </>
   )
 }
 
-// Centred and given a gold frame — the client asked for this one to sit in the
-// middle and be highlighted rather than tucked into the bottom-left corner.
-function Vision() {
-  const { t } = useI18n()
-  return (
-    <section className="relative my-16 flex h-[70vh] min-h-[420px] items-center overflow-hidden">
-      <Media src="" label="" className="absolute inset-0 h-full w-full" />
-      <div className="absolute inset-0 bg-navy-950/75" />
-      {/* Arrives a piece at a time: label, rule, statement, rule. */}
-      <div className="relative z-10 mx-auto w-full max-w-3xl px-6 text-center">
-        <Reveal from={MOTION.vision.eyebrow.from}>
-          <p className="eyebrow mb-6">{t.about.vision.eyebrow}</p>
-        </Reveal>
-        <Reveal from={MOTION.vision.rule.from} delay={MOTION.vision.rule.delay}>
-          <div className="hairline mx-auto mb-8 max-w-xs" />
-        </Reveal>
-        <Reveal from={MOTION.vision.statement.from} delay={MOTION.vision.statement.delay} duration={MOTION.vision.statement.duration}>
-          <p className="font-serif text-3xl italic leading-snug text-gold-light sm:text-4xl">
-            {t.about.vision.text}
-          </p>
-        </Reveal>
-        <Reveal from="scale" delay={700}>
-          <div className="hairline mx-auto mt-8 max-w-xs" />
-        </Reveal>
-      </div>
-    </section>
-  )
-}
-
-// Slide 11. Both heading and body are new objects there, so Morph fades them —
-// and the body is the one effect in the deck marked explicitly ON CLICK.
+// 2:12. Over the stem: "Why" with "Oscenia" set in under it, in gold, and the
+// two paragraphs as narrow columns beneath, the second a step lower — the
+// settled frame at 2:13-2:15. The section is pulled up by a
+// full screen so it scrolls in over the glass scene's last, pinned frame — the
+// stem — rather than cutting away from it.
 function WhyOscenia() {
   const { t } = useI18n()
   const w = t.about.why
-  const m = MOTION.why
+  const reduced = useReduced()
   return (
-    <section className="mx-auto max-w-content px-6 py-24">
-      <div className="grid items-center gap-12 md:grid-cols-2">
-        <Reveal from={m.heading.from} duration={m.heading.duration}>
-          <h2 className="font-serif text-4xl text-white sm:text-6xl md:text-7xl">
-            <span className="italic text-white/60">{w.pre}</span> <br className="hidden sm:block" />
-            <span className="text-gold-light">{w.brand}</span>
+    <section
+      className={`relative z-10 bg-gradient-to-b from-transparent via-black/60 to-black px-6 pb-16 sm:pb-24 ${
+        reduced ? 'pt-28 sm:pt-40' : '-mt-[100svh] min-h-svh pt-[38svh]'
+      }`}
+    >
+      <div className="mx-auto max-w-3xl">
+        <Reveal from="left" duration={1600}>
+          <h2 className="font-serif text-6xl italic leading-[0.95] text-gold-light sm:text-7xl md:text-8xl">
+            <span className="block">{w.pre}</span>
+            <span className="block pl-[16%] sm:pl-[22%]">{w.brand}</span>
           </h2>
         </Reveal>
-        {/* Paragraphs arrive one after another rather than behind a toggle. */}
-        <div className="space-y-6">
-          {w.body.map((p, i) => (
-            <Reveal key={i} from="scale" delay={280 + i * 220}>
-              <p className="text-lg leading-relaxed text-white/80">{p}</p>
+        <div className="mt-12 grid gap-8 sm:ml-[4%] sm:grid-cols-2 sm:gap-14">
+          {w.body.map((para, i) => (
+            <Reveal key={i} from="up" delay={300 + i * 250} className={i === 1 ? 'sm:mt-10' : ''}>
+              <p className="max-w-[17rem] text-sm leading-relaxed text-white/80 sm:text-base">{para}</p>
             </Reveal>
           ))}
         </div>
@@ -258,74 +349,119 @@ function WhyOscenia() {
   )
 }
 
+// 2:15. "Our Value", then a black panel per value: the title writes itself in
+// a letter at a time on the left and its content arrives on the right.
+//
+// The satin is not a strip of its own. As the reference has it (2:17-2:27),
+// it is one full-screen backdrop pinned behind the whole section — cream
+// above, blue below, the fold between them moving — and the panels scroll
+// over it, so each gap between them is a window onto it. A gap near the top of
+// the screen shows cream, one near the foot shows blue, and one crossing the
+// middle shows the blue sweeping up over the cream. Hard edges, no fades.
 function OurValue() {
   const { t } = useI18n()
+  const value = t.about.value
   return (
-    <section className="bg-navy-950 py-24">
-      <div className="mx-auto max-w-content px-6">
-        <Reveal from={MOTION.value.heading.from} duration={MOTION.value.heading.duration}>
-          <h2 className="mb-16 font-serif text-5xl italic text-white sm:text-6xl">{t.about.value.heading}</h2>
-        </Reveal>
+    <section className="relative">
+      {/* The pinned layer lives inside a layer exactly the section's size, so
+          it stops at the section's foot instead of hanging over the footer.
+          The film is drawn taller than the screen and hung from the top, so
+          the fold sits about two-thirds down: mostly cream, the blue coming in
+          below, as in the reference. */}
+      <div aria-hidden="true" className="absolute inset-0">
+        <div className="sticky top-0 h-svh overflow-hidden">
+          <BackdropVideo
+            src={MEDIA.twoTone.src}
+            poster={MEDIA.twoTone.poster}
+            className="absolute inset-x-0 top-0 h-[135%] w-full object-cover object-top"
+          />
+        </div>
+      </div>
 
-        {/* Slides 12-15: one label slides in from the left per slide, and its
-            explanation fades in on click. Each row is its own disclosure so the
-            page reads as three headlines until something is asked for. */}
-        <div className="space-y-14">
-          {t.about.value.items.map((v, i) => (
-            <Reveal
-              key={v.title}
-              from={MOTION.value.label.from}
-              delay={i * MOTION.value.rowStagger}
-            >
-              <div className="border-t border-white/10 pt-8">
-                <Disclosure
-                  summary={<h3 className="font-serif text-2xl italic text-gold-light">{v.title}</h3>}
-                  panelClassName="pt-6"
-                  // Opens itself, each row a beat behind the one above.
-                  autoOpenAfter={AUTO_REVEAL_MS + i * AUTO_REVEAL_STAGGER_MS}
-                >
-                  <div className="text-white/75 md:pl-1">
-                  {v.body && (
-                    <div className="space-y-4">
-                      {v.body.map((b, k) => (
-                        <p key={k} className="leading-relaxed">
-                          <span className="text-white/45">{b.label}: </span>
-                          <span className="font-serif text-xl text-white">{b.text}</span>
-                        </p>
-                      ))}
-                    </div>
-                  )}
-                  {v.list && (
-                    <>
-                      {v.lead && <p className="mb-4">{v.lead}</p>}
-                      <ul className="grid gap-2 sm:grid-cols-2">
-                        {v.list.map((li) => (
-                          <li key={li} className="flex items-center gap-3">
-                            <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-                            {li}
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                  {v.formula && (
-                    <>
-                      {v.lead && <p className="mb-3">{v.lead}</p>}
-                      <p className="font-serif text-2xl text-white">{v.formula}</p>
-                      {v.note && <p className="mt-4 text-sm italic text-white/50">{v.note}</p>}
-                    </>
-                  )}
-                  </div>
-                </Disclosure>
-              </div>
-            </Reveal>
-          ))}
+      <div className="relative">
+        <div className="bg-black px-6 pb-8 pt-28 text-center sm:pt-40">
+          <Reveal from="scale" duration={1600}>
+            <h2 className={`font-serif text-6xl italic sm:text-8xl ${CREAM}`}>{value.heading}</h2>
+          </Reveal>
         </div>
 
-        <div className="mt-16 text-center">
-          <CTA variant="pill" />
+        {value.items.map((v, i) => (
+          <Fragment key={v.title}>
+            {i > 0 && <div aria-hidden="true" className="h-[52svh] sm:h-[70svh]" />}
+            <div className="bg-black">
+              <ValueBand item={v} />
+            </div>
+          </Fragment>
+        ))}
+
+        <div className="bg-gradient-to-b from-black to-[#0b1424] px-6 pb-28 pt-12 text-center">
+          <GlassCTA />
         </div>
       </div>
     </section>
+  )
+}
+
+function ValueBand({ item: v }) {
+  return (
+    <div className="mx-auto grid max-w-content gap-10 px-6 py-20 sm:py-28 md:grid-cols-[minmax(0,1fr)_minmax(0,2.2fr)] md:gap-16">
+      <TypeOn
+        as="h3"
+        by="char"
+        text={v.title}
+        className={`font-serif text-4xl leading-[1.15] sm:text-5xl md:max-w-[11ch] ${CREAM}`}
+      />
+
+      <div className="md:pt-3">
+        {/* Strategic Experience Design: the two questions, side by side. */}
+        {v.body && (
+          <div className="grid gap-10 sm:grid-cols-2">
+            {v.body.map((b, k) => (
+              <Reveal key={k} from="right" delay={900 + k * 450}>
+                <p className="text-xs text-white/55">{b.label}</p>
+                <p className={`mt-2 font-serif text-2xl italic leading-snug sm:text-3xl ${CREAM}`}>
+                  {b.text}
+                </p>
+              </Reveal>
+            ))}
+          </div>
+        )}
+
+        {/* Integrated Event Management: the list, in two columns. */}
+        {v.list && (
+          <>
+            <Reveal from="up" delay={700}>
+              <p className="mb-6 text-sm text-white/70">{v.lead}</p>
+            </Reveal>
+            <ul className="grid gap-x-12 gap-y-3 text-sm text-white/75 sm:grid-cols-2">
+              {v.list.map((li, k) => (
+                <Reveal as="li" key={li} from="up" delay={900 + k * 120}>
+                  <span className="mr-2 text-gold">~</span>
+                  {li}
+                </Reveal>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {/* Narrative-Driven Approach: the formula writes itself in. */}
+        {v.formula && (
+          <>
+            <Reveal from="up" delay={700}>
+              <p className="text-sm text-white/70">{v.lead}</p>
+            </Reveal>
+            <TypeOn
+              text={v.formula}
+              delay={1000}
+              stagger={160}
+              className={`mt-4 font-serif text-2xl italic sm:text-3xl ${CREAM}`}
+            />
+            <Reveal from="up" delay={1800}>
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-white/55">{v.note}</p>
+            </Reveal>
+          </>
+        )}
+      </div>
+    </div>
   )
 }
