@@ -45,7 +45,7 @@ The home page is a sequence of full-screen scenes rather than a document: film, 
 - **Headline:** the brand sentence *"Strategic events & immersive experiences that transform business objectives into memorable human moments."* is set as ten differently sized fragments across three lines (`KineticHeadline`). Fragments land one at a time, 380ms apart, **starting only when the intro has finished**. Screen readers get the sentence once, as plain text.
 - **Call to action:** "Start your event" in liquid glass (`GlassCTA` → `/contact`), fading in 500ms before the last headline word lands.
 - **Subline:** *"The Company Behind Our Success"*, italic serif, `white/80`.
-- **Client strip:** a band of warm paper crossing the film, with client names (Bentley, Ferrari, Emporio Armani, Chanel, Mercedes-Benz, Louis Vuitton, Rolex) scrolling continuously every 38s. Names render in the brand serif until logo files are supplied.
+- **Client strip:** a band of warm paper crossing the film, with client names scrolling continuously every 38s. Client names are pending confirmation, so the seven slots are currently blank placeholders that keep the band's spacing and animation. Once confirmed, add each company's name and logo in `src/data/site.js` with the same styling and animation. Names render in the brand serif until logo files are supplied.
 - A 45vh spacer after the strip gives the film a long fade before the page turns black.
 
 ### 2. What we direct (`Formats`)
