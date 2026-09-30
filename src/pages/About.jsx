@@ -119,8 +119,10 @@ function Hero() {
   // Share of the screen the satin still covers.
   const band = 100 - fold * 58
 
+  // 2.4 screens: the opening is meant to unfold slowly, and everything in it
+  // moves across the whole run, so a longer run is slower, not stuck.
   return (
-    <section ref={ref} className={reduced ? '' : 'h-[155vh]'}>
+    <section ref={ref} className={reduced ? '' : 'h-[240vh]'}>
       <div className={`${reduced ? 'relative' : 'sticky top-0'} h-svh overflow-hidden bg-black`}>
         <div className="absolute inset-x-0 top-0 overflow-hidden" style={{ height: `${band}%` }}>
           <ScrubVideo

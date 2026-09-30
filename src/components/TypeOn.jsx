@@ -64,7 +64,7 @@ export default function TypeOn({
       <span
         key={key}
         className={`inline-block transition-[opacity,transform] ease-out ${
-          scrubbed ? 'duration-300' : 'duration-500'
+          scrubbed ? 'duration-[600ms]' : 'duration-500'
         } ${extra} ${
           on ? 'translate-y-0 opacity-100' : `opacity-0 ${by === 'word' ? 'translate-y-[0.3em]' : ''}`
         }`}
