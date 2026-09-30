@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { useI18n } from '../i18n/LanguageContext'
 import useScrollProgress, { easeInOut, easeOut, span } from '../components/useScrollProgress'
 import BackdropVideo from '../components/BackdropVideo'
@@ -52,26 +52,81 @@ export default function About() {
   )
 }
 
+// How many seconds of the satin film one pass through the hero scrubs across.
+const SCRUB_SECONDS = 4
+
+// The hero's satin film. While the page rests at the top it simply plays.
+// Once the section is being scrolled it follows the scroll instead — forward
+// going down, backward coming up — and back at the top it returns to the frame
+// it left from and plays on. Scrubbing needs a keyframe every few frames, which
+// is how public/about/fabric-blue.mp4 is encoded (see brand-assets/README.md).
+function ScrubVideo({ src, poster, progress, className = '' }) {
+  const ref = useRef(null)
+  // The film's time when scrolling began; the scroll is measured from there.
+  const anchor = useRef(null)
+  const reduced = useReduced()
+
+  useEffect(() => {
+    const v = ref.current
+    if (!v || reduced) return
+    if (progress <= 0.002) {
+      if (anchor.current !== null) {
+        v.currentTime = anchor.current
+        anchor.current = null
+      }
+      if (v.paused) v.play()?.catch(() => {})
+      return
+    }
+    if (anchor.current === null) {
+      anchor.current = v.currentTime
+      v.pause()
+    }
+    const duration = v.duration || 14.68
+    const t = (anchor.current + progress * SCRUB_SECONDS) % duration
+    if (Math.abs(v.currentTime - t) > 0.02) v.currentTime = t
+  }, [progress, reduced])
+
+  if (reduced) return <img src={poster} alt="" aria-hidden="true" className={className} />
+  return (
+    <video
+      ref={ref}
+      className={className}
+      src={src}
+      poster={poster}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      aria-hidden="true"
+    />
+  )
+}
+
 // 1:33. Blue satin fills the screen with "About Us" over it. Scrolling folds the
 // satin up into a band across the top, carrying the title with it, and the
-// intro writes itself in on the black that opens up beneath.
+// intro writes itself in on the black that opens up beneath. All of it is tied
+// to the scroll, so scrolling back up plays it in reverse: the words un-write
+// last first, the satin unfolds, and the film runs backward.
 function Hero() {
   const { t } = useI18n()
   const a = t.about
   const reduced = useReduced()
   const [ref, p] = useScrollProgress()
-  const fold = reduced ? 1 : easeInOut(span(p, 0, 0.6))
+  // Across the whole pinned stretch, so there is never a scroll that moves
+  // nothing: the section releases just as the fold lands.
+  const fold = reduced ? 1 : easeInOut(span(p, 0, 0.95))
   // Share of the screen the satin still covers.
   const band = 100 - fold * 58
 
   return (
-    <section ref={ref} className={reduced ? '' : 'h-[210vh]'}>
+    <section ref={ref} className={reduced ? '' : 'h-[155vh]'}>
       <div className={`${reduced ? 'relative' : 'sticky top-0'} h-svh overflow-hidden bg-black`}>
         <div className="absolute inset-x-0 top-0 overflow-hidden" style={{ height: `${band}%` }}>
-          <BackdropVideo
+          <ScrubVideo
             src={MEDIA.blue.src}
             poster={MEDIA.blue.poster}
-            eager
+            progress={p}
             className="absolute inset-0 h-full w-full object-cover"
           />
           {/* Blends the band's lower edge into the black as it folds up. */}
@@ -100,8 +155,7 @@ function Hero() {
         >
           <TypeOn
             text={a.intro}
-            active={reduced || p > 0.4}
-            stagger={45}
+            progress={reduced ? 1 : span(p, 0.25, 0.9)}
             className="max-w-2xl text-center text-sm leading-relaxed text-white/80 sm:text-base"
           />
         </div>
@@ -117,14 +171,12 @@ function NameMeaning() {
   const n = t.about.name
   return (
     <section className="bg-[linear-gradient(180deg,#0a1220_0%,#1b2c48_100%)] px-6 py-28 sm:py-40">
-      <Reveal from="scale" duration={1600}>
-        <p
-          lang="en-fonipa"
-          className="font-phonetic text-center text-4xl italic tracking-[0.3em] text-white sm:text-6xl"
-        >
-          {n.phonetic}
-        </p>
-      </Reveal>
+      <Bloom
+        lang="en-fonipa"
+        className="font-phonetic text-center text-[2.75rem] italic leading-tight text-white sm:text-7xl md:text-8xl"
+      >
+        {n.phonetic}
+      </Bloom>
       <div className="mx-auto mt-14 grid max-w-3xl gap-8 text-sm leading-relaxed text-white/75 sm:text-base md:mt-20 md:grid-cols-2 md:gap-16">
         {n.body.map((b, i) => (
           // The second column waits for the first to finish writing.
@@ -132,6 +184,40 @@ function NameMeaning() {
         ))}
       </div>
     </section>
+  )
+}
+
+// The phonetic name blooms open from its centre, as at 1:39 in the reference:
+// it arrives with the letters drawn in close and faint, then the spacing
+// between them opens out evenly both ways to its full 0.3em while the line
+// sharpens and brightens. The letters never grow — only the gaps do. Plays each
+// time the line scrolls into view (see .bloom in index.css).
+function Bloom({ children, className = '', ...rest }) {
+  const ref = useRef(null)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return undefined
+    // Hysteresis, as in Reveal: opens once a third is visible, closes again
+    // only once it has fully left, so it replays on the way back.
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio >= 0.35) setOpen(true)
+        else if (entry.intersectionRatio === 0) setOpen(false)
+      },
+      { threshold: [0, 0.35] },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  return (
+    <p ref={ref} className={className} {...rest}>
+      <span className="bloom" data-open={open}>
+        {children}
+      </span>
+    </p>
   )
 }
 

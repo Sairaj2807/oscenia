@@ -5,6 +5,7 @@ import { useI18n } from '../i18n/LanguageContext'
 import useScrollProgress, { easeInOut, easeOut, span } from '../components/useScrollProgress'
 import useViewTransitionNavigate from '../components/useViewTransitionNavigate'
 import Curtains from '../components/Curtains'
+import GlassCTA from '../components/GlassCTA'
 import LetterCurtain from '../components/LetterCurtain'
 import Reveal from '../components/Reveal'
 
@@ -51,11 +52,13 @@ function Velvet() {
 function Stage() {
   const reduced = useReduced()
   const [ref, p] = useScrollProgress()
-  const lift = reduced ? 0 : easeInOut(span(p, 0.3, 0.75))
-  const open = reduced ? 0 : easeInOut(span(p, 0.35, 0.8))
+  // Both start almost at once: a stretch at the top where scrolling moved
+  // nothing read as the page being stuck.
+  const lift = reduced ? 0 : easeInOut(span(p, 0.05, 0.75))
+  const open = reduced ? 0 : easeInOut(span(p, 0.08, 0.8))
 
   return (
-    <section ref={ref} className={reduced ? '' : 'h-[250vh]'}>
+    <section ref={ref} className={reduced ? '' : 'h-[200vh]'}>
       <div className={`${reduced ? 'relative' : 'sticky top-0'} h-svh overflow-hidden`}>
         <div
           className="absolute inset-0"
@@ -127,6 +130,12 @@ function Portfolio() {
           )
         })}
       </div>
+
+      {/* The page's one call to action, in the same glass as Home and About,
+          once the work has been seen. */}
+      <Reveal from="up" className="mt-16 text-center sm:mt-24">
+        <GlassCTA />
+      </Reveal>
     </section>
   )
 }

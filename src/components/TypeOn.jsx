@@ -10,8 +10,10 @@ const STAGGER_MS = { word: 70, char: 38 }
 // paragraphs arrive a word at a time, the value titles a letter at a time.
 //
 // Plays when it scrolls into view and resets once it has fully left, like
-// Reveal. Pass `active` to drive it from a scene instead (the About hero starts
-// its paragraph partway through its own scroll).
+// Reveal. Pass `active` to drive it from a scene instead, or `progress` (0 to 1)
+// to tie it to scroll outright: that share of the text is shown, so it writes
+// itself in as the page goes down and un-writes, last word first, as it comes
+// back up (the About hero's paragraph).
 //
 // The sentence is in the DOM once, whole, for screen readers; the animated
 // copy is aria-hidden. Reduced motion gets plain text.
@@ -23,11 +25,13 @@ export default function TypeOn({
   delay = 0,
   stagger = STAGGER_MS[by],
   active,
+  progress,
 }) {
   const ref = useRef(null)
   const [reduced] = useState(prefersReduced)
   const [seen, setSeen] = useState(false)
-  const controlled = active !== undefined
+  const scrubbed = progress !== undefined
+  const controlled = active !== undefined || scrubbed
 
   useEffect(() => {
     if (reduced || controlled) return undefined
@@ -46,20 +50,27 @@ export default function TypeOn({
 
   if (reduced) return <Tag className={className}>{text}</Tag>
 
-  const on = controlled ? active : seen
   const words = text.split(' ')
+  const total = by === 'word' ? words.length : words.reduce((sum, w) => sum + [...w].length, 0)
+  // Scrubbed: how many pieces the scroll has reached.
+  const reached = scrubbed ? Math.ceil(Math.min(1, Math.max(0, progress)) * total) : 0
   let n = 0
 
   const piece = (content, key, extra = '') => {
     const i = n
     n += 1
+    const on = scrubbed ? i < reached : active !== undefined ? active : seen
     return (
       <span
         key={key}
-        className={`inline-block transition-[opacity,transform] duration-500 ease-out ${extra} ${
+        className={`inline-block transition-[opacity,transform] ease-out ${
+          scrubbed ? 'duration-300' : 'duration-500'
+        } ${extra} ${
           on ? 'translate-y-0 opacity-100' : `opacity-0 ${by === 'word' ? 'translate-y-[0.3em]' : ''}`
         }`}
-        style={{ transitionDelay: on ? `${delay + i * stagger}ms` : '0ms' }}
+        // Scrubbed pieces follow the scroll directly, so they carry no
+        // stagger of their own.
+        style={{ transitionDelay: on && !scrubbed ? `${delay + i * stagger}ms` : '0ms' }}
       >
         {content}
       </span>
