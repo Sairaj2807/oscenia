@@ -22,6 +22,8 @@ npm run lint      # oxlint
 
 | Document | Read it to… |
 |---|---|
+| [docs/COMPLETE-WEBSITE-GUIDE.md](docs/COMPLETE-WEBSITE-GUIDE.md) | **Start here to rebuild the whole site.** How everything works, current as of the code, with a step-by-step rebuild procedure and asset inventory |
+| [docs/COMPLETE-SOURCE-CODE.md](docs/COMPLETE-SOURCE-CODE.md) | Every source file, verbatim (58 files) |
 | [docs/design-system.md](docs/design-system.md) | Understand the look: colours, typography, buttons, liquid glass, shadows, imagery, layout and breakpoints |
 | [docs/pages.md](docs/pages.md) | See every page section by section: what's on it, where its content comes from, how it behaves |
 | [docs/components.md](docs/components.md) | Use or change a shared component or hook: props, rules, internals |
