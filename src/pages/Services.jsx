@@ -6,7 +6,7 @@ import useScrollProgress, { easeInOut, easeOut, span } from '../components/useSc
 import useViewTransitionNavigate from '../components/useViewTransitionNavigate'
 import Curtains from '../components/Curtains'
 import GlassCTA from '../components/GlassCTA'
-import LetterCurtain from '../components/LetterCurtain'
+import BeadCurtain from '../components/BeadCurtain'
 import Reveal from '../components/Reveal'
 
 // The Services page follows the reference recording (video_refrence.mp4,
@@ -64,7 +64,7 @@ function Stage() {
           className="absolute inset-0"
           style={{ transform: `translateY(${-lift * 110}%)`, opacity: 1 - span(p, 0.55, 0.75) }}
         >
-          <LetterCurtain className="h-full w-full" />
+          <BeadCurtain className="h-full w-full" />
         </div>
         <Curtains open={open} />
       </div>
