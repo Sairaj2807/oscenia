@@ -4,6 +4,7 @@ import Nav from './Nav'
 import Footer from './Footer'
 import QuickContact from './QuickContact'
 import Ripple from './Ripple'
+import Sound from './Sound'
 import useSmoothScroll, { getLenis } from './useSmoothScroll'
 
 // Scrolls to top on route change — or, when the link carries a #hash, to that
@@ -66,6 +67,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <QuickContact />
+      <Sound />
       {!isHome && <Footer />}
     </div>
   )
