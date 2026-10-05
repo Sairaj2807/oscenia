@@ -1,12 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useIntroReady } from '../introReady'
 
 // Site sound: a quiet looping ambience and a pop on every click.
 //
-// Browsers refuse audio until the visitor has interacted, so nothing plays on
-// load: the first press or key starts the ambience (on by default from then
-// on). The speaker button, bottom left, mutes everything and the choice is
-// remembered. The pop is one delegated listener, so no button needs wiring;
-// add data-sound="off" to an element to keep it silent.
+// The ambience waits for the visitor to land on the home page: it fades in
+// once the intro has finished and the route is "/", never during the intro
+// (whose film has its own soundtrack). Starting the intro is itself the
+// interaction browsers require, so it can usually begin straight away; if a
+// browser still refuses, the next press on the page starts it. Once started it
+// carries on across pages. The speaker button, bottom left, mutes everything
+// and the choice is remembered. The pop is one delegated listener, so no
+// button needs wiring; add data-sound="off" to an element to keep it silent.
 
 const AMBIENCE_SRC = '/sound/ambience.mp3'
 const POP_SRC = '/sound/pop.wav'
@@ -31,7 +36,11 @@ export default function Sound() {
   const ctxRef = useRef(null)
   const popRef = useRef(null)
   const fadeRef = useRef(0)
-  const startedRef = useRef(false)
+  // True once the visitor has landed on the home page after the intro: the
+  // only point from which the ambience may play.
+  const arrivedRef = useRef(false)
+  const introDone = useIntroReady()
+  const { pathname } = useLocation()
 
   const fadeTo = (target) => {
     const audio = audioRef.current
@@ -41,7 +50,9 @@ export default function Sound() {
     const t0 = performance.now()
     const tick = (now) => {
       const k = Math.min(1, (now - t0) / FADE_MS)
-      audio.volume = from + (target - from) * k
+      // Clamped: rounding at the end of a fade can land a hair below 0,
+      // which the browser rejects with an error.
+      audio.volume = Math.min(1, Math.max(0, from + (target - from) * k))
       if (k < 1) fadeRef.current = requestAnimationFrame(tick)
       else if (target === 0) audio.pause()
     }
@@ -50,7 +61,7 @@ export default function Sound() {
 
   const playAmbience = () => {
     const audio = audioRef.current
-    if (!audio || mutedRef.current) return
+    if (!audio || mutedRef.current || !arrivedRef.current) return
     audio.play().then(() => fadeTo(AMBIENCE_VOLUME)).catch(() => {})
   }
 
@@ -72,7 +83,9 @@ export default function Sound() {
     const audio = new Audio(AMBIENCE_SRC)
     audio.loop = true
     audio.volume = 0
-    audio.preload = 'auto'
+    // Not fetched until it first plays, on the home page: downloading 3 MB of
+    // ambience during the intro only slowed everything else.
+    audio.preload = 'none'
     audioRef.current = audio
 
     const AC = window.AudioContext || window.webkitAudioContext
@@ -88,11 +101,11 @@ export default function Sound() {
         .catch(() => {})
     }
 
+    // A press unlocks audio; it only starts the ambience once the visitor has
+    // arrived (and covers a browser that refused to start it on arrival).
     const onFirst = () => {
-      if (startedRef.current) return
-      startedRef.current = true
       ctxRef.current?.resume()
-      playAmbience()
+      if (audio.paused) playAmbience()
     }
     const onDown = (e) => {
       onFirst()
@@ -103,7 +116,7 @@ export default function Sound() {
     const onKey = () => onFirst()
     const onVisibility = () => {
       if (document.hidden) audio.pause()
-      else if (startedRef.current) playAmbience()
+      else playAmbience()
     }
 
     document.addEventListener('pointerdown', onDown, true)
@@ -120,6 +133,15 @@ export default function Sound() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Landing on the home page once the intro has lifted starts the ambience.
+  useEffect(() => {
+    if (arrivedRef.current || !introDone || pathname !== '/') return
+    arrivedRef.current = true
+    ctxRef.current?.resume()
+    playAmbience()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [introDone, pathname])
+
   const toggle = () => {
     const next = !muted
     mutedRef.current = next
@@ -129,7 +151,6 @@ export default function Sound() {
     } catch {
       /* private mode: the choice just lasts this visit */
     }
-    startedRef.current = true
     if (next) {
       fadeTo(0)
     } else {
