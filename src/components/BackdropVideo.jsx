@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import releaseVideo from './releaseVideo'
 
 // A full-bleed film behind a section.
 //
@@ -41,6 +42,13 @@ export default function BackdropVideo({ src, poster, className = '', eager = fal
     io.observe(el)
     return () => io.disconnect()
   }, [load, reduced])
+
+  // Leaving the page cancels the film's download rather than letting it
+  // stream on behind the next page.
+  useEffect(() => {
+    const el = ref.current
+    return () => releaseVideo(el)
+  }, [load])
 
   // The poster is the element until the film is wanted, so the section is
   // never a black rectangle and the swap has nothing to fade.

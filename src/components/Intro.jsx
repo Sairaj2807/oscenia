@@ -4,6 +4,7 @@ import { MARK_EMBLEM, MARK_GOLD, MARK_TEXT, MARK_VIEWBOX } from '../data/markGeo
 import { useI18n } from '../i18n/LanguageContext'
 import BackdropVideo from './BackdropVideo'
 import BrandMark from './BrandMark'
+import releaseVideo from './releaseVideo'
 
 // The opening sequence: a held logo on navy velvet that the visitor starts
 // themselves, then Oscenia's own company film, playing in full, then the site.
@@ -260,6 +261,9 @@ export default function Intro() {
   const finish = useCallback(() => {
     cancelAnimationFrame(rafRef.current)
     clearTimeout(leaveTimerRef.current)
+    // Stop the film downloading too: skipped early, it would otherwise keep
+    // streaming in the background and slow the page the visitor goes to next.
+    releaseVideo(videoRef.current)
     setStage(STAGE.DONE)
   }, [])
 

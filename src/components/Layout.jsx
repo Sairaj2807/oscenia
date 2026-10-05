@@ -6,6 +6,7 @@ import QuickContact from './QuickContact'
 import Ripple from './Ripple'
 import Sound from './Sound'
 import useSmoothScroll, { getLenis } from './useSmoothScroll'
+import usePrefetch from './usePrefetch'
 
 // Scrolls to top on route change — or, when the link carries a #hash, to that
 // element (a case page's Back lands on the Services grid, not the curtains).
@@ -51,6 +52,7 @@ export default function Layout() {
   // itself (see pages/Home.jsx). Every other route gets it here, on a panel.
   const isHome = pathname === '/'
   useSmoothScroll()
+  usePrefetch()
 
   return (
     // `isolate` is what lets the ripple sit behind the page without touching a

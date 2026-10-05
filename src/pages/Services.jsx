@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { EVENT_RADIUS, PORTFOLIO } from '../data/site'
+import { SERVICES_VELVET } from '../data/placeholders'
 import { useI18n } from '../i18n/LanguageContext'
 import useScrollProgress, { easeInOut, easeOut, span } from '../components/useScrollProgress'
 import useViewTransitionNavigate from '../components/useViewTransitionNavigate'
@@ -37,10 +38,33 @@ export default function Services() {
 // rather than per-section so the stage and the grid share one continuous
 // ground — the reference never shows a seam between them. It sits under the
 // Layout's pointer ripple (-z-10), so the water still plays over the velvet.
+//
+// Its average colour and a blurred thumbnail come with the page, so arriving
+// shows velvet at once; the real image fades in over them as it loads.
 function Velvet() {
+  const [ready, setReady] = useState(false)
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-20">
-      <img src="/services/velvet.webp" alt="" className="h-full w-full object-cover" />
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 -z-20"
+      style={{ backgroundColor: SERVICES_VELVET.colour }}
+    >
+      <div
+        className="absolute inset-0 scale-110 bg-cover bg-center blur-2xl"
+        style={{ backgroundImage: `url(${SERVICES_VELVET.blur})` }}
+      />
+      <img
+        src="/services/velvet.webp"
+        alt=""
+        decoding="async"
+        onLoad={() => setReady(true)}
+        ref={(el) => {
+          if (el?.complete && el.naturalWidth) setReady(true)
+        }}
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+          ready ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
       <div className="absolute inset-0 bg-navy-950/25" />
     </div>
   )

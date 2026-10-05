@@ -6,6 +6,8 @@ import GlassBubbles from '../components/GlassBubbles'
 import GlassCTA from '../components/GlassCTA'
 import Reveal from '../components/Reveal'
 import TypeOn from '../components/TypeOn'
+import { ABOUT_SATIN } from '../data/placeholders'
+import releaseVideo from '../components/releaseVideo'
 
 // The About page follows the reference recording (video_refrence.mp4, 1:30-2:36)
 // and is built from the designer's About material (brand-assets/2. About Us
@@ -19,7 +21,7 @@ import TypeOn from '../components/TypeOn'
 // compression (H.264 CRF 18): picture quality first, file size second. See
 // brand-assets/README.md.
 const MEDIA = {
-  blue: { src: '/about/fabric-blue.mp4', poster: '/about/fabric-blue-poster.jpg' },
+  blue: { src: '/about/fabric-blue.mp4', poster: '/about/fabric-blue-poster.webp' },
   champagne: { src: '/about/champagne.mp4', poster: '/about/champagne-poster.jpg' },
   twoTone: { src: '/about/fabric-two.mp4', poster: '/about/fabric-two-poster.jpg' },
   envelope: '/about/envelope.webp',
@@ -60,11 +62,37 @@ const SCRUB_SECONDS = 4
 // going down, backward coming up — and back at the top it returns to the frame
 // it left from and plays on. Scrubbing needs a keyframe every few frames, which
 // is how public/about/fabric-blue.mp4 is encoded (see brand-assets/README.md).
-function ScrubVideo({ src, poster, progress, className = '' }) {
+//
+// Never black on arrival. Four layers, back to front, each covering the one
+// behind as soon as it can: the satin's average blue and a blurred 32px
+// thumbnail (both in the bundle, so in the very first frame), the poster
+// (fades in when it loads), then the film (fades in once its first frame is
+// decoded). usePrefetch has usually cached the poster before the click.
+function ScrubVideo({ src, poster, progress }) {
   const ref = useRef(null)
   // The film's time when scrolling began; the scroll is measured from there.
   const anchor = useRef(null)
   const reduced = useReduced()
+  const [posterReady, setPosterReady] = useState(false)
+  const [filmReady, setFilmReady] = useState(false)
+  // The 20 MB film waits for the 78 KB poster (or 2.5s at most): started
+  // together on a slow connection, the film's download swamps the poster's and
+  // the satin stays a blur for seconds. Usually the poster is already cached.
+  const [loadFilm, setLoadFilm] = useState(false)
+  useEffect(() => {
+    if (posterReady) {
+      setLoadFilm(true)
+      return undefined
+    }
+    const id = setTimeout(() => setLoadFilm(true), 2500)
+    return () => clearTimeout(id)
+  }, [posterReady])
+
+  // Leaving the page cancels the film's download.
+  useEffect(() => {
+    const v = ref.current
+    return () => releaseVideo(v)
+  }, [loadFilm])
 
   useEffect(() => {
     const v = ref.current
@@ -84,22 +112,43 @@ function ScrubVideo({ src, poster, progress, className = '' }) {
     const duration = v.duration || 14.68
     const t = (anchor.current + progress * SCRUB_SECONDS) % duration
     if (Math.abs(v.currentTime - t) > 0.02) v.currentTime = t
-  }, [progress, reduced])
+  }, [progress, reduced, loadFilm])
 
-  if (reduced) return <img src={poster} alt="" aria-hidden="true" className={className} />
+  const layer = 'absolute inset-0 h-full w-full object-cover transition-opacity duration-500'
   return (
-    <video
-      ref={ref}
-      className={className}
-      src={src}
-      poster={poster}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-      aria-hidden="true"
-    />
+    <div aria-hidden="true" className="absolute inset-0" style={{ backgroundColor: ABOUT_SATIN.colour }}>
+      {/* Scaled past the edges so the blur doesn't fade them in. */}
+      <div
+        className="absolute inset-0 scale-110 bg-cover bg-center blur-2xl"
+        style={{ backgroundImage: `url(${ABOUT_SATIN.blur})` }}
+      />
+      <img
+        src={poster}
+        alt=""
+        decoding="async"
+        fetchPriority="high"
+        onLoad={() => setPosterReady(true)}
+        // A cached image can finish before React attaches onLoad.
+        ref={(el) => {
+          if (el?.complete && el.naturalWidth) setPosterReady(true)
+        }}
+        className={`${layer} ${posterReady ? 'opacity-100' : 'opacity-0'}`}
+      />
+      {!reduced && loadFilm && (
+        <video
+          ref={ref}
+          className={`${layer} ${filmReady ? 'opacity-100' : 'opacity-0'}`}
+          src={src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onLoadedData={() => setFilmReady(true)}
+          onPlaying={() => setFilmReady(true)}
+        />
+      )}
+    </div>
   )
 }
 
@@ -125,12 +174,7 @@ function Hero() {
     <section ref={ref} className={reduced ? '' : 'h-[240vh]'}>
       <div className={`${reduced ? 'relative' : 'sticky top-0'} h-svh overflow-hidden bg-black`}>
         <div className="absolute inset-x-0 top-0 overflow-hidden" style={{ height: `${band}%` }}>
-          <ScrubVideo
-            src={MEDIA.blue.src}
-            poster={MEDIA.blue.poster}
-            progress={p}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+          <ScrubVideo src={MEDIA.blue.src} poster={MEDIA.blue.poster} progress={p} />
           {/* Blends the band's lower edge into the black as it folds up. */}
           <div
             className="absolute inset-0 bg-gradient-to-b from-navy-950/10 via-navy-800/20 to-black"
