@@ -317,5 +317,17 @@ for (const role of ['sales', 'warehouse', 'pm', 'finance', 'ceo']) {
 s().setLang('id')
 renderAll('Pass 3 — Bahasa Indonesia')
 
+// A real installation starts with no data at all. Every other pass runs on seed data, where
+// `projects[0]` always exists, so a screen that assumed one rendered fine here and crashed in
+// production (the P&L and the Profit Simulator did). Back to English, with every business
+// collection empty.
+s().setLang('en')
+useStore.setState({
+  projects: [], invoices: [], journal: [], deals: [], quotations: [], clients: [], vendors: [],
+  purchaseOrders: [], procurement: [], inventory: [], fixedAssets: [], crew: [], deliveryOrders: [],
+  vendorCatalogue: [], vendorLifecycle: {}, interactions: {}, clientHistory: {}, incentives: {},
+})
+renderAll('Pass 4 — an empty database')
+
 console.log(`\n${failures === 0 ? 'ALL RENDER CHECKS PASSED' : failures + ' RENDER CHECK(S) FAILED'}\n`)
 process.exit(failures === 0 ? 0 : 1)

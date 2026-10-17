@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from 'recharts'
 import { Info, FileDown, Table, FileSpreadsheet, GitCompareArrows } from 'lucide-react'
 import { useStore } from '../store/useStore'
+import NoProjectsYet from '../components/NoProjectsYet'
 import { useReport, useCrossCheck } from '../store/useReport'
 import { adaptSlice, adaptComparison } from '../store/reportAdapters'
 import {
@@ -39,7 +40,7 @@ const MODES = [
   { key: 'custom', label: 'Custom Range' },
 ]
 
-export default function ProjectPnL() {
+function ProjectPnLView() {
   const projects = useStore((s) => s.projects)
   const journal = useStore((s) => s.journal)
   const t = useT()
@@ -468,4 +469,10 @@ export default function ProjectPnL() {
       </div>
     </div>
   )
+}
+
+// With no projects there is nothing to analyse; the view below assumes at least one.
+export default function ProjectPnL() {
+  const hasProjects = useStore((s) => s.projects.length > 0)
+  return hasProjects ? <ProjectPnLView /> : <NoProjectsYet eyebrow="Profitability" title="Project P&L" />
 }

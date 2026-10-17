@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { ResponsiveContainer, RadialBarChart, RadialBar, PolarAngleAxis, BarChart, Bar, XAxis, YAxis, Tooltip, Cell } from 'recharts'
 import { RotateCcw } from 'lucide-react'
 import { useStore } from '../store/useStore'
+import NoProjectsYet from '../components/NoProjectsYet'
 import { PageHeader, Card, money, money2, pct2 } from '../components/ui'
 import { useT } from '../i18n'
 
@@ -21,7 +22,7 @@ function Slider({ label, value, min, max, step, onChange, fmt }) {
   )
 }
 
-export default function Simulator() {
+function SimulatorView() {
   const projects = useStore((s) => s.projects)
   const t = useT()
   const base = projects.find((p) => p.id === 'EVT-2026-CONF-03') || projects[0]
@@ -131,4 +132,10 @@ export default function Simulator() {
       </div>
     </div>
   )
+}
+
+// With no projects there is nothing to analyse; the view below assumes at least one.
+export default function Simulator() {
+  const hasProjects = useStore((s) => s.projects.length > 0)
+  return hasProjects ? <SimulatorView /> : <NoProjectsYet eyebrow="What-if" title="Profit Simulator" />
 }

@@ -15,7 +15,13 @@ echo "==> building the website"
 ( cd "$ROOT/website" && npm ci --no-audit --no-fund && npx vite build )
 
 echo "==> building the ERP (same-origin API at /api/v1)"
-( cd "$ROOT/erp-frontend" && npm ci --no-audit --no-fund && VITE_API_URL=/api/v1 npx vite build )
+# MSYS_NO_PATHCONV: in Git Bash on Windows, a value like /api/v1 is silently rewritten to
+# "C:/Program Files/Git/api/v1", which broke every request. The check below refuses such a build.
+( cd "$ROOT/erp-frontend" && npm ci --no-audit --no-fund && MSYS_NO_PATHCONV=1 VITE_API_URL=/api/v1 npx vite build )
+if grep -rlE 'Program Files|C:/Users' "$ROOT/erp-frontend/dist" >/dev/null 2>&1    || ! grep -rlF '`/api/v1`' "$ROOT/erp-frontend/dist/assets" >/dev/null 2>&1; then
+  echo "refusing to ship: the ERP bundle does not have the relative API base /api/v1" >&2
+  exit 1
+fi
 
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT

@@ -47,7 +47,7 @@ and runs `alembic upgrade head` before each start. About 120 MB RSS idle.
 | API | **running**, `curl http://127.0.0.1:8010/health` → `{"status":"ok","database":"ok",...}` |
 | Reference data | seeded (`app.seed.chart`): chart of accounts, tax config, voucher series. Production creates **no demo users** |
 | Nginx | **not changed yet.** `osceniaevents` still serves the old site from `/var/www/oscenia-web/dist` |
-| Static files | **not shipped yet** (`/var/www/oscenia/` does not exist) |
+| Static files | **shipped and tested, not live.** `/var/www/oscenia/site` → `releases/20261017-172415` (website + ERP). Tested through a throwaway Nginx on a private port and a real browser (CEO sign-in, all 27 ERP screens on the empty database). The live site still serves the old `/var/www/oscenia-web/dist` |
 | First CEO | **created 2026-10-17**: Sairaj Bangar (`sdbangar2808@gmail.com`, role `ceo`); signing in against the API on the server returns 200 |
 | Swap | **2 GB `/swapfile` added 2026-10-17** (in `/etc/fstab`), `vm.swappiness=10` in `/etc/sysctl.d/99-oscenia-swap.conf`, so swap is an emergency reserve and does not push the neighbours' idle memory out |
 | AI minutes | off until `AI_API_KEY` is set in `/srv/oscenia/api.env` |
@@ -62,7 +62,9 @@ and runs `alembic upgrade head` before each start. About 120 MB RSS idle.
      -p WorkingDirectory=/srv/oscenia/erp-backend -p Environment=PYTHONDONTWRITEBYTECODE=1 \
      /srv/oscenia/venv/bin/python -m app.seed.users add someone@example.com "Name" finance
    ```
-2. **Ship the static files:** `VPS_HOST=… deploy/vps/ship-static.sh` (builds here, not on the server).
+2. ~~Ship the static files~~ done for now. Repeat after any frontend change: `VPS_HOST=… deploy/vps/ship-static.sh`
+   (builds here, not on the server). On Windows Git Bash the script sets `MSYS_NO_PATHCONV=1` and
+   refuses a bundle whose API base was rewritten to `C:/Program Files/Git/api/v1`.
 3. **Switch Nginx** to `nginx-osceniaevents.conf` (keep the Certbot-managed lines), then
    `nginx -t && systemctl reload nginx`. Reload, never restart. Keep the old file for rollback.
 4. **AI key:** set `AI_API_KEY=` in `/srv/oscenia/api.env`, then `systemctl restart oscenia-api`.
