@@ -1,0 +1,29 @@
+[Unit]
+Description=Oscenia ERP API (FastAPI, localhost only)
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+User=oscenia
+Group=oscenia
+WorkingDirectory=/srv/oscenia/erp-backend
+EnvironmentFile=/srv/oscenia/api.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+# Migrations run before every start; if one fails the service does not come up on a half-migrated schema.
+ExecStartPre=/srv/oscenia/venv/bin/alembic upgrade head
+# One worker on purpose: the scheduler runs in-process, so two workers would mean two schedulers.
+ExecStart=/srv/oscenia/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8010 --workers 1 --proxy-headers
+Restart=on-failure
+RestartSec=5
+# This box also runs trading services. Be the first thing the kernel sacrifices, and never hog the core.
+Nice=10
+MemoryMax=700M
+OOMScoreAdjust=500
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/oscenia/uploads
+
+[Install]
+WantedBy=multi-user.target
