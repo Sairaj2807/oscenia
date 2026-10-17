@@ -1,0 +1,45 @@
+{
+  "name": "oscenia-erp-prototype",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "verify:ledger": "node scripts/verify-ledger.mjs",
+    "verify:flows": "node scripts/verify-flows.mjs",
+    "verify:render": "vite-node --config scripts/smoke.config.js scripts/smoke.jsx",
+    "verify": "npm run verify:ledger && npm run verify:flows && npm run verify:adapters && npm run verify:chat && npm run verify:events && npm run verify:public && npm run verify:media && npm run verify:writes && npm run verify:role-load && npm run verify:proto",
+    "verify:api": "vite-node scripts/verify-api.mjs",
+    "verify:adapters": "vite-node scripts/verify-adapters.mjs",
+    "verify:chat": "vite-node scripts/verify-chat-adapters.mjs",
+    "verify:events": "vite-node scripts/verify-event-adapters.mjs",
+    "verify:public": "vite-node scripts/verify-public.mjs",
+    "verify:media": "vite-node scripts/verify-media.mjs",
+    "verify:writes": "vite-node scripts/verify-writes.mjs",
+    "verify:reports": "vite-node scripts/verify-reports.mjs",
+    "verify:proto": "node scripts/verify-proto.mjs",
+    "verify:mobile": "vite build && node scripts/mobile-check.mjs mobile-shots && node scripts/popover-check.mjs",
+    "verify:role-load": "vite-node scripts/verify-role-load.mjs"
+  },
+  "dependencies": {
+    "jspdf": "^4.2.1",
+    "lucide-react": "^0.469.0",
+    "qrcode.react": "^4.2.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.1",
+    "recharts": "^2.15.0",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.3",
+    "autoprefixer": "^10.5.4",
+    "playwright": "^1.63.0",
+    "postcss": "^8.5.22",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.1.1",
+    "vite-node": "^6.0.0"
+  }
+}

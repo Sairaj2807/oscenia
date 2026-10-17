@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-navy-950 text-white/90 font-sans antialiased;
+  margin: 0;
+}
+
+/* Deep navy gradient shell background */
+.bg-oscenia {
+  background:
+    radial-gradient(120% 80% at 100% -10%, #12233f 0%, rgba(18, 35, 63, 0) 55%),
+    linear-gradient(180deg, #060b16 0%, #04070f 100%);
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(198, 161, 91, 0.55), transparent);
+}
+
+.brand-mark {
+  @apply font-display tracking-brand text-gold-light;
+}
+
+::selection {
+  background: rgba(198, 161, 91, 0.35);
+}
+
+/* Thin custom scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(198,161,91,0.25); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(198,161,91,0.45); }
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-white/10 bg-navy-800/60 backdrop-blur-sm
+      shadow-[0_1px_0_0_rgba(255,255,255,0.04)_inset];
+  }
+  .eyebrow {
+    @apply text-[10px] tracking-[0.35em] uppercase text-gold/80;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium
+      transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-gold {
+    @apply btn bg-gold text-navy-950 hover:bg-gold-light;
+  }
+  .btn-ghost {
+    @apply btn border border-white/15 text-white/80 hover:border-gold/60 hover:text-white;
+  }
+  .th {
+    @apply text-left text-[11px] font-medium uppercase tracking-wider text-white/40 px-4 py-3;
+  }
+  .td {
+    @apply px-4 py-3 text-sm text-white/80 border-t border-white/5;
+  }
+}
