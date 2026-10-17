@@ -227,7 +227,7 @@ a budget ceiling, renaming an account, closing a period.
 
 **Status:** open · **Blocks:** nothing in the backend · **Priority:** medium
 
-`erp-prototype/src/pages/PurchaseOrders.jsx:175-193` — the component takes
+`erp-frontend/src/pages/PurchaseOrders.jsx:175-193` — the component takes
 `{po, vendor, onClose}` and has **no** `useStore` selector, yet line 193 calls
 `settlePurchaseOrder(po.id, value)`. Clicking **Settle** throws a `ReferenceError` in the
 browser, breaking the final step of the purchase-order lifecycle.

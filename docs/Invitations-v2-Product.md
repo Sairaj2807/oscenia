@@ -1,5 +1,8 @@
 # Invitations v2 — Template gallery, media and broadcasting (product spec)
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 Version 0.1 · 2 Oct 2026 · Status: **product confirmed pending sign-off** — technical plan next.
 Reference: Invitato (invitato.id/design, invitato.net/template-rominadia, template-hendryclarissa).
 

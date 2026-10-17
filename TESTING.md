@@ -1,5 +1,8 @@
 # Manual testing guide — Oscenia ERP
 
+> **Update, 17 Oct 2026.** This repository is now one monorepo deployed on one VPS (`https://osceniaevents.com`). Read [GO-LIVE-STATUS](docs/GO-LIVE-STATUS.md) first, then [deploy/vps/README](deploy/vps/README.md). Path changes: `erp-frontend/` is now `erp-frontend/`, `oscenia-web/` is now `website/`. Deploys are no longer by Vercel CLI. Production has real login only (demo mode is dev and tests only), pages are role-guarded and the API gates reads by module. Where this document disagrees with that, the newer docs win.
+
+
 For a tester picking this up cold. It tells you what to run, what to click, what number should
 appear, and — just as importantly — **what is not wired up yet**, so you do not spend an
 afternoon writing up a bug that is a known gap.
@@ -69,10 +72,10 @@ uvicorn app.main:app --reload    # http://localhost:8000
 In a second terminal:
 
 ```bash
-cd erp-prototype
+cd erp-frontend
 npm install
 cp .env.example .env             # points at http://localhost:8000/api/v1
-npm run dev                      # http://localhost:5173
+npm run dev                      # http://localhost:5273  (the website is 5173)
 ```
 
 ### Confirm it is alive
@@ -341,7 +344,7 @@ Remember [§0](#0-what-is-real-today): reading and saving are wired, apart from 
 
 | # | Do this | Expect |
 |---|---|---|
-| F1.1 | Open http://localhost:5173 | The sign-in screen, not the dashboard |
+| F1.1 | Open http://localhost:5273 | The sign-in screen, not the dashboard |
 | F1.2 | Click a demo account, then **Sign in** | The dashboard |
 | F1.3 | **Refresh the page** | Still signed in |
 | F1.4 | Wrong password | An error, and you stay put |
@@ -465,7 +468,7 @@ and fails to authenticate against a perfectly healthy container.
 
 **The frontend shows demo data with an amber banner**
 
-The backend is not running, or `VITE_API_URL` is wrong. Check `erp-prototype/.env`.
+The backend is not running, or `VITE_API_URL` is wrong. Check `erp-frontend/.env`.
 
 **Everything returns 401**
 
@@ -490,7 +493,7 @@ pytest -m "not slow"             # skip the long depreciation runs
 ```
 
 ```bash
-cd erp-prototype
+cd erp-frontend
 npm run verify                   # ledger + flow + adapter checks, no backend needed
 npm run verify:api               # needs the backend running
 ```

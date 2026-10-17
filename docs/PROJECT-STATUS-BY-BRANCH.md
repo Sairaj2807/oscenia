@@ -1,5 +1,10 @@
 # Oscenia website and ERP: what is built, on which branch, and what is left
 
+> **Update, 17 Oct 2026.** This repository is now one monorepo deployed on one VPS (`https://osceniaevents.com`). Read [GO-LIVE-STATUS](./GO-LIVE-STATUS.md) first, then [deploy/vps/README](../deploy/vps/README.md). Path changes: `erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`. Deploys are no longer by Vercel CLI. Production has real login only (demo mode is dev and tests only), pages are role-guarded and the API gates reads by module. Where this document disagrees with that, the newer docs win.
+
+> **Which repository:** the branches, the 15 Oct merge (PR #3) and the commit hashes in this file belong to the *prototype* repository (`rahuls18-damco/Oscenia-website-and-ERP`). The real repository is `Sairaj2807/oscenia`; the same code was brought into it on 17 Oct 2026 on branch `feature/erp-integration` (not yet merged to its `main`).
+
+
 > Written 2026-10-12 from `git` (all local and remote branches), `docs/finance-backend/STATUS.md` and `FE-BE-GAP-LIST.md`.
 > **Updated 2026-10-14** after the gaps plan (phases P0 to P9) was built on `feature/finance-gaps`: sections 2, 3 and 4 and the
 > gap list now match the code at `8216c9d`. The exact state, the gates and the working rules are in `docs/SESSION-HANDOFF.md`.

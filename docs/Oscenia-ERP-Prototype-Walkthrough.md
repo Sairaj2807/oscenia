@@ -1,5 +1,8 @@
 # Oscenia ERP — Prototype Walkthrough
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 **Prototype link:** **https://oscenia-web.vercel.app/erp**
 
 Thank you for taking the time to review this. What you're looking at is an **interactive prototype** of the Oscenia ERP, built directly from your concept deck. It's meant to make the idea tangible — so you can *click through the actual screens* and tell us what feels right, what's missing, and what should work differently, before we build the real thing.

@@ -1,5 +1,8 @@
 # Client feedback — round 1 (prototype review)
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 Received 30 Sep 2026 on preview `oscenia-lcpqvn3ss` (deployment `CFD788CE3`). Status of each item is kept here; update it as work lands.
 
 **Legend:** 🐞 bug · 🔁 changes an agreed decision · ✨ new feature · ❓ open question

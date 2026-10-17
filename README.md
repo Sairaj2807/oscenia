@@ -8,11 +8,16 @@ repository, deployed together on one VPS.
 | [`website/`](./website) | Marketing website: React 19 + Vite + Tailwind. Served at `/`. |
 | [`erp-frontend/`](./erp-frontend) | ERP single-page app: React 19 + Vite + zustand. Served at `/erp/`. |
 | [`erp-backend/`](./erp-backend) | ERP API: FastAPI + PostgreSQL 16. Served at `/api/*`. |
-| [`deploy/`](./deploy) | Docker Compose, Caddy, deploy / backup / restore scripts. **Start here to ship.** |
+| [`deploy/vps/`](./deploy/vps) | **Production:** systemd unit, Nginx site, `ship-static.sh`, `update-api.sh`, runbook. Start here to ship. |
+| [`deploy/`](./deploy) | Docker Compose + Caddy stack for local rehearsal. |
 | [`docs/`](./docs) | Product and engineering docs. [`docs/finance-backend/STATUS.md`](./docs/finance-backend/STATUS.md) is the backend's source of truth. |
 
-Everything is served from one domain by Caddy, so the browser never makes a cross-origin call.
-Sign-in is real: a deployed build has no demo accounts. See [`deploy/README.md`](./deploy/README.md).
+**Live at https://osceniaevents.com.** Everything is served from one domain (Nginx on the shared VPS), so the
+browser never makes a cross-origin call. Sign-in is real: a deployed build has no demo accounts.
+
+- **Where things stand, what is verified, what is left:** [`docs/GO-LIVE-STATUS.md`](./docs/GO-LIVE-STATUS.md)
+- **How production runs and how to update it:** [`deploy/vps/README.md`](./deploy/vps/README.md)
+- The Docker + Caddy stack in [`deploy/`](./deploy) is for local rehearsal; it cannot run on the shared VPS.
 
 ## Run it locally
 

@@ -8,8 +8,11 @@ One repo holds everything Oscenia ships: the marketing website, the ERP (fronten
 backend) and the VPS deployment. The repo root is this folder (`Oscenia-website-main/`).
 
 - **GitHub:** https://github.com/Sairaj2807/oscenia, branch `main`.
-- **Deploy target:** one VPS, one domain. The website is served at `/`, the ERP at `/erp/`
-  and the API at `/api/*`, all by Caddy (see `deploy/README.md`). There is no Vercel.
+- **Live at `https://osceniaevents.com`** on a **shared** VPS (it also runs trading and other production
+  services: never stop, restart or reboot anything there; reload Nginx, never restart it). The website is
+  served at `/`, the ERP at `/erp/` and the API at `/api/*`. Nginx serves the static builds and proxies
+  `/api` to the API, a localhost-only systemd service with a local PostgreSQL 16. **No Docker, no Caddy, no
+  Vercel in production.** Runbook: `deploy/vps/README.md`. Current state and open items: `docs/GO-LIVE-STATUS.md`.
 - **Login is real.** A production build has no demo accounts, no offline mode and no role
   switcher. Users are created on the server (`deploy/README.md`, "First deploy only").
 
@@ -21,14 +24,16 @@ backend) and the VPS deployment. The repo root is this folder (`Oscenia-website-
 | `website/brand-assets/` | Delivered brand pack and designer files. Source material, not served. `brand-assets/README.md` maps every file in `public/` back to its source | No (ignored) |
 | `erp-frontend/` | ERP single-page app: React 19 + Vite + zustand. Built with `base: '/erp/'` | Yes |
 | `erp-backend/` | ERP API: FastAPI, async SQLAlchemy, Alembic, PostgreSQL 16 | Yes |
-| `deploy/` | Docker Compose, Caddyfile, edge image, deploy / backup / restore scripts | Yes |
+| `deploy/vps/` | **Production**: systemd unit, Nginx site, `ship-static.sh`, `update-api.sh`, runbook | Yes |
+| `deploy/` (rest) | Docker Compose + Caddy stack, built and run locally; for rehearsal or a future dedicated server. It cannot run on the shared VPS | Yes |
 | `docs/` | ERP product and engineering docs. `docs/finance-backend/STATUS.md` is the backend's source of truth | Yes |
 | `.github/workflows/ci.yml` | Backend, frontend, website and edge-image checks | Yes |
 | Client documents, decks, videos, zips at this level | Source material kept on disk, never committed (see `.gitignore`) | No |
 | `_stale-root-git-backup/`, `_stale-erp-prototype-backup/` | Backups of what the restructure replaced. Safe to delete once nobody needs them | No |
 
-Nothing built is committed. The edge image (`deploy/Dockerfile.edge`) builds the website and
-the ERP from source on every deploy.
+Nothing built is committed. `deploy/vps/ship-static.sh` builds the website and the ERP on your machine
+and ships them as a release. On Windows Git Bash always build through that script: Git Bash silently
+rewrites values like `VITE_API_URL=/api/v1` into `C:/Program Files/Git/api/v1`.
 
 ## Git
 
@@ -40,7 +45,8 @@ the ERP from source on every deploy.
 - Before committing, check `git status` for changes made outside the current session. Tell the
   user what they are and commit them under their own message.
 - Things that never go to GitHub: `website/brand-assets/`, client documents, `.env` files,
-  anything under `deploy/` named `.env.production` / `.env.staging`.
+  anything under `deploy/` named `.env.production` / `.env.staging`, and any password. Secrets live only on
+  the server in `/srv/oscenia/api.env`.
 
 ## Working on the website
 

@@ -163,8 +163,14 @@ Full detail and recommendations in [07](./07-open-questions.md).
 * **Frontend.** `hydrate.js` `optional()` turns a 403 on a collection into an empty one (a 500 still fails the load). Before, one
   refusal aborted the whole first load, which already broke Sales and Warehouse logins (neither sees `/vendor-lifecycle`).
   Pinned by `npm run verify:role-load`.
-* **Layout.** `erp-prototype/` is now `erp-frontend/`; the site is `website/`; deploy is one domain (see `deploy/README.md`).
-  Docs below this entry still say `erp-prototype/` and describe the Vercel deploy; they are history.
+* **Layout.** The prototype's `erp-prototype/` folder is now `erp-frontend/`; the site is `website/`. Older entries below still
+  say `erp-prototype/` in prose, and describe the Vercel deploy and the offline demo; they are history.
+* **Production (live since 17 Oct 2026).** The API runs on the shared VPS behind `https://osceniaevents.com` (`/api/*`), as a
+  sandboxed systemd service on `127.0.0.1:8010` with a local PostgreSQL 16 (no Docker: the box is shared and Nginx owns 80/443).
+  So "not deployed anywhere" in the older entries is no longer true. Runbook: `deploy/vps/README.md`. Current state, tests,
+  open decisions and risks (**no backups yet**): `docs/GO-LIVE-STATUS.md`.
+* **Verified:** full backend suite 2,125 passed plus the 4 tests fixed afterwards, 423 new access-policy tests, `ruff` and
+  `mypy` (strict) clean; browser check on the live domain as the CEO (sign-in, 27 screens on an empty database).
 
 
 **2026-10-12 - Public guest pages and invitation media (branch `feature/finance-gaps`; public routes pushed as `ac2e9b9`..`f49a886`, media after).**
@@ -256,7 +262,7 @@ Full detail and recommendations in [07](./07-open-questions.md).
   "Loading live data…" was still showing, so a fast click ran the *demo* branch of an action, which changed
   browser memory only and looked as if it worked. The app now shows a loading screen until the first load
   finishes or fails (a failed load still opens the app: a chat-only login has no finance data to load).
-* **Finance click-through** (`erp-prototype/scripts/finance-live-e2e.mjs`, `node scripts/finance-live-e2e.mjs`):
+* **Finance click-through** (`erp-frontend/scripts/finance-live-e2e.mjs`, `node scripts/finance-live-e2e.mjs`):
   a scratch DB, a real backend and frontend, the CEO driving the screens; each step clicks, asks the *server*,
   then reloads and checks the screen. Reached 16/17 (quotation → send → accept → down payment → advance →
   cancel with refund, vendor, account, petty cash, procurement request, stock item, depreciation, bonus
@@ -484,7 +490,7 @@ as frozen data. Fresh-context review: no critical findings; three should-fix fix
   server stores file references only (no inline `data:` images) and bounds section size and
   depth. Guest links and QR codes are signed + versioned (`links.py`); a revoked guest's old
   QR no longer checks in. Client edit links expire after `CLIENT_LINK_DAYS` (90).
-* **Demo seed:** exported from the prototype by `erp-prototype/scripts/export-events-seed.mjs`
+* **Demo seed:** exported from the prototype by `erp-frontend/scripts/export-events-seed.mjs`
   into `app/seed/events_seed.json` (re-run it after changing `protoSeed.js`), loaded by
   `app.seed.demo`. EV-02's 16 / 4 / 5 / 6 grid holds. Clients match by name; the backend demo
   has no projects, so seeded events have none.
@@ -529,7 +535,7 @@ found in the round-4 guard, closed in `app/domain/ledger/overrides.py` and the c
   moved by exactly the gross) and moved the receivable with no invoice behind it, so AR open
   items stopped reconciling with 1201. Also refused: a contra line on the locked control
   account that nets back to the right figure. Both 422. The prototype's `validateEdited`
-  (`erp-prototype/src/lib/postings.js`) applies the same rules.
+  (`erp-frontend/src/lib/postings.js`) applies the same rules.
 * **Sub-account rule.** `POST /accounts` refuses a sub-account under 1201 or 2102 (409): it
   would turn the control account into a header, which accepts no postings, and every receipt
   and payment would then fail. The prototype's chart editor refuses it too.
@@ -538,7 +544,7 @@ found in the round-4 guard, closed in `app/domain/ledger/overrides.py` and the c
 now post to these endpoints on a live backend: the editor is seeded from the server's
 `?dry_run` (re-asked as dates, account, withholding, tax or amount change) and sends
 `lines` only when a line was edited and `tax_amount` only when a figure was typed
-(`erp-prototype/src/lib/apiPostings.js`). Receive payment and pay bill reach the API for the
+(`erp-frontend/src/lib/apiPostings.js`). Receive payment and pay bill reach the API for the
 first time. A 422 `detail` shows in the pop-up, which stays open. One backend addition:
 `POST /journal-entries/{id}/adjust` takes `document_date` for the replacement entry (it had
 no way to carry the corrected receipt's date). The memo is not sent — none of the money

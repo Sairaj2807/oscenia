@@ -1,5 +1,8 @@
 # Client feedback — round 4 (5 Oct 2026)
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 Received after the round-3 deploy (https://oscenia-web.vercel.app/erp). Verbatim where quoted.
 
 1. **Guest table number: free text** — "for the table, just make it we can freely write it". Screenshot: Events → Wibowo–Sari Wedding → Guests & RSVP, where the Table column is a dropdown limited to `— / T1 … T5`.

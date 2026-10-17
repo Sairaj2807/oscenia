@@ -1,5 +1,8 @@
 # Oscenia ERP — Client Feedback Analysis & Fix Plan
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 **Source of feedback:** `oscenia_erp_upgrade_roadmap_presentation.html` (10-slide deck, "System Evaluation & Upgrade Roadmap")
 **System under review:** https://oscenia-web.vercel.app/erp
 **Code that changes:** `erp-prototype/src/` — this is the real source. The live `/erp` route is a **built copy** in `oscenia-web/public/erp/`. Editing `oscenia-web/src` does nothing for the ERP.

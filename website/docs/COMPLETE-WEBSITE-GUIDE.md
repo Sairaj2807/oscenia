@@ -1,5 +1,8 @@
 # Oscenia Website: Complete Guide
 
+> **Update, 17 Oct 2026.** This repository is now one monorepo deployed on one VPS (`https://osceniaevents.com`). Read [GO-LIVE-STATUS](../../docs/GO-LIVE-STATUS.md) first, then [deploy/vps/README](../../deploy/vps/README.md). Path changes: `erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`. Deploys are no longer by Vercel CLI. Production has real login only (demo mode is dev and tests only), pages are role-guarded and the API gates reads by module. Where this document disagrees with that, the newer docs win.
+
+
 How the whole site works, how it is built, and how to rebuild it from nothing.
 
 This guide has two companions:

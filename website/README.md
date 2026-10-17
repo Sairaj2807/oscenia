@@ -1,13 +1,16 @@
 # Oscenia Events — Website
 
+> **Update, 17 Oct 2026.** This repository is now one monorepo deployed on one VPS (`https://osceniaevents.com`). Read [GO-LIVE-STATUS](../docs/GO-LIVE-STATUS.md) first, then [deploy/vps/README](../deploy/vps/README.md). Path changes: `erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`. Deploys are no longer by Vercel CLI. Production has real login only (demo mode is dev and tests only), pages are role-guarded and the API gates reads by module. Where this document disagrees with that, the newer docs win.
+
+
 The marketing site for **Oscenia Events**, a strategic events and immersive-experiences company in Jakarta, Bali and Singapore. It's bilingual (English and Bahasa Indonesia), film-led and heavily animated, built to match the "Landing Page Visual Direction" deck and the reference recordings in the repository root.
 
-**Stack:** React 19 · Vite 8 · Tailwind CSS 3.4 · React Router 7 · hosted on Vercel. No backend, no CMS.
+**Stack:** React 19 · Vite 8 · Tailwind CSS 3.4 · React Router 7 · static files served by Nginx on the VPS at `https://osceniaevents.com` (the ERP lives beside it at `/erp/` and has its own backend; the site itself has no backend and no CMS).
 
 ## Run it
 
 ```bash
-cd oscenia-web
+cd website
 npm install
 npm run dev       # http://localhost:5173
 ```

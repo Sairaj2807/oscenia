@@ -1,5 +1,8 @@
 # Architecture
 
+> **Update, 17 Oct 2026.** This repository is now one monorepo deployed on one VPS (`https://osceniaevents.com`). Read [GO-LIVE-STATUS](../../docs/GO-LIVE-STATUS.md) first, then [deploy/vps/README](../../deploy/vps/README.md). Path changes: `erp-frontend/` is now `erp-frontend/`, `oscenia-web/` is now `website/`. Deploys are no longer by Vercel CLI. Production has real login only (demo mode is dev and tests only), pages are role-guarded and the API gates reads by module. Where this document disagrees with that, the newer docs win.
+
+
 How the website is put together: stack, file layout, how a page boots and renders, the layering model, performance and accessibility strategies, browser support, and deployment.
 
 ---
@@ -226,7 +229,7 @@ Hosted on **Vercel** as a static site. `npm run build` outputs `dist/`.
 | `/erp/…` | `/erp/index.html` | The ERP prototype's own SPA |
 | everything else | `/index.html` | The website SPA, so deep links like `/about` work on refresh |
 
-**The ERP prototype** is a separate Vite app in `../erp-prototype/`, built with `base: '/erp/'` in production. Its build output is placed in `public/erp/`, so it ships with the website and is served under `/erp`. After changing the ERP, rebuild it and replace `public/erp/`. The ERP has its own documentation in the repository's `docs/` folder.
+**The ERP prototype** is a separate Vite app in `../erp-frontend/`, built with `base: '/erp/'` in production. Its build output is placed in `public/erp/`, so it ships with the website and is served under `/erp`. After changing the ERP, rebuild it and replace `public/erp/`. The ERP has its own documentation in the repository's `docs/` folder.
 
 ---
 

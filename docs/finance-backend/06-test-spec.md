@@ -4,8 +4,8 @@
 
 **We are not writing new tests. We are porting an existing, proven specification.**
 
-`erp-prototype/scripts/verify-ledger.mjs` (12 invariants) and
-`erp-prototype/scripts/verify-flows.mjs` (67 sections, 1,702 lines) already encode what
+`erp-frontend/scripts/verify-ledger.mjs` (12 invariants) and
+`erp-frontend/scripts/verify-flows.mjs` (67 sections, 1,702 lines) already encode what
 correct behaviour means for this business. They were written against two rounds of client
 feedback and they caught eleven real bugs during the prototype build — including the PPh 23
 direction being backwards, a variance adjustment being double-counted as its own open bill,

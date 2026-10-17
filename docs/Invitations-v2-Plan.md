@@ -1,5 +1,8 @@
 # Invitations v2: template gallery, media, review & broadcasting
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 ## Context
 The client wants invitations to work like Invitato: pick from a gallery of designed templates, add their own photos, video and music, and get a shareable link with personalised guest invites. Today `/erp` has one fixed layout (`InvitationBuilder.jsx` + `InvitationView.jsx`) with a palette, fonts and copy. Product decisions D1–D14 are in `docs/Invitations-v2-Product.md`. In short:
 - Staff and the client both build. The client works from one private link.

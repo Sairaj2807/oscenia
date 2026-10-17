@@ -1,5 +1,8 @@
 # Client feedback round 3: plan
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 ## Context
 The client sent four requests after the invitations v2 deploy (saved verbatim in `docs/Client-Feedback-Round-3.md`). Exploring the code showed that **items 1–3 are already built but hidden or confusing**, and **item 4 is new**:
 1. **Google Calendar.** It exists, but you only reach it through CRM → *Relationship calendar* tab → switch to *Month* → the card on the right. The client can't find it.

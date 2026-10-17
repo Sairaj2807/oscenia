@@ -1,5 +1,8 @@
 # Oscenia ERP — Prototype Demo Guide
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 **Project Management + Team Chat · Event Invitations, RSVP & Check-in · CRM**
 
 This guide walks through every feature in the clickable prototype, step by step. It follows the client decisions in the BRD (v0.2, `docs/BRD-PM-Events-CRM-v0.2.pdf`).

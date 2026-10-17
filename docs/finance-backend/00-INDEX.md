@@ -1,6 +1,9 @@
 # Finance Backend — Documentation Index
 
-**Status:** specification. No backend code exists yet.
+> **Update, 17 Oct 2026.** This repository is now one monorepo deployed on one VPS (`https://osceniaevents.com`). Read [GO-LIVE-STATUS](../GO-LIVE-STATUS.md) first, then [deploy/vps/README](../../deploy/vps/README.md). Path changes: `erp-frontend/` is now `erp-frontend/`, `oscenia-web/` is now `website/`. Deploys are no longer by Vercel CLI. Production has real login only (demo mode is dev and tests only), pages are role-guarded and the API gates reads by module. Where this document disagrees with that, the newer docs win.
+
+
+**Status:** the backend is built and live (see [STATUS](./STATUS.md) and [GO-LIVE-STATUS](../GO-LIVE-STATUS.md)); this index was written when it was only a specification.
 **Owner:** Oscenia IT Development Division
 **Created:** 2026-09-04
 **Applies to:** the Finance portion of the Oscenia ERP — accounting core, AR, AP, cash &
@@ -11,7 +14,7 @@ incentives, project P&L, quotations & phased DP.
 
 ## Why these documents exist
 
-`erp-prototype/` is a complete, client-reviewed ERP **with no backend of any kind**. Every
+`erp-frontend/` is a complete, client-reviewed ERP **with no backend of any kind**. Every
 number on every screen is derived at render time from one in-memory Zustand store
 (`src/store/useStore.js`, 2,638 lines) seeded from `src/store/seed.js`. A page refresh
 resets the company's books.
@@ -68,15 +71,15 @@ document is a bug — fix the document.
 
 | Source | What it contributed |
 |---|---|
-| `erp-prototype/src/lib/ledger.js` (527 lines) | The report algebra — `openItems`, `generalLedger`, `incomeStatementFrom`, `balanceSheetFrom`, `trialBalance`, `projectCosts`. Becomes SQL. |
-| `erp-prototype/src/lib/accounts.js` | The 27-account seed chart, account types, nesting and lock rules |
-| `erp-prototype/src/lib/vouchers.js` | Voucher series, format tokens, reset cadences, `pickSeries` auto-classification |
-| `erp-prototype/src/lib/billing.js` | Phased-DP presets and `resolveSchedule` |
-| `erp-prototype/src/lib/depreciation.js` | Straight-line and declining schedules |
-| `erp-prototype/src/lib/roles.js` | The 5-role × 20-action RBAC matrix |
-| `erp-prototype/src/store/seed.js` (982 lines) | The de-facto data model — every entity's real field names |
-| `erp-prototype/src/store/useStore.js` (2,638 lines) | The de-facto API surface — ~70 mutations |
-| `erp-prototype/scripts/verify-ledger.mjs` · `verify-flows.mjs` | **The acceptance criteria.** 12 invariants + 65 flow sections |
+| `erp-frontend/src/lib/ledger.js` (527 lines) | The report algebra — `openItems`, `generalLedger`, `incomeStatementFrom`, `balanceSheetFrom`, `trialBalance`, `projectCosts`. Becomes SQL. |
+| `erp-frontend/src/lib/accounts.js` | The 27-account seed chart, account types, nesting and lock rules |
+| `erp-frontend/src/lib/vouchers.js` | Voucher series, format tokens, reset cadences, `pickSeries` auto-classification |
+| `erp-frontend/src/lib/billing.js` | Phased-DP presets and `resolveSchedule` |
+| `erp-frontend/src/lib/depreciation.js` | Straight-line and declining schedules |
+| `erp-frontend/src/lib/roles.js` | The 5-role × 20-action RBAC matrix |
+| `erp-frontend/src/store/seed.js` (982 lines) | The de-facto data model — every entity's real field names |
+| `erp-frontend/src/store/useStore.js` (2,638 lines) | The de-facto API surface — ~70 mutations |
+| `erp-frontend/scripts/verify-ledger.mjs` · `verify-flows.mjs` | **The acceptance criteria.** 12 invariants + 65 flow sections |
 | `docs/PRD-ERP-Oscenia.md` | Original scope from the client's 14-slide deck |
 | `docs/ERP-Feedback-Analysis-and-Fix-Plan.md` | Two rounds of client feedback and the rulings taken |
 | `oscenia_erp_upgrade_roadmap_presentation.html` | Client feedback round 1 (10 slides) |

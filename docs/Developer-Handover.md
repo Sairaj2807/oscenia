@@ -1,5 +1,8 @@
 # Oscenia ERP — Developer Handover
 
+> **Update, 17 Oct 2026.** This repository is now one monorepo deployed on one VPS (`https://osceniaevents.com`). Read [GO-LIVE-STATUS](./GO-LIVE-STATUS.md) first, then [deploy/vps/README](../deploy/vps/README.md). Path changes: `erp-frontend/` is now `erp-frontend/`, `oscenia-web/` is now `website/`. Deploys are no longer by Vercel CLI. Production has real login only (demo mode is dev and tests only), pages are role-guarded and the API gates reads by module. Where this document disagrees with that, the newer docs win.
+
+
 For the full-stack developer who will turn the clickable prototype into the real product (backend + production frontend).
 
 Written 5 Oct 2026 from the code on branch `feature/pm-events-prototype` (commit `72faa63`), updated the same day for client feedback round 4 (journal pop-up, two dates, free-text guest tables; commits `360fc8e` … `43169ff`). Paths are relative to the repo root. Where something was not verified it says **check**.
@@ -45,7 +48,7 @@ Everything hangs off one **Project ID** (for example `EVT-2026-GALA-01`). A quot
 ### 2.2 Run the prototype (no backend: offline demo mode)
 
 ```bash
-cd erp-prototype
+cd erp-frontend
 npm install
 npm run dev        # http://localhost:5273  (vite.config.js: port 5273)
 ```
@@ -68,7 +71,7 @@ uvicorn app.main:app --reload                           # http://localhost:8000,
 
 cd ../erp-prototype
 # create .env with VITE_API_URL=http://localhost:8000/api/v1
-# (erp-prototype/.env.example exists locally but is NOT tracked: root .gitignore excludes .env.*)
+# (erp-frontend/.env.example exists locally but is NOT tracked: root .gitignore excludes .env.*)
 npm run dev
 ```
 
@@ -101,7 +104,7 @@ Workspace & Tasks → the ↺ button next to *Viewing as* (`useProto.resetDemo`)
 Pushing to GitHub **does not deploy**. Deploys are manual from the CLI:
 
 ```bash
-cd erp-prototype && npm run verify && npm run build
+cd erp-frontend && npm run verify && npm run build
 rm -rf ../oscenia-web/public/erp/assets
 cp -r dist/assets ../oscenia-web/public/erp/assets
 cp dist/index.html ../oscenia-web/public/erp/index.html
@@ -110,9 +113,9 @@ cd ../oscenia-web && npx vercel --prod --yes      # production
 # or: npx vercel --yes                             # preview (sits behind Vercel login; share via a dashboard Share link)
 ```
 
-- The production build uses `base: '/erp/'` (`erp-prototype/vite.config.js`). `oscenia-web/vercel.json` rewrites `/erp/(.*)` to `/erp/index.html`.
+- The production build uses `base: '/erp/'` (`erp-frontend/vite.config.js`). `oscenia-web/vercel.json` rewrites `/erp/(.*)` to `/erp/index.html`.
 - Asset names are content-hashed, so delete the old `assets/` folder or stale files pile up in git.
-- Editing `oscenia-web/src` does nothing for the ERP. The ERP source is `erp-prototype/src`.
+- Editing `oscenia-web/src` does nothing for the ERP. The ERP source is `erp-frontend/src`.
 - The only server code on Vercel is `oscenia-web/api/meeting-summary.js` (AI minutes, §6.13).
 
 ---
@@ -169,15 +172,15 @@ The old feature branches can be deleted after the merge to `main`.
 - Root `.gitignore`: `**/node_modules`, `**/dist`, `*.log`, `*.local`, `.env`, `.env.*`, editor files, `.claude/settings.local.json`, two screen recordings.
 - `erp-backend/.gitignore`: `.venv`, caches, `.env`, `var/` (uploaded files). `erp-backend/.env.example` is deliberately committed.
 - `oscenia-web/.gitignore` ignores `.vercel` (the local project link).
-- `erp-prototype/.gitignore` ignores `mobile-shots/`.
-- **Built files are committed** under `oscenia-web/public/erp/` (that is how Vercel serves `/erp`). `erp-prototype/dist` is not committed.
+- `erp-frontend/.gitignore` ignores `mobile-shots/`.
+- **Built files are committed** under `oscenia-web/public/erp/` (that is how Vercel serves `/erp`). `erp-frontend/dist` is not committed.
 - Several large binaries are committed at the root and in `docs/` (pptx, pdf, docx, one zip). They are client source material.
 - **Do not commit** `Landing Page-20260828T033736Z-1-001.zip` at the repo root. It is untracked, about **309 MB**, over GitHub's 100 MB file limit.
 
 ### 3.7 CI and deploy hooks
 
 - No `.github/` folder, so **no GitHub Actions**.
-- `oscenia-web/vercel.json` and `erp-prototype/vercel.json` hold only rewrites and the function duration. No Git settings.
+- `oscenia-web/vercel.json` and `erp-frontend/vercel.json` hold only rewrites and the function duration. No Git settings.
 - `oscenia-web/.vercel/project.json` (ignored) links the folder to the Vercel project `oscenia-web`.
 - Whether Vercel's Git integration is connected in the Vercel dashboard cannot be seen from the repo (**check**). In practice, pushes have not deployed; deploys are by CLI (§2.6).
 
@@ -189,11 +192,11 @@ The old feature branches can be deleted after the merge to `main`.
 
 | Variable | Read by | Where to set |
 |---|---|---|
-| `VITE_API_URL` | `erp-prototype/src/lib/api.js` (default `http://localhost:8000/api/v1`) | `erp-prototype/.env` at build time |
-| `VITE_AI_SUMMARY` | `erp-prototype/src/lib/meetingAi.js` (`on` enables real AI) | build-time env for the prototype build |
+| `VITE_API_URL` | `erp-frontend/src/lib/api.js` (default `http://localhost:8000/api/v1`) | `erp-frontend/.env` at build time |
+| `VITE_AI_SUMMARY` | `erp-frontend/src/lib/meetingAi.js` (`on` enables real AI) | build-time env for the prototype build |
 | `BASE_URL` | Vite built-in, from `base` in `vite.config.js` | automatic |
 | `AI_PROVIDER`, `AI_MODEL`, `DEEPSEEK_API_KEY`, `OPENAI_API_KEY` | `oscenia-web/api/meeting-summary.js` | Vercel project env vars |
-| `PREVIEW_PORT` | `erp-prototype/scripts/preview-server.mjs` | shell, for the browser checks |
+| `PREVIEW_PORT` | `erp-frontend/scripts/preview-server.mjs` | shell, for the browser checks |
 | `ENV`, `DEBUG`, `DATABASE_URL`, `TEST_DATABASE_URL`, `DB_ECHO`, `JWT_SECRET`, `ACCESS_TOKEN_MINUTES`, `REFRESH_TOKEN_DAYS`, `STORAGE_DIR`, `MAX_UPLOAD_BYTES`, `TIMEZONE`, plus `SCHEDULER_ENABLED`, `CORS_ORIGINS` and others in `erp-backend/app/core/config.py` | backend | `erp-backend/.env` |
 
 ---
@@ -211,7 +214,7 @@ The old feature branches can be deleted after the merge to `main`.
 │     ├─ domain/                  accounts, ap, ar, assets, auth, cash, ledger, masters, payroll, reports, search
 │     ├─ jobs/                    APScheduler jobs, /jobs, /reminders
 │     └─ seed/                    demo seed (python -m app.seed.demo)
-├─ erp-prototype/                 the React prototype (the source of /erp)
+├─ erp-frontend/                 the React prototype (the source of /erp)
 │  ├─ DEMO-SCRIPT.md
 │  ├─ scripts/                    verify suites and browser checks (§9)
 │  └─ src/
@@ -606,7 +609,7 @@ The finance backend (FastAPI + Postgres, `erp-backend/`) is built, tested and do
 
 ## 9. Testing
 
-All in `erp-prototype/` unless noted.
+All in `erp-frontend/` unless noted.
 
 | Command | What it checks | Needs |
 |---|---|---|
@@ -678,7 +681,7 @@ From `docs/Prototype-Demo-Guide.md`, `docs/Client-Feedback-Round-1.md` and `docs
 |---|---|
 | `README.md` | Repo overview and quick starts |
 | `TESTING.md` | Manual testing guide for the backend and the wired frontend: what is real, scenarios, troubleshooting |
-| `erp-prototype/DEMO-SCRIPT.md` | Short demo script for the prototype (**check** contents) |
+| `erp-frontend/DEMO-SCRIPT.md` | Short demo script for the prototype (**check** contents) |
 | `docs/Prototype-Demo-Guide.md` (+ `.pdf`) | Client-facing, step-by-step walkthrough of every feature, with what's new in rounds 1–4 and open questions |
 | `docs/Oscenia-ERP-Prototype-Walkthrough.md` | The first client walkthrough of the original ERP screens (Dashboard → Sales report) |
 | `docs/PRD-ERP-Oscenia.md` | Original ERP PRD from the client's concept deck: roles, modules, data model, automation triggers |

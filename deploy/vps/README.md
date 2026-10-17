@@ -46,14 +46,15 @@ and runs `alembic upgrade head` before each start. About 120 MB RSS idle.
 |---|---|
 | API | **running**, `curl http://127.0.0.1:8010/health` → `{"status":"ok","database":"ok",...}` |
 | Reference data | seeded (`app.seed.chart`): chart of accounts, tax config, voucher series. Production creates **no demo users** |
-| Nginx | **not changed yet.** `osceniaevents` still serves the old site from `/var/www/oscenia-web/dist` |
-| Static files | **shipped and tested, not live.** `/var/www/oscenia/site` → `releases/20261017-172415` (website + ERP). Tested through a throwaway Nginx on a private port and a real browser (CEO sign-in, all 27 ERP screens on the empty database). The live site still serves the old `/var/www/oscenia-web/dist` |
+| Nginx | **switched 2026-10-17.** `/etc/nginx/sites-available/osceniaevents` is the config in `nginx-osceniaevents.conf` plus the Certbot lines (unchanged). Validated with `nginx -t`, then a graceful `reload`. The previous file is `/root/nginx-backup/osceniaevents.20261017.bak`. The old site folder `/var/www/oscenia-web` is no longer served but still on disk |
+| Static files | **live.** `/var/www/oscenia/site` → `releases/20261017-172415` (website + ERP); two earlier releases kept for rollback |
+| Public site | **live since 2026-10-17.** `https://osceniaevents.com/` (website), `/erp/` (ERP), `/api/*` and `/health` (API). Verified from the public internet and in a real browser as the CEO (sign-in, all 27 ERP screens on the empty database, no script errors) |
 | First CEO | **created 2026-10-17**: Sairaj Bangar (`sdbangar2808@gmail.com`, role `ceo`); signing in against the API on the server returns 200 |
 | Swap | **2 GB `/swapfile` added 2026-10-17** (in `/etc/fstab`), `vm.swappiness=10` in `/etc/sysctl.d/99-oscenia-swap.conf`, so swap is an emergency reserve and does not push the neighbours' idle memory out |
 | AI minutes | off until `AI_API_KEY` is set in `/srv/oscenia/api.env` |
 | Backups | none yet |
 
-## Remaining go-live steps
+## Remaining steps
 
 1. ~~Create the first CEO~~ done. Day to day, the CEO adds people from the **Users** screen in the ERP.
    To add or reset a user from the server (asks for the password twice, 12+ characters):
@@ -65,12 +66,15 @@ and runs `alembic upgrade head` before each start. About 120 MB RSS idle.
 2. ~~Ship the static files~~ done for now. Repeat after any frontend change: `VPS_HOST=… deploy/vps/ship-static.sh`
    (builds here, not on the server). On Windows Git Bash the script sets `MSYS_NO_PATHCONV=1` and
    refuses a bundle whose API base was rewritten to `C:/Program Files/Git/api/v1`.
-3. **Switch Nginx** to `nginx-osceniaevents.conf` (keep the Certbot-managed lines), then
-   `nginx -t && systemctl reload nginx`. Reload, never restart. Keep the old file for rollback.
-4. **AI key:** set `AI_API_KEY=` in `/srv/oscenia/api.env`, then `systemctl restart oscenia-api`.
-5. **Backups:** nightly `pg_dump -Fc oscenia_erp` plus `/srv/oscenia/uploads`, copied off the box, and a
-   tested restore. (Not done.)
+3. ~~Switch Nginx~~ done 2026-10-17 (see the table above). For any later edit: change the file, `nginx -t`,
+   then `systemctl reload nginx`. Reload, never restart: other sites share this Nginx.
+4. **AI key** (owner will provide it later): set `AI_API_KEY=` in `/srv/oscenia/api.env`, then
+   `systemctl restart oscenia-api`.
+5. **Backups: NOT DONE, and the database is the only copy of the data.** Nightly `pg_dump -Fc oscenia_erp`
+   plus `/srv/oscenia/uploads`, copied off the box, and a tested restore. Do this before real data goes in.
 6. ~~Swap~~ done (see above).
+7. **Merge `main`.** Push `feature/erp-integration`, merge it, and stop using the old checkout
+   `/var/www/oscenia-web` (its `git pull && npm ci` fails once `main` has the monorepo layout).
 
 ## Updating
 

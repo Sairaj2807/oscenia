@@ -1,5 +1,8 @@
 # Backend build plan: where to start and how
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 ## Context
 The prototype has been signed off over four client rounds and is being handed to a full-stack developer (`docs/Developer-Handover.md`). The question: if I were starting the real backend, how and where would I start?
 

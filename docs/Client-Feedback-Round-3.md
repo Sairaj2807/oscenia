@@ -1,5 +1,8 @@
 # Client feedback — round 3 (4 Oct 2026)
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 Received on WhatsApp after the invitations v2 deploy (https://oscenia-web.vercel.app/erp). Verbatim:
 
 1. **Google Calendar under CRM & Clients** — "Please also add a Google Calendar section under CRM & Clients."

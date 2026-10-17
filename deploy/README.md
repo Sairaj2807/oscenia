@@ -1,5 +1,10 @@
 # Deploying Oscenia (website + ERP + API) to the VPS
 
+> **This Docker + Caddy stack is not what production runs.** The real server is shared with other production services,
+> has no Docker and keeps Nginx on ports 80/443, so production is native: see [`vps/README.md`](./vps/README.md) and
+> [`../docs/GO-LIVE-STATUS.md`](../docs/GO-LIVE-STATUS.md). This stack was built and run locally (17 Oct 2026) and works; use it
+> for rehearsal or a future dedicated server. Its domain variables are placeholders.
+
 One VPS runs everything. The **website** (`/`), the **ERP** (`/erp/`) and the **API**
 (`/api/*`) answer on the **same domain**, so the browser never makes a cross-origin call.
 

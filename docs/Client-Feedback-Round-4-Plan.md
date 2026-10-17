@@ -1,5 +1,8 @@
 # Client feedback round 4: plan
 
+> **Historical record.** Written before the 17 Oct 2026 restructure. Paths and deploy steps below are as they were (`erp-prototype/` is now `erp-frontend/`, `oscenia-web/` is now `website/`, and Vercel is no longer used). Current state: [GO-LIVE-STATUS](./GO-LIVE-STATUS.md).
+
+
 ## Context
 The client's round-4 feedback is saved verbatim in `docs/Client-Feedback-Round-4.md`:
 1. **Guest table number should be free text.** Today the Guests & RSVP and Check-in screens limit it to a dropdown of `T1…T5`.
