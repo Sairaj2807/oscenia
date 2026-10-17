@@ -48,17 +48,19 @@ and runs `alembic upgrade head` before each start. About 120 MB RSS idle.
 | Reference data | seeded (`app.seed.chart`): chart of accounts, tax config, voucher series. Production creates **no demo users** |
 | Nginx | **not changed yet.** `osceniaevents` still serves the old site from `/var/www/oscenia-web/dist` |
 | Static files | **not shipped yet** (`/var/www/oscenia/` does not exist) |
-| First CEO | **not created yet** (needs a password chosen by the person) |
+| First CEO | **created 2026-10-17**: Sairaj Bangar (`sdbangar2808@gmail.com`, role `ceo`); signing in against the API on the server returns 200 |
+| Swap | **2 GB `/swapfile` added 2026-10-17** (in `/etc/fstab`), `vm.swappiness=10` in `/etc/sysctl.d/99-oscenia-swap.conf`, so swap is an emergency reserve and does not push the neighbours' idle memory out |
 | AI minutes | off until `AI_API_KEY` is set in `/srv/oscenia/api.env` |
 | Backups | none yet |
 
 ## Remaining go-live steps
 
-1. **Create the first CEO** (asks for the password twice, 12+ characters):
+1. ~~Create the first CEO~~ done. Day to day, the CEO adds people from the **Users** screen in the ERP.
+   To add or reset a user from the server (asks for the password twice, 12+ characters):
    ```bash
    systemd-run --wait --pty -p User=oscenia -p EnvironmentFile=/srv/oscenia/api.env \
      -p WorkingDirectory=/srv/oscenia/erp-backend -p Environment=PYTHONDONTWRITEBYTECODE=1 \
-     /srv/oscenia/venv/bin/python -m app.seed.users add sdbangar2808@gmail.com "Sairaj Bangar" ceo
+     /srv/oscenia/venv/bin/python -m app.seed.users add someone@example.com "Name" finance
    ```
 2. **Ship the static files:** `VPS_HOST=… deploy/vps/ship-static.sh` (builds here, not on the server).
 3. **Switch Nginx** to `nginx-osceniaevents.conf` (keep the Certbot-managed lines), then
@@ -66,8 +68,7 @@ and runs `alembic upgrade head` before each start. About 120 MB RSS idle.
 4. **AI key:** set `AI_API_KEY=` in `/srv/oscenia/api.env`, then `systemctl restart oscenia-api`.
 5. **Backups:** nightly `pg_dump -Fc oscenia_erp` plus `/srv/oscenia/uploads`, copied off the box, and a
    tested restore. (Not done.)
-6. **Swap:** the box has none. A 2 GB swapfile would make a memory spike survivable. (Not done: it is a
-   system change.)
+6. ~~Swap~~ done (see above).
 
 ## Updating
 
@@ -96,5 +97,6 @@ systemctl is-active fyers_v2 nginx           # the neighbours, unchanged
 
 ## Credentials
 
-Access today is by root password. Move to SSH keys and a non-root deploy user, and rotate the root
-password (it has been shared in chat).
+Access today is by root password, which was shared in chat. The owner has decided to keep it as it is
+for now; moving to SSH keys with a non-root deploy user, and rotating the password, is still advised.
+The CEO's password is recorded nowhere in the repo or on the server except as a hash in the database.
