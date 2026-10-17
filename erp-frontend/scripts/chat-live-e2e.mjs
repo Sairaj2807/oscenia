@@ -19,7 +19,7 @@ import { chromium } from 'playwright'
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url))
 const BACKEND = `${ROOT}erp-backend`
-const FRONTEND = `${ROOT}erp-prototype`
+const FRONTEND = `${ROOT}erp-frontend`
 const PY = `${BACKEND}/.venv/Scripts/python.exe`
 const ALEMBIC = `${BACKEND}/.venv/Scripts/alembic.exe`
 const DB = 'oscenia_fe_e2e'

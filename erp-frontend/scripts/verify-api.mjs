@@ -1,7 +1,7 @@
 // Verifies the API client against a *running* backend.
 //
 //   cd erp-backend && uvicorn app.main:app --port 8000
-//   cd erp-prototype && npx vite-node scripts/verify-api.mjs
+//   cd erp-frontend && npx vite-node scripts/verify-api.mjs
 //
 // Sibling to verify-ledger.mjs and verify-flows.mjs: same shape, same reason. The client is
 // the seam between two systems that are each tested on their own, so the bugs that live here

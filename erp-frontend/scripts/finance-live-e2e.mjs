@@ -17,7 +17,7 @@ import { chromium } from 'playwright'
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url))
 const BACKEND = `${ROOT}erp-backend`
-const FRONTEND = `${ROOT}erp-prototype`
+const FRONTEND = `${ROOT}erp-frontend`
 const PY = `${BACKEND}/.venv/Scripts/python.exe`
 const ALEMBIC = `${BACKEND}/.venv/Scripts/alembic.exe`
 const DB = 'oscenia_fin_e2e'
@@ -575,8 +575,13 @@ async function main() {
     await page.locator('div').filter({ hasText: /^E2E Crew Hand/ }).getByRole('button', { name: /Deactivate/ }).first().click()
     await until('deactivated', async () => crewId('E2E Crew Hand'), (x) => x && x.active === false)
     // The pool table (above the manage card) no longer lists them: only the card (struck through) does.
-    const rows = await page.locator('tbody tr', { hasText: 'E2E Crew Hand' }).count()
-    if (rows !== 0) throw new Error('a deactivated member is still in the incentive pool table')
+    // The server has already said so; the screen re-reads a moment later, so wait for it rather than
+    // sampling the table the instant the server answers.
+    try {
+      await page.locator('tbody tr', { hasText: 'E2E Crew Hand' }).first().waitFor({ state: 'detached', timeout: T })
+    } catch {
+      throw new Error('a deactivated member is still in the incentive pool table')
+    }
   })
 
   await step('a crew member added by mistake is removed', async () => {
