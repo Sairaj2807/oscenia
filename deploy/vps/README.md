@@ -76,6 +76,16 @@ and runs `alembic upgrade head` before each start. About 120 MB RSS idle.
 7. **Merge `main`.** Push `feature/erp-integration`, merge it, and stop using the old checkout
    `/var/www/oscenia-web` (its `git pull && npm ci` fails once `main` has the monorepo layout).
 
+## Helper scripts in this folder
+
+| Script | What it does | Needs |
+|---|---|---|
+| `smoke-test.sh` | Public, read-only check that production answers correctly (routes, API 401s, health, bundle base, certificate days left) | nothing |
+| `ssh-run.py` | Run commands or upload a file on the server over SSH | `pip install paramiko`, root password in `VPS_PW` (never stored) |
+| `ship-static.sh` | Build the website and the ERP here and ship them as a release (atomic switch) | `VPS_HOST`, SSH |
+| `update-api.sh` | Ship the committed backend and restart (migrations run first) | `VPS_HOST`, SSH |
+| `session-context.sh` | Prints the live repo state for a starting Claude session (SessionStart hook) | nothing |
+
 ## Updating
 
 - **Backend:** `VPS_HOST=root@… deploy/vps/update-api.sh` (migrations run on restart).

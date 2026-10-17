@@ -119,6 +119,14 @@ rerun after the last frontend-only fixes (they did not touch the backend).
 - **Windows build trap:** building from Git Bash rewrites values like `/api/v1`. Use `deploy/vps/ship-static.sh`,
   which guards against it.
 
+## For a new session (or a new person)
+
+1. Run `bash deploy/vps/smoke-test.sh`: ten public checks, no credentials, tells you in seconds whether production is up.
+2. Read this file, then `deploy/vps/README.md`.
+3. Server access is `deploy/vps/ssh-run.py` with the root password in the `VPS_PW` environment variable. The password is
+   not stored anywhere; ask the owner. Read-only probes are fine; ask before any change (the server is shared).
+4. When you finish, update this file, the runbook if production changed, and the Claude memory notes.
+
 ## How to update production
 
 - **Website / ERP:** `VPS_HOST=… deploy/vps/ship-static.sh` (builds on your machine, ships a release, atomic switch).

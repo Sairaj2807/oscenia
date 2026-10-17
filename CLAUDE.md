@@ -45,6 +45,20 @@ rewrites values like `VITE_API_URL=/api/v1` into `C:/Program Files/Git/api/v1`.
 - **Backups do not exist yet**; the production database is the only copy of the data.
 - Short chat answers when the owner says "answer in chat"; approvals come one numbered decision at a time.
 
+## Session protocol (so nothing is lost between sessions)
+
+**Start.** A SessionStart hook prints the live repo state (branch, unpushed commits, last commits, the status excerpt)
+automatically. Then, without credentials: `bash deploy/vps/smoke-test.sh` confirms production is up. Read
+`docs/GO-LIVE-STATUS.md` before acting.
+
+**Tools in `deploy/vps/`:** `smoke-test.sh` (public production check), `ssh-run.py` (run commands or upload over SSH;
+password only from the `VPS_PW` env var, ask the owner for it), `ship-static.sh` (build and ship website + ERP),
+`update-api.sh` (ship the backend), `session-context.sh` (the hook's output), plus the runbook `README.md`.
+
+**Finish.** Before ending any session that changed something: update `docs/GO-LIVE-STATUS.md` (what is live, done,
+left), the matching section of `deploy/vps/README.md` if production changed, and Claude's memory notes
+(`oscenia-open-items`, `oscenia-production-vps`, `oscenia-repo-structure`). Commit the docs with the change.
+
 ## Git
 
 - Work on a branch, open a PR into `main`. Never force-push.
