@@ -35,6 +35,16 @@ Nothing built is committed. `deploy/vps/ship-static.sh` builds the website and t
 and ships them as a release. On Windows Git Bash always build through that script: Git Bash silently
 rewrites values like `VITE_API_URL=/api/v1` into `C:/Program Files/Git/api/v1`.
 
+## Standing rules (also in Claude's memory and in the parent folder's CLAUDE.md)
+
+- **Start with `docs/GO-LIVE-STATUS.md`.** It is the master record of what is live, verified and left. Update it, and the
+  Claude memory notes, whenever something changes.
+- **Never write a password, key or secret into any file.** The owner pastes credentials in chat; use them for the task only.
+  In a new session, ask for server access again.
+- **Never push, force-push or merge** unless asked. Branch `feature/erp-integration` is local only.
+- **Backups do not exist yet**; the production database is the only copy of the data.
+- Short chat answers when the owner says "answer in chat"; approvals come one numbered decision at a time.
+
 ## Git
 
 - Work on a branch, open a PR into `main`. Never force-push.
