@@ -1,0 +1,2 @@
+# These run on Linux. A CRLF shebang fails with "bad interpreter".
+* text eol=lf

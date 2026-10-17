@@ -1,0 +1,8 @@
+# Context for deploy/Dockerfile.edge is the repository root. Send only what the build
+# reads; the client documents, videos and zips next to it must never enter the context.
+*
+!website
+!erp-frontend
+**/node_modules
+**/dist
+website/brand-assets

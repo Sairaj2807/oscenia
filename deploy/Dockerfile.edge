@@ -1,0 +1,33 @@
+# The edge image: Caddy with the built website and the built ERP baked in.
+#
+# Build context is the repository root (see docker-compose.prod.yml), and the root
+# .dockerignore keeps the client documents and videos out of it. Nothing built is ever
+# committed: the bundles are produced here, from source, on every deploy.
+#
+#   /          the marketing site            (website/)
+#   /erp/      the ERP single-page app       (erp-frontend/, built with base /erp/)
+#   /api/*     proxied to the API container  (see Caddyfile)
+
+FROM node:22-alpine AS website
+WORKDIR /w
+COPY website/package.json website/package-lock.json ./
+RUN npm ci
+COPY website/ ./
+RUN npx vite build
+
+
+FROM node:22-alpine AS erp
+WORKDIR /e
+COPY erp-frontend/package.json erp-frontend/package-lock.json ./
+RUN npm ci
+COPY erp-frontend/ ./
+# Same origin as the site, so the API is a relative path and needs no CORS.
+ARG VITE_API_URL=/api/v1
+ENV VITE_API_URL=$VITE_API_URL
+RUN npx vite build
+
+
+FROM caddy:2-alpine
+COPY --from=website /w/dist /srv/site
+COPY --from=erp /e/dist /srv/site/erp
+# The Caddyfile is bind-mounted by docker-compose.prod.yml, not baked in.

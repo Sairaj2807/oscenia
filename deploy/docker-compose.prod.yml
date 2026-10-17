@@ -1,0 +1,107 @@
+# One environment of the API: Postgres, a one-shot migration, the API, and (production
+# only) the Caddy reverse proxy that terminates HTTPS for every environment on the VPS.
+#
+# Never run this file by hand without -p and --env-file; use deploy/deploy.sh, which does:
+#
+#   docker compose -p oscenia-production --env-file deploy/.env.production \
+#     -f deploy/docker-compose.prod.yml --profile edge up -d
+#
+# Staging is the same file under another project name and env file, without the edge
+# profile. Each project gets its own database and uploads volume; the two meet only on
+# the external "oscenia-edge" network, where Caddy finds them as api-production and
+# api-staging. Neither the API nor Postgres publishes a port: Caddy is the only way in.
+
+x-api: &api
+  build:
+    context: ../erp-backend
+  image: oscenia-api:${DEPLOY_ENV:?set DEPLOY_ENV in the env file}
+  env_file: .env.${DEPLOY_ENV}
+  environment:
+    ENV: production
+    DATABASE_URL: postgresql+asyncpg://oscenia:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}@db:5432/oscenia_erp
+    STORAGE_DIR: /data/uploads
+    # Trust X-Forwarded-For from Caddy only (its fixed address on oscenia-edge, below).
+    FORWARDED_ALLOW_IPS: 172.30.42.10
+  volumes:
+    - uploads:/data/uploads
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: oscenia
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: oscenia_erp
+      # Deterministic collation, as in development: report ordering must not depend on
+      # whichever locale the VPS image happens to ship.
+      POSTGRES_INITDB_ARGS: "--locale=C --encoding=UTF8"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U oscenia -d oscenia_erp"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  # Runs to completion before the API starts, on every `up`. A failed migration leaves the
+  # previous API container serving and the deploy stops there.
+  migrate:
+    <<: *api
+    command: ["alembic", "upgrade", "head"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    <<: *api
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    networks:
+      default:
+      edge:
+        aliases:
+          - api-${DEPLOY_ENV}
+    restart: unless-stopped
+
+  # Serves the website (/), the ERP (/erp/) and proxies /api to the API. The static files are
+  # built inside the image (deploy/Dockerfile.edge), so a deploy never needs Node on the VPS.
+  caddy:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.edge
+    image: oscenia-edge:${DEPLOY_ENV}
+    profiles: ["edge"]
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:-}
+      STAGING_SITE_DOMAIN: ${STAGING_SITE_DOMAIN:-}
+      ACME_EMAIL: ${ACME_EMAIL:-}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      edge:
+        # Fixed, so the APIs can trust forwarded headers from this address and no other.
+        ipv4_address: 172.30.42.10
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  uploads:
+  caddy_data:
+  caddy_config:
+
+networks:
+  # Created once by deploy.sh with subnet 172.30.42.0/24 (Caddy's address lives in it).
+  edge:
+    name: oscenia-edge
+    external: true

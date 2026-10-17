@@ -1,0 +1,3 @@
+# The root .gitignore excludes .env.* — the real files must stay out, the example stays in.
+!.env.example
+backups/

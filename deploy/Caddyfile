@@ -1,0 +1,67 @@
+# One origin per environment on the VPS: the website, the ERP and the API all answer on the
+# same domain, so the browser never makes a cross-origin call. Caddy obtains and renews the
+# certificates itself; each domain's DNS A record must point at the VPS before the first start.
+#
+#   /          the marketing site       (static, baked into the edge image)
+#   /erp/*     the ERP single-page app  (static, baked into the edge image)
+#   /api/*     the API                  (reverse proxy, including the chat WebSocket)
+#   /health    the API's health check
+#
+# The upstreams are network aliases on "oscenia-edge" (see docker-compose.prod.yml). If
+# staging is not running, its domain answers 502 and production is unaffected.
+
+{
+	email {$ACME_EMAIL}
+}
+
+(site) {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+
+	handle /api/* {
+		# Invitation videos are capped at 200 MB by the API; leave headroom for multipart.
+		request_body {
+			max_size 210MB
+		}
+		reverse_proxy {args[0]}
+	}
+
+	handle /health {
+		reverse_proxy {args[0]}
+	}
+
+	# /erp has to end in a slash for the app's relative asset base to resolve.
+	@erp_bare path /erp
+	redir @erp_bare /erp/ 308
+
+	# Content-hashed bundles never change, so they can be cached for good.
+	@hashed path /assets/* /erp/assets/*
+	header @hashed Cache-Control "public, max-age=31536000, immutable"
+
+	handle /erp/* {
+		root * /srv/site
+		try_files {path} /erp/index.html
+		file_server
+	}
+
+	handle {
+		root * /srv/site
+		# /erp-guide -> erp-guide.html; anything else is a client-side route of the site.
+		try_files {path} {path}.html /index.html
+		file_server
+	}
+}
+
+{$SITE_DOMAIN} {
+	import site api-production:8000
+}
+
+{$STAGING_SITE_DOMAIN} {
+	import site api-staging:8000
+}
