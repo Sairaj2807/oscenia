@@ -1,31 +1,60 @@
+# Dependencies / build output
+**/node_modules
+**/dist
+**/dist-ssr
+
+# Python (erp-backend)
+**/.venv
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+erp-backend/var/
+
 # Logs
-logs
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Env / secrets. Only the .example templates are committed.
 *.local
+.env
+.env.*
+!.env.example
+deploy/secrets/
 
-# Editor directories and files
+# Editor / OS
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
 
+# Claude Code local settings
+.claude/settings.local.json
+
+# Office temp lock files
+~$*
+
+# Vercel link (the site now deploys to a VPS; keep stray local links out)
 .vercel
 
-# Delivered brand pack — source material for the site, not shipped by it.
-# 383MB with one file over GitHub's 100MB hard limit (GSM_oscenia.pdf, 112MB).
-# See brand-assets/README.md for what was derived into public/ from here.
-brand-assets
+# Delivered brand pack: source material, not shipped. 383MB with one file
+# over GitHub's 100MB limit. See website/brand-assets/README.md.
+website/brand-assets/
+
+# Client documents, decks, raw footage and scratch files at the workspace
+# root. Kept on disk, never committed.
+/*.pptx
+/*.docx
+/*.pdf
+/*.zip
+/*.mp4
+/*.html
+/test.js
+/_stale-root-git-backup/
+/_stale-erp-prototype-backup/
+
+# Source screen recordings: show a desktop, not site content.
+2_Homepage.mp4
+3_About Us.mp4
