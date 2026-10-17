@@ -1,0 +1,1073 @@
+{
+  "tasks": [
+    {
+      "task_no": "T-101",
+      "project": "EVT-2026-GALA-01",
+      "division": "Field",
+      "title": "Finalise run-of-show v3",
+      "description": "Lock timings with the MC and the bank’s comms team. Include the CEO speech slot.",
+      "assignee": "M-05",
+      "assigned_by": "M-02",
+      "assigned_at": "2026-07-10T09:00",
+      "deadline": "2026-07-28",
+      "priority": "High",
+      "status": "In progress",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-10T09:00",
+          "by": "M-02",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-11T10:30",
+          "by": "M-05",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-24T15:10",
+          "by": "M-05",
+          "text": "attached run-of-show-v3-draft.docx",
+          "kind": "attach"
+        }
+      ],
+      "attachments": [
+        {
+          "name": "run-of-show-v3-draft.docx",
+          "kind": "docx",
+          "size": 184320,
+          "by": "M-05",
+          "at": "2026-07-24T15:10"
+        }
+      ]
+    },
+    {
+      "task_no": "T-102",
+      "project": "EVT-2026-GALA-01",
+      "division": "Production",
+      "title": "LED wall content render (main + side screens)",
+      "description": "",
+      "assignee": "M-06",
+      "assigned_by": "M-04",
+      "assigned_at": "2026-07-12T09:00",
+      "deadline": "2026-07-24",
+      "priority": "High",
+      "status": "Blocked",
+      "blocker_reason": "Waiting on the client’s final logo files — requested 20 Jul, no reply yet",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-12T09:00",
+          "by": "M-04",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-13T10:30",
+          "by": "M-06",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-20T16:00",
+          "by": "M-06",
+          "text": "blocked: Waiting on the client’s final logo files — requested 20 Jul, no reply yet",
+          "kind": "block"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-103",
+      "project": "EVT-2026-GALA-01",
+      "division": "Field",
+      "title": "VIP seating plan from guest list",
+      "description": "",
+      "assignee": "M-10",
+      "assigned_by": "M-02",
+      "assigned_at": "2026-07-15T09:00",
+      "deadline": "2026-07-30",
+      "priority": "Medium",
+      "status": "Submitted",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-15T09:00",
+          "by": "M-02",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-16T10:30",
+          "by": "M-10",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-26T17:00",
+          "by": "M-10",
+          "text": "submitted for approval",
+          "kind": "status"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-104",
+      "project": "EVT-2026-GALA-01",
+      "division": "Production",
+      "title": "Rigging load calculation sign-off",
+      "description": "",
+      "assignee": "M-06",
+      "assigned_by": "M-04",
+      "assigned_at": "2026-07-08T09:00",
+      "deadline": "2026-07-20",
+      "priority": "High",
+      "status": "Leader approved",
+      "blocker_reason": "",
+      "approvals": {
+        "leader": {
+          "by": "M-04",
+          "at": "2026-07-20T10:00"
+        }
+      },
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-08T09:00",
+          "by": "M-04",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-09T10:30",
+          "by": "M-06",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-19T17:00",
+          "by": "M-06",
+          "text": "submitted for approval",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-20T10:00",
+          "by": "M-04",
+          "text": "approved (Division Leader)",
+          "kind": "approve"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-105",
+      "project": "EVT-2026-GALA-01",
+      "division": "Field",
+      "title": "Venue walkthrough with client",
+      "description": "",
+      "assignee": "M-05",
+      "assigned_by": "M-02",
+      "assigned_at": "2026-07-01T09:00",
+      "deadline": "2026-07-12",
+      "priority": "Medium",
+      "status": "PM approved",
+      "blocker_reason": "",
+      "approvals": {
+        "leader": {
+          "by": "M-02",
+          "at": "2026-07-12T10:00"
+        },
+        "pm": {
+          "by": "M-01",
+          "at": "2026-07-13T14:00"
+        }
+      },
+      "completed_at": "2026-07-13T14:00",
+      "activity": [
+        {
+          "at": "2026-07-01T09:00",
+          "by": "M-02",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-02T10:30",
+          "by": "M-05",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-11T17:00",
+          "by": "M-05",
+          "text": "submitted for approval",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-12T10:00",
+          "by": "M-02",
+          "text": "approved (Division Leader)",
+          "kind": "approve"
+        },
+        {
+          "at": "2026-07-13T14:00",
+          "by": "M-01",
+          "text": "approved (PM) — done",
+          "kind": "approve"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-106",
+      "project": "EVT-2026-GALA-01",
+      "division": "Field",
+      "title": "Print guest badges and table cards",
+      "description": "Assigned by Rina (staff) — wait for the RSVP list to close on 1 Aug.",
+      "assignee": "M-10",
+      "assigned_by": "M-05",
+      "assigned_at": "2026-07-20T09:00",
+      "deadline": "2026-08-07",
+      "priority": "Low",
+      "status": "To do",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-20T09:00",
+          "by": "M-05",
+          "text": "assigned",
+          "kind": "assign"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-107",
+      "project": "EVT-2026-GALA-01",
+      "division": "Production",
+      "title": "Stage lighting cue sheet",
+      "description": "",
+      "assignee": "M-06",
+      "assigned_by": "M-04",
+      "assigned_at": "2026-07-18T09:00",
+      "deadline": "2026-08-05",
+      "priority": "Medium",
+      "status": "To do",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-18T09:00",
+          "by": "M-04",
+          "text": "assigned",
+          "kind": "assign"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-108",
+      "project": "EVT-2026-GALA-01",
+      "division": "Field",
+      "title": "Confirm catering headcount and allergy list",
+      "description": "",
+      "assignee": "M-05",
+      "assigned_by": "M-01",
+      "assigned_at": "2026-07-19T09:00",
+      "deadline": "2026-07-25",
+      "priority": "High",
+      "status": "Blocked",
+      "blocker_reason": "RSVP closes 1 Aug — headcount cannot be locked before then",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-19T09:00",
+          "by": "M-01",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-20T10:30",
+          "by": "M-05",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-24T16:00",
+          "by": "M-05",
+          "text": "blocked: RSVP closes 1 Aug — headcount cannot be locked before then",
+          "kind": "block"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-201",
+      "project": "EVT-2026-WED-02",
+      "division": "Design",
+      "title": "Moodboard revision 2 (warmer palette)",
+      "description": "",
+      "assignee": "M-08",
+      "assigned_by": "M-03",
+      "assigned_at": "2026-07-14T09:00",
+      "deadline": "2026-07-27",
+      "priority": "High",
+      "status": "Submitted",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-14T09:00",
+          "by": "M-03",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-15T10:30",
+          "by": "M-08",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-26T17:00",
+          "by": "M-08",
+          "text": "submitted for approval",
+          "kind": "status"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-202",
+      "project": "EVT-2026-WED-02",
+      "division": "Design",
+      "title": "Floral arch 3D render",
+      "description": "",
+      "assignee": "M-09",
+      "assigned_by": "M-03",
+      "assigned_at": "2026-07-16T09:00",
+      "deadline": "2026-07-29",
+      "priority": "Medium",
+      "status": "In progress",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-16T09:00",
+          "by": "M-03",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-17T10:30",
+          "by": "M-09",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-21T15:00",
+          "by": "M-09",
+          "text": "submitted for approval",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-22T11:15",
+          "by": "M-03",
+          "text": "rejected: arch is too tall for the pendopo — keep it under 3 m",
+          "kind": "reject"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-203",
+      "project": "EVT-2026-WED-02",
+      "division": "Field",
+      "title": "Venue permit application (Gianyar regency)",
+      "description": "",
+      "assignee": "M-02",
+      "assigned_by": "M-01",
+      "assigned_at": "2026-07-05T09:00",
+      "deadline": "2026-07-31",
+      "priority": "High",
+      "status": "Blocked",
+      "blocker_reason": "Regency office needs the signed family consent letter — with the client since 18 Jul",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-05T09:00",
+          "by": "M-01",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-06T10:30",
+          "by": "M-02",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-18T16:00",
+          "by": "M-02",
+          "text": "blocked: Regency office needs the signed family consent letter — with the client since 18 Jul",
+          "kind": "block"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-204",
+      "project": "EVT-2026-WED-02",
+      "division": "Design",
+      "title": "Invitation website design",
+      "description": "",
+      "assignee": "M-08",
+      "assigned_by": "M-03",
+      "assigned_at": "2026-07-18T09:00",
+      "deadline": "2026-08-02",
+      "priority": "Medium",
+      "status": "To do",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-18T09:00",
+          "by": "M-03",
+          "text": "assigned",
+          "kind": "assign"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-205",
+      "project": "EVT-2026-WED-02",
+      "division": "Design",
+      "title": "Table-setting mockups",
+      "description": "",
+      "assignee": "M-09",
+      "assigned_by": "M-08",
+      "assigned_at": "2026-07-21T09:00",
+      "deadline": "2026-08-06",
+      "priority": "Low",
+      "status": "To do",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-21T09:00",
+          "by": "M-08",
+          "text": "assigned",
+          "kind": "assign"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-206",
+      "project": "EVT-2026-WED-02",
+      "division": "Design",
+      "title": "Signage copy review",
+      "description": "",
+      "assignee": "M-09",
+      "assigned_by": "M-03",
+      "assigned_at": "2026-07-10T09:00",
+      "deadline": "2026-07-18",
+      "priority": "Low",
+      "status": "PM approved",
+      "blocker_reason": "",
+      "approvals": {
+        "leader": {
+          "by": "M-03",
+          "at": "2026-07-18T10:00"
+        },
+        "pm": {
+          "by": "M-01",
+          "at": "2026-07-19T14:00"
+        }
+      },
+      "completed_at": "2026-07-19T14:00",
+      "activity": [
+        {
+          "at": "2026-07-10T09:00",
+          "by": "M-03",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-11T10:30",
+          "by": "M-09",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-17T17:00",
+          "by": "M-09",
+          "text": "submitted for approval",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-18T10:00",
+          "by": "M-03",
+          "text": "approved (Division Leader)",
+          "kind": "approve"
+        },
+        {
+          "at": "2026-07-19T14:00",
+          "by": "M-01",
+          "text": "approved (PM) — done",
+          "kind": "approve"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-301",
+      "project": "EVT-2026-CONF-03",
+      "division": "Design",
+      "title": "Keynote stage design concept",
+      "description": "",
+      "assignee": "M-08",
+      "assigned_by": "M-03",
+      "assigned_at": "2026-07-12T09:00",
+      "deadline": "2026-07-26",
+      "priority": "High",
+      "status": "Submitted",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-12T09:00",
+          "by": "M-03",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-13T10:30",
+          "by": "M-08",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-25T17:00",
+          "by": "M-08",
+          "text": "submitted for approval",
+          "kind": "status"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-302",
+      "project": "EVT-2026-CONF-03",
+      "division": "Production",
+      "title": "Streaming kit vendor shortlist",
+      "description": "",
+      "assignee": "M-07",
+      "assigned_by": "M-04",
+      "assigned_at": "2026-07-15T09:00",
+      "deadline": "2026-07-30",
+      "priority": "Medium",
+      "status": "In progress",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-15T09:00",
+          "by": "M-04",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-16T10:30",
+          "by": "M-07",
+          "text": "started",
+          "kind": "status"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-303",
+      "project": "EVT-2026-CONF-03",
+      "division": "Production",
+      "title": "Power distribution plan",
+      "description": "",
+      "assignee": "M-06",
+      "assigned_by": "M-04",
+      "assigned_at": "2026-07-20T09:00",
+      "deadline": "2026-08-10",
+      "priority": "Medium",
+      "status": "To do",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-20T09:00",
+          "by": "M-04",
+          "text": "assigned",
+          "kind": "assign"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-304",
+      "project": "EVT-2026-CONF-03",
+      "division": "Design",
+      "title": "Breakout room wayfinding",
+      "description": "",
+      "assignee": "M-09",
+      "assigned_by": "M-03",
+      "assigned_at": "2026-07-17T09:00",
+      "deadline": "2026-07-24",
+      "priority": "Medium",
+      "status": "In progress",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-17T09:00",
+          "by": "M-03",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-18T10:30",
+          "by": "M-09",
+          "text": "started",
+          "kind": "status"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-305",
+      "project": "EVT-2026-CONF-03",
+      "division": "Production",
+      "title": "LED floor supplier quotes",
+      "description": "",
+      "assignee": "M-07",
+      "assigned_by": "M-04",
+      "assigned_at": "2026-07-05T09:00",
+      "deadline": "2026-07-19",
+      "priority": "High",
+      "status": "Leader approved",
+      "blocker_reason": "",
+      "approvals": {
+        "leader": {
+          "by": "M-04",
+          "at": "2026-07-19T10:00"
+        }
+      },
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-05T09:00",
+          "by": "M-04",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-06T10:30",
+          "by": "M-07",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-18T17:00",
+          "by": "M-07",
+          "text": "submitted for approval",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-19T10:00",
+          "by": "M-04",
+          "text": "approved (Division Leader)",
+          "kind": "approve"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-306",
+      "project": "EVT-2026-CONF-03",
+      "division": "Design",
+      "title": "Sponsor booth templates",
+      "description": "",
+      "assignee": "M-08",
+      "assigned_by": "M-01",
+      "assigned_at": "2026-07-22T09:00",
+      "deadline": "2026-08-15",
+      "priority": "Low",
+      "status": "To do",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-22T09:00",
+          "by": "M-01",
+          "text": "assigned",
+          "kind": "assign"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-307",
+      "project": "EVT-2026-CONF-03",
+      "division": "Production",
+      "title": "Audio test plan",
+      "description": "",
+      "assignee": "M-07",
+      "assigned_by": "M-06",
+      "assigned_at": "2026-07-23T09:00",
+      "deadline": "2026-08-20",
+      "priority": "Low",
+      "status": "To do",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-23T09:00",
+          "by": "M-06",
+          "text": "assigned",
+          "kind": "assign"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-308",
+      "project": "EVT-2026-CONF-03",
+      "division": "Design",
+      "title": "Brand guideline intake",
+      "description": "",
+      "assignee": "M-08",
+      "assigned_by": "M-03",
+      "assigned_at": "2026-07-01T09:00",
+      "deadline": "2026-07-08",
+      "priority": "Medium",
+      "status": "PM approved",
+      "blocker_reason": "",
+      "approvals": {
+        "leader": {
+          "by": "M-03",
+          "at": "2026-07-08T10:00"
+        },
+        "pm": {
+          "by": "M-01",
+          "at": "2026-07-09T14:00"
+        }
+      },
+      "completed_at": "2026-07-09T14:00",
+      "activity": [
+        {
+          "at": "2026-07-01T09:00",
+          "by": "M-03",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-02T10:30",
+          "by": "M-08",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-07T17:00",
+          "by": "M-08",
+          "text": "submitted for approval",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-08T10:00",
+          "by": "M-03",
+          "text": "approved (Division Leader)",
+          "kind": "approve"
+        },
+        {
+          "at": "2026-07-09T14:00",
+          "by": "M-01",
+          "text": "approved (PM) — done",
+          "kind": "approve"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-309",
+      "project": "EVT-2026-CONF-03",
+      "division": "Production",
+      "title": "Truss height clearance check",
+      "description": "",
+      "assignee": "M-06",
+      "assigned_by": "M-04",
+      "assigned_at": "2026-07-19T09:00",
+      "deadline": "2026-07-23",
+      "priority": "High",
+      "status": "Blocked",
+      "blocker_reason": "Venue has not shared the ballroom ceiling drawings",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-19T09:00",
+          "by": "M-04",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-20T10:30",
+          "by": "M-06",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-21T16:00",
+          "by": "M-06",
+          "text": "blocked: Venue has not shared the ballroom ceiling drawings",
+          "kind": "block"
+        },
+        {
+          "at": "2026-07-23T10:05",
+          "by": "M-04",
+          "text": "attached venue-floor-plan-v3.pdf",
+          "kind": "attach"
+        }
+      ],
+      "attachments": [
+        {
+          "name": "venue-floor-plan-v3.pdf",
+          "kind": "pdf",
+          "size": 2516582,
+          "by": "M-04",
+          "at": "2026-07-23T10:05"
+        }
+      ]
+    },
+    {
+      "task_no": "T-401",
+      "project": "EVT-2026-PROD-04",
+      "division": "Field",
+      "title": "Post-event client survey",
+      "description": "",
+      "assignee": "M-05",
+      "assigned_by": "M-02",
+      "assigned_at": "2026-07-01T09:00",
+      "deadline": "2026-07-10",
+      "priority": "Medium",
+      "status": "PM approved",
+      "blocker_reason": "",
+      "approvals": {
+        "leader": {
+          "by": "M-02",
+          "at": "2026-07-10T10:00"
+        },
+        "pm": {
+          "by": "M-01",
+          "at": "2026-07-11T14:00"
+        }
+      },
+      "completed_at": "2026-07-11T14:00",
+      "activity": [
+        {
+          "at": "2026-07-01T09:00",
+          "by": "M-02",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-02T10:30",
+          "by": "M-05",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-09T17:00",
+          "by": "M-05",
+          "text": "submitted for approval",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-10T10:00",
+          "by": "M-02",
+          "text": "approved (Division Leader)",
+          "kind": "approve"
+        },
+        {
+          "at": "2026-07-11T14:00",
+          "by": "M-01",
+          "text": "approved (PM) — done",
+          "kind": "approve"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-402",
+      "project": "EVT-2026-PROD-04",
+      "division": "Design",
+      "title": "Photo and video handover pack",
+      "description": "",
+      "assignee": "M-08",
+      "assigned_by": "M-03",
+      "assigned_at": "2026-07-02T09:00",
+      "deadline": "2026-07-15",
+      "priority": "Medium",
+      "status": "Leader approved",
+      "blocker_reason": "",
+      "approvals": {
+        "leader": {
+          "by": "M-03",
+          "at": "2026-07-15T10:00"
+        }
+      },
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-02T09:00",
+          "by": "M-03",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-03T10:30",
+          "by": "M-08",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-14T17:00",
+          "by": "M-08",
+          "text": "submitted for approval",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-15T10:00",
+          "by": "M-03",
+          "text": "approved (Division Leader)",
+          "kind": "approve"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-403",
+      "project": "EVT-2026-PROD-04",
+      "division": "Field",
+      "title": "Return rented furniture",
+      "description": "",
+      "assignee": "M-05",
+      "assigned_by": "M-02",
+      "assigned_at": "2026-07-01T09:00",
+      "deadline": "2026-07-05",
+      "priority": "Low",
+      "status": "PM approved",
+      "blocker_reason": "",
+      "approvals": {
+        "leader": {
+          "by": "M-02",
+          "at": "2026-07-05T10:00"
+        },
+        "pm": {
+          "by": "M-01",
+          "at": "2026-07-06T14:00"
+        }
+      },
+      "completed_at": "2026-07-06T14:00",
+      "activity": [
+        {
+          "at": "2026-07-01T09:00",
+          "by": "M-02",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-02T10:30",
+          "by": "M-05",
+          "text": "started",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-04T17:00",
+          "by": "M-05",
+          "text": "submitted for approval",
+          "kind": "status"
+        },
+        {
+          "at": "2026-07-05T10:00",
+          "by": "M-02",
+          "text": "approved (Division Leader)",
+          "kind": "approve"
+        },
+        {
+          "at": "2026-07-06T14:00",
+          "by": "M-01",
+          "text": "approved (PM) — done",
+          "kind": "approve"
+        }
+      ],
+      "attachments": []
+    },
+    {
+      "task_no": "T-404",
+      "project": "EVT-2026-PROD-04",
+      "division": "Field",
+      "title": "Collect vendor feedback forms",
+      "description": "",
+      "assignee": "M-05",
+      "assigned_by": "M-02",
+      "assigned_at": "2026-07-08T09:00",
+      "deadline": "2026-07-28",
+      "priority": "Low",
+      "status": "In progress",
+      "blocker_reason": "",
+      "approvals": {},
+      "completed_at": null,
+      "activity": [
+        {
+          "at": "2026-07-08T09:00",
+          "by": "M-02",
+          "text": "assigned",
+          "kind": "assign"
+        },
+        {
+          "at": "2026-07-09T10:30",
+          "by": "M-05",
+          "text": "started",
+          "kind": "status"
+        }
+      ],
+      "attachments": []
+    }
+  ],
+  "project_pm": {
+    "EVT-2026-GALA-01": "M-02",
+    "EVT-2026-WED-02": "M-02",
+    "EVT-2026-CONF-03": null,
+    "EVT-2026-PROD-04": "M-02"
+  }
+}

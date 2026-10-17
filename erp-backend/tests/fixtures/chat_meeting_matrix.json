@@ -1,0 +1,3779 @@
+{
+  "project_divisions": {
+    "EVT-2026-GALA-01": [
+      "Field",
+      "Production"
+    ],
+    "EVT-2026-WED-02": [
+      "Design",
+      "Field"
+    ],
+    "EVT-2026-CONF-03": [
+      "Design",
+      "Production"
+    ],
+    "EVT-2026-PROD-04": [
+      "Field",
+      "Design"
+    ]
+  },
+  "members": [
+    {
+      "id": "M-01",
+      "workspace_role": "pm",
+      "division": "Management",
+      "project_ids": []
+    },
+    {
+      "id": "M-02",
+      "workspace_role": "leader",
+      "division": "Field",
+      "project_ids": []
+    },
+    {
+      "id": "M-03",
+      "workspace_role": "leader",
+      "division": "Design",
+      "project_ids": []
+    },
+    {
+      "id": "M-04",
+      "workspace_role": "leader",
+      "division": "Production",
+      "project_ids": []
+    },
+    {
+      "id": "M-05",
+      "workspace_role": "staff",
+      "division": "Field",
+      "project_ids": [
+        "EVT-2026-GALA-01",
+        "EVT-2026-PROD-04"
+      ]
+    },
+    {
+      "id": "M-06",
+      "workspace_role": "staff",
+      "division": "Production",
+      "project_ids": [
+        "EVT-2026-GALA-01",
+        "EVT-2026-CONF-03"
+      ]
+    },
+    {
+      "id": "M-07",
+      "workspace_role": "staff",
+      "division": "Production",
+      "project_ids": [
+        "EVT-2026-CONF-03"
+      ]
+    },
+    {
+      "id": "M-08",
+      "workspace_role": "staff",
+      "division": "Design",
+      "project_ids": [
+        "EVT-2026-WED-02",
+        "EVT-2026-CONF-03",
+        "EVT-2026-PROD-04"
+      ]
+    },
+    {
+      "id": "M-09",
+      "workspace_role": "intern",
+      "division": "Design",
+      "project_ids": [
+        "EVT-2026-WED-02",
+        "EVT-2026-CONF-03"
+      ]
+    },
+    {
+      "id": "M-10",
+      "workspace_role": "intern",
+      "division": "Field",
+      "project_ids": [
+        "EVT-2026-GALA-01"
+      ]
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch-announcements",
+      "project_id": null,
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-general",
+      "project_id": null,
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-leaders",
+      "project_id": null,
+      "dm": false,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04"
+      ],
+      "blocked_ids": [],
+      "listed": false
+    },
+    {
+      "id": "ch-gala-general",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-gala-field",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Field"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-gala-production",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Production"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-wedding-general",
+      "project_id": "EVT-2026-WED-02",
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-wedding-design",
+      "project_id": "EVT-2026-WED-02",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-wedding-field",
+      "project_id": "EVT-2026-WED-02",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Field"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-devconf-general",
+      "project_id": "EVT-2026-CONF-03",
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-devconf-design",
+      "project_id": "EVT-2026-CONF-03",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-devconf-production",
+      "project_id": "EVT-2026-CONF-03",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Production"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-meridian-general",
+      "project_id": "EVT-2026-PROD-04",
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-meridian-field",
+      "project_id": "EVT-2026-PROD-04",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Field"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-meridian-design",
+      "project_id": "EVT-2026-PROD-04",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "dm-M-01-M-05",
+      "project_id": null,
+      "dm": true,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-01",
+        "M-05"
+      ],
+      "blocked_ids": [],
+      "listed": false
+    },
+    {
+      "id": "dm-M-02-M-05",
+      "project_id": null,
+      "dm": true,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-02",
+        "M-05"
+      ],
+      "blocked_ids": [],
+      "listed": false
+    },
+    {
+      "id": "edge-dm",
+      "project_id": null,
+      "dm": true,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-02",
+        "M-05"
+      ],
+      "blocked_ids": [],
+      "listed": false
+    },
+    {
+      "id": "edge-blocked",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [
+        "M-05",
+        "M-01"
+      ],
+      "listed": true
+    },
+    {
+      "id": "edge-invite",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-06"
+      ],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "edge-moved-off",
+      "project_id": "EVT-2026-WED-02",
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [
+        "M-10"
+      ],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "edge-company-divisions",
+      "project_id": null,
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    }
+  ],
+  "meetings": [
+    {
+      "id": "ch-announcements|participants|open",
+      "channel": "ch-announcements",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "ch-announcements|participants|view",
+      "channel": "ch-announcements",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-announcements|channel|open",
+      "channel": "ch-announcements",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09",
+        "M-10"
+      ]
+    },
+    {
+      "id": "ch-announcements|channel|view",
+      "channel": "ch-announcements",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-announcements|people|open",
+      "channel": "ch-announcements",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-06",
+        "M-10"
+      ]
+    },
+    {
+      "id": "ch-announcements|people|view",
+      "channel": "ch-announcements",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-general|participants|open",
+      "channel": "ch-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "ch-general|participants|view",
+      "channel": "ch-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-general|channel|open",
+      "channel": "ch-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09",
+        "M-10"
+      ]
+    },
+    {
+      "id": "ch-general|channel|view",
+      "channel": "ch-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-general|people|open",
+      "channel": "ch-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-06",
+        "M-10"
+      ]
+    },
+    {
+      "id": "ch-general|people|view",
+      "channel": "ch-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-leaders|participants|open",
+      "channel": "ch-leaders",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-leaders|participants|view",
+      "channel": "ch-leaders",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-leaders|channel|open",
+      "channel": "ch-leaders",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04"
+      ]
+    },
+    {
+      "id": "ch-leaders|channel|view",
+      "channel": "ch-leaders",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-leaders|people|open",
+      "channel": "ch-leaders",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-leaders|people|view",
+      "channel": "ch-leaders",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-gala-general|participants|open",
+      "channel": "ch-gala-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "ch-gala-general|participants|view",
+      "channel": "ch-gala-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-gala-general|channel|open",
+      "channel": "ch-gala-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-10"
+      ]
+    },
+    {
+      "id": "ch-gala-general|channel|view",
+      "channel": "ch-gala-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-04",
+        "M-05",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-gala-general|people|open",
+      "channel": "ch-gala-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-06",
+        "M-10"
+      ]
+    },
+    {
+      "id": "ch-gala-general|people|view",
+      "channel": "ch-gala-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-gala-field|participants|open",
+      "channel": "ch-gala-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "ch-gala-field|participants|view",
+      "channel": "ch-gala-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-gala-field|channel|open",
+      "channel": "ch-gala-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-10"
+      ]
+    },
+    {
+      "id": "ch-gala-field|channel|view",
+      "channel": "ch-gala-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-gala-field|people|open",
+      "channel": "ch-gala-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-10"
+      ]
+    },
+    {
+      "id": "ch-gala-field|people|view",
+      "channel": "ch-gala-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-gala-production|participants|open",
+      "channel": "ch-gala-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-gala-production|participants|view",
+      "channel": "ch-gala-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-gala-production|channel|open",
+      "channel": "ch-gala-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-04",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-04",
+        "M-06"
+      ]
+    },
+    {
+      "id": "ch-gala-production|channel|view",
+      "channel": "ch-gala-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-04",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-gala-production|people|open",
+      "channel": "ch-gala-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-06"
+      ]
+    },
+    {
+      "id": "ch-gala-production|people|view",
+      "channel": "ch-gala-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-wedding-general|participants|open",
+      "channel": "ch-wedding-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-wedding-general|participants|view",
+      "channel": "ch-wedding-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-wedding-general|channel|open",
+      "channel": "ch-wedding-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-08",
+        "M-09"
+      ]
+    },
+    {
+      "id": "ch-wedding-general|channel|view",
+      "channel": "ch-wedding-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-wedding-general|people|open",
+      "channel": "ch-wedding-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-wedding-general|people|view",
+      "channel": "ch-wedding-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-wedding-design|participants|open",
+      "channel": "ch-wedding-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-wedding-design|participants|view",
+      "channel": "ch-wedding-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-wedding-design|channel|open",
+      "channel": "ch-wedding-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-03",
+        "M-08",
+        "M-09"
+      ]
+    },
+    {
+      "id": "ch-wedding-design|channel|view",
+      "channel": "ch-wedding-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-wedding-design|people|open",
+      "channel": "ch-wedding-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-wedding-design|people|view",
+      "channel": "ch-wedding-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-wedding-field|participants|open",
+      "channel": "ch-wedding-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-wedding-field|participants|view",
+      "channel": "ch-wedding-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-wedding-field|channel|open",
+      "channel": "ch-wedding-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-wedding-field|channel|view",
+      "channel": "ch-wedding-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-wedding-field|people|open",
+      "channel": "ch-wedding-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-wedding-field|people|view",
+      "channel": "ch-wedding-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-devconf-general|participants|open",
+      "channel": "ch-devconf-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-general|participants|view",
+      "channel": "ch-devconf-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-general|channel|open",
+      "channel": "ch-devconf-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-03",
+        "M-04",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-03",
+        "M-04",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09"
+      ]
+    },
+    {
+      "id": "ch-devconf-general|channel|view",
+      "channel": "ch-devconf-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-03",
+        "M-04",
+        "M-06",
+        "M-07",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-general|people|open",
+      "channel": "ch-devconf-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-06"
+      ]
+    },
+    {
+      "id": "ch-devconf-general|people|view",
+      "channel": "ch-devconf-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-design|participants|open",
+      "channel": "ch-devconf-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-design|participants|view",
+      "channel": "ch-devconf-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-design|channel|open",
+      "channel": "ch-devconf-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-03",
+        "M-08",
+        "M-09"
+      ]
+    },
+    {
+      "id": "ch-devconf-design|channel|view",
+      "channel": "ch-devconf-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-design|people|open",
+      "channel": "ch-devconf-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-design|people|view",
+      "channel": "ch-devconf-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-production|participants|open",
+      "channel": "ch-devconf-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-production|participants|view",
+      "channel": "ch-devconf-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-production|channel|open",
+      "channel": "ch-devconf-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-04",
+        "M-06",
+        "M-07"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-04",
+        "M-06",
+        "M-07"
+      ]
+    },
+    {
+      "id": "ch-devconf-production|channel|view",
+      "channel": "ch-devconf-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-04",
+        "M-06",
+        "M-07"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-devconf-production|people|open",
+      "channel": "ch-devconf-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-06"
+      ]
+    },
+    {
+      "id": "ch-devconf-production|people|view",
+      "channel": "ch-devconf-production",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-meridian-general|participants|open",
+      "channel": "ch-meridian-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "ch-meridian-general|participants|view",
+      "channel": "ch-meridian-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-meridian-general|channel|open",
+      "channel": "ch-meridian-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-05",
+        "M-08"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-05",
+        "M-08"
+      ]
+    },
+    {
+      "id": "ch-meridian-general|channel|view",
+      "channel": "ch-meridian-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-05",
+        "M-08"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-meridian-general|people|open",
+      "channel": "ch-meridian-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "ch-meridian-general|people|view",
+      "channel": "ch-meridian-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-meridian-field|participants|open",
+      "channel": "ch-meridian-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "ch-meridian-field|participants|view",
+      "channel": "ch-meridian-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-meridian-field|channel|open",
+      "channel": "ch-meridian-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "ch-meridian-field|channel|view",
+      "channel": "ch-meridian-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-meridian-field|people|open",
+      "channel": "ch-meridian-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "ch-meridian-field|people|view",
+      "channel": "ch-meridian-field",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "ch-meridian-design|participants|open",
+      "channel": "ch-meridian-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-meridian-design|participants|view",
+      "channel": "ch-meridian-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-meridian-design|channel|open",
+      "channel": "ch-meridian-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-03",
+        "M-08"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-03",
+        "M-08"
+      ]
+    },
+    {
+      "id": "ch-meridian-design|channel|view",
+      "channel": "ch-meridian-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-03",
+        "M-08"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-meridian-design|people|open",
+      "channel": "ch-meridian-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "ch-meridian-design|people|view",
+      "channel": "ch-meridian-design",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "dm-M-01-M-05|participants|open",
+      "channel": "dm-M-01-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-05"
+      ]
+    },
+    {
+      "id": "dm-M-01-M-05|participants|view",
+      "channel": "dm-M-01-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": []
+    },
+    {
+      "id": "dm-M-01-M-05|channel|open",
+      "channel": "dm-M-01-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-05"
+      ]
+    },
+    {
+      "id": "dm-M-01-M-05|channel|view",
+      "channel": "dm-M-01-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": []
+    },
+    {
+      "id": "dm-M-01-M-05|people|open",
+      "channel": "dm-M-01-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-05"
+      ]
+    },
+    {
+      "id": "dm-M-01-M-05|people|view",
+      "channel": "dm-M-01-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": []
+    },
+    {
+      "id": "dm-M-02-M-05|participants|open",
+      "channel": "dm-M-02-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "dm-M-02-M-05|participants|view",
+      "channel": "dm-M-02-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02"
+      ]
+    },
+    {
+      "id": "dm-M-02-M-05|channel|open",
+      "channel": "dm-M-02-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "dm-M-02-M-05|channel|view",
+      "channel": "dm-M-02-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02"
+      ]
+    },
+    {
+      "id": "dm-M-02-M-05|people|open",
+      "channel": "dm-M-02-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "dm-M-02-M-05|people|view",
+      "channel": "dm-M-02-M-05",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-dm|participants|open",
+      "channel": "edge-dm",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "edge-dm|participants|view",
+      "channel": "edge-dm",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-dm|channel|open",
+      "channel": "edge-dm",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "edge-dm|channel|view",
+      "channel": "edge-dm",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-dm|people|open",
+      "channel": "edge-dm",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02",
+        "M-05"
+      ]
+    },
+    {
+      "id": "edge-dm|people|view",
+      "channel": "edge-dm",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-02",
+        "M-05"
+      ],
+      "manage": [
+        "M-02"
+      ],
+      "files": [
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-blocked|participants|open",
+      "channel": "edge-blocked",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-blocked|participants|view",
+      "channel": "edge-blocked",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-blocked|channel|open",
+      "channel": "edge-blocked",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-04",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-04",
+        "M-06",
+        "M-10"
+      ]
+    },
+    {
+      "id": "edge-blocked|channel|view",
+      "channel": "edge-blocked",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-04",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-blocked|people|open",
+      "channel": "edge-blocked",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-06",
+        "M-10"
+      ]
+    },
+    {
+      "id": "edge-blocked|people|view",
+      "channel": "edge-blocked",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-06",
+        "M-10"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-invite|participants|open",
+      "channel": "edge-invite",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "edge-invite|participants|view",
+      "channel": "edge-invite",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "edge-invite|channel|open",
+      "channel": "edge-invite",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-06"
+      ]
+    },
+    {
+      "id": "edge-invite|channel|view",
+      "channel": "edge-invite",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "edge-invite|people|open",
+      "channel": "edge-invite",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-06"
+      ]
+    },
+    {
+      "id": "edge-invite|people|view",
+      "channel": "edge-invite",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-06"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "edge-moved-off|participants|open",
+      "channel": "edge-moved-off",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-moved-off|participants|view",
+      "channel": "edge-moved-off",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-moved-off|channel|open",
+      "channel": "edge-moved-off",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-08",
+        "M-09"
+      ]
+    },
+    {
+      "id": "edge-moved-off|channel|view",
+      "channel": "edge-moved-off",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-moved-off|people|open",
+      "channel": "edge-moved-off",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-moved-off|people|view",
+      "channel": "edge-moved-off",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-02"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-02"
+      ]
+    },
+    {
+      "id": "edge-company-divisions|participants|open",
+      "channel": "edge-company-divisions",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "edge-company-divisions|participants|view",
+      "channel": "edge-company-divisions",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "participants",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "edge-company-divisions|channel|open",
+      "channel": "edge-company-divisions",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "see": [
+        "M-01",
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01",
+        "M-03",
+        "M-08",
+        "M-09"
+      ]
+    },
+    {
+      "id": "edge-company-divisions|channel|view",
+      "channel": "edge-company-divisions",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "channel",
+      "readers": [],
+      "files_view_only": true,
+      "see": [
+        "M-01",
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "edge-company-divisions|people|open",
+      "channel": "edge-company-divisions",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": false,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    },
+    {
+      "id": "edge-company-divisions|people|view",
+      "channel": "edge-company-divisions",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05"
+      ],
+      "access": "people",
+      "readers": [
+        "M-06",
+        "M-10"
+      ],
+      "files_view_only": true,
+      "see": [
+        "M-01"
+      ],
+      "manage": [
+        "M-01",
+        "M-02"
+      ],
+      "files": [
+        "M-01"
+      ]
+    }
+  ]
+}

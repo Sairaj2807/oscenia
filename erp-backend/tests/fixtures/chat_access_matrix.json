@@ -1,0 +1,825 @@
+{
+  "project_divisions": {
+    "EVT-2026-GALA-01": [
+      "Field",
+      "Production"
+    ],
+    "EVT-2026-WED-02": [
+      "Design",
+      "Field"
+    ],
+    "EVT-2026-CONF-03": [
+      "Design",
+      "Production"
+    ],
+    "EVT-2026-PROD-04": [
+      "Field",
+      "Design"
+    ]
+  },
+  "members": [
+    {
+      "id": "M-01",
+      "workspace_role": "pm",
+      "division": "Management",
+      "project_ids": []
+    },
+    {
+      "id": "M-02",
+      "workspace_role": "leader",
+      "division": "Field",
+      "project_ids": []
+    },
+    {
+      "id": "M-03",
+      "workspace_role": "leader",
+      "division": "Design",
+      "project_ids": []
+    },
+    {
+      "id": "M-04",
+      "workspace_role": "leader",
+      "division": "Production",
+      "project_ids": []
+    },
+    {
+      "id": "M-05",
+      "workspace_role": "staff",
+      "division": "Field",
+      "project_ids": [
+        "EVT-2026-GALA-01",
+        "EVT-2026-PROD-04"
+      ]
+    },
+    {
+      "id": "M-06",
+      "workspace_role": "staff",
+      "division": "Production",
+      "project_ids": [
+        "EVT-2026-GALA-01",
+        "EVT-2026-CONF-03"
+      ]
+    },
+    {
+      "id": "M-07",
+      "workspace_role": "staff",
+      "division": "Production",
+      "project_ids": [
+        "EVT-2026-CONF-03"
+      ]
+    },
+    {
+      "id": "M-08",
+      "workspace_role": "staff",
+      "division": "Design",
+      "project_ids": [
+        "EVT-2026-WED-02",
+        "EVT-2026-CONF-03",
+        "EVT-2026-PROD-04"
+      ]
+    },
+    {
+      "id": "M-09",
+      "workspace_role": "intern",
+      "division": "Design",
+      "project_ids": [
+        "EVT-2026-WED-02",
+        "EVT-2026-CONF-03"
+      ]
+    },
+    {
+      "id": "M-10",
+      "workspace_role": "intern",
+      "division": "Field",
+      "project_ids": [
+        "EVT-2026-GALA-01"
+      ]
+    }
+  ],
+  "channels": [
+    {
+      "id": "ch-announcements",
+      "project_id": null,
+      "dm": false,
+      "voice": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-general",
+      "project_id": null,
+      "dm": false,
+      "voice": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-leaders",
+      "project_id": null,
+      "dm": false,
+      "voice": false,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04"
+      ],
+      "blocked_ids": [],
+      "listed": false
+    },
+    {
+      "id": "ch-gala-general",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "voice": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-gala-field",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "voice": false,
+      "access": "divisions",
+      "divisions": [
+        "Field"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-gala-production",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "voice": false,
+      "access": "divisions",
+      "divisions": [
+        "Production"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-wedding-general",
+      "project_id": "EVT-2026-WED-02",
+      "dm": false,
+      "voice": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-wedding-design",
+      "project_id": "EVT-2026-WED-02",
+      "dm": false,
+      "voice": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-wedding-field",
+      "project_id": "EVT-2026-WED-02",
+      "dm": false,
+      "voice": false,
+      "access": "divisions",
+      "divisions": [
+        "Field"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-devconf-general",
+      "project_id": "EVT-2026-CONF-03",
+      "dm": false,
+      "voice": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-devconf-design",
+      "project_id": "EVT-2026-CONF-03",
+      "dm": false,
+      "voice": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-devconf-production",
+      "project_id": "EVT-2026-CONF-03",
+      "dm": false,
+      "voice": false,
+      "access": "divisions",
+      "divisions": [
+        "Production"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-meridian-general",
+      "project_id": "EVT-2026-PROD-04",
+      "dm": false,
+      "voice": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-meridian-field",
+      "project_id": "EVT-2026-PROD-04",
+      "dm": false,
+      "voice": false,
+      "access": "divisions",
+      "divisions": [
+        "Field"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "ch-meridian-design",
+      "project_id": "EVT-2026-PROD-04",
+      "dm": false,
+      "voice": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "vc-lounge",
+      "project_id": null,
+      "dm": false,
+      "voice": true,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "vc-gala",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "voice": true,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "vc-wedding",
+      "project_id": "EVT-2026-WED-02",
+      "dm": false,
+      "voice": true,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "vc-devconf",
+      "project_id": "EVT-2026-CONF-03",
+      "dm": false,
+      "voice": true,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "vc-meridian",
+      "project_id": "EVT-2026-PROD-04",
+      "dm": false,
+      "voice": true,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "dm-M-01-M-05",
+      "project_id": null,
+      "dm": true,
+      "voice": false,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-01",
+        "M-05"
+      ],
+      "blocked_ids": [],
+      "listed": false
+    },
+    {
+      "id": "dm-M-02-M-05",
+      "project_id": null,
+      "dm": true,
+      "voice": false,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-02",
+        "M-05"
+      ],
+      "blocked_ids": [],
+      "listed": false
+    },
+    {
+      "id": "edge-dm",
+      "project_id": null,
+      "dm": true,
+      "voice": false,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-05",
+        "M-06"
+      ],
+      "blocked_ids": [],
+      "listed": false
+    },
+    {
+      "id": "edge-blocked",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "voice": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [
+        "M-05",
+        "M-01"
+      ],
+      "listed": true
+    },
+    {
+      "id": "edge-invite",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "voice": false,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-06"
+      ],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "edge-moved-off",
+      "project_id": "EVT-2026-WED-02",
+      "dm": false,
+      "voice": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [
+        "M-10"
+      ],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "edge-company-divisions",
+      "project_id": null,
+      "dm": false,
+      "voice": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    },
+    {
+      "id": "edge-unlisted",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "voice": false,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": false
+    },
+    {
+      "id": "edge-voice",
+      "project_id": "EVT-2026-GALA-01",
+      "dm": false,
+      "voice": true,
+      "access": "divisions",
+      "divisions": [
+        "Production"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true
+    }
+  ],
+  "open": {
+    "M-01": [
+      "ch-announcements",
+      "ch-general",
+      "ch-leaders",
+      "ch-gala-general",
+      "ch-gala-field",
+      "ch-gala-production",
+      "ch-wedding-general",
+      "ch-wedding-design",
+      "ch-wedding-field",
+      "ch-devconf-general",
+      "ch-devconf-design",
+      "ch-devconf-production",
+      "ch-meridian-general",
+      "ch-meridian-field",
+      "ch-meridian-design",
+      "vc-lounge",
+      "vc-gala",
+      "vc-wedding",
+      "vc-devconf",
+      "vc-meridian",
+      "dm-M-01-M-05",
+      "edge-blocked",
+      "edge-invite",
+      "edge-moved-off",
+      "edge-company-divisions",
+      "edge-unlisted",
+      "edge-voice"
+    ],
+    "M-02": [
+      "ch-announcements",
+      "ch-general",
+      "ch-leaders",
+      "ch-gala-general",
+      "ch-gala-field",
+      "ch-wedding-general",
+      "ch-wedding-field",
+      "ch-meridian-general",
+      "ch-meridian-field",
+      "vc-lounge",
+      "vc-gala",
+      "vc-wedding",
+      "vc-meridian",
+      "dm-M-02-M-05",
+      "edge-blocked",
+      "edge-moved-off"
+    ],
+    "M-03": [
+      "ch-announcements",
+      "ch-general",
+      "ch-leaders",
+      "ch-wedding-general",
+      "ch-wedding-design",
+      "ch-devconf-general",
+      "ch-devconf-design",
+      "ch-meridian-general",
+      "ch-meridian-design",
+      "vc-lounge",
+      "vc-wedding",
+      "vc-devconf",
+      "vc-meridian",
+      "edge-moved-off",
+      "edge-company-divisions"
+    ],
+    "M-04": [
+      "ch-announcements",
+      "ch-general",
+      "ch-leaders",
+      "ch-gala-general",
+      "ch-gala-production",
+      "ch-devconf-general",
+      "ch-devconf-production",
+      "vc-lounge",
+      "vc-gala",
+      "vc-devconf",
+      "edge-blocked",
+      "edge-voice"
+    ],
+    "M-05": [
+      "ch-announcements",
+      "ch-general",
+      "ch-gala-general",
+      "ch-gala-field",
+      "ch-meridian-general",
+      "ch-meridian-field",
+      "vc-lounge",
+      "vc-gala",
+      "vc-meridian",
+      "dm-M-01-M-05",
+      "dm-M-02-M-05",
+      "edge-dm"
+    ],
+    "M-06": [
+      "ch-announcements",
+      "ch-general",
+      "ch-gala-general",
+      "ch-gala-production",
+      "ch-devconf-general",
+      "ch-devconf-production",
+      "vc-lounge",
+      "vc-gala",
+      "vc-devconf",
+      "edge-dm",
+      "edge-blocked",
+      "edge-invite",
+      "edge-voice"
+    ],
+    "M-07": [
+      "ch-announcements",
+      "ch-general",
+      "ch-devconf-general",
+      "ch-devconf-production",
+      "vc-lounge",
+      "vc-devconf"
+    ],
+    "M-08": [
+      "ch-announcements",
+      "ch-general",
+      "ch-wedding-general",
+      "ch-wedding-design",
+      "ch-devconf-general",
+      "ch-devconf-design",
+      "ch-meridian-general",
+      "ch-meridian-design",
+      "vc-lounge",
+      "vc-wedding",
+      "vc-devconf",
+      "vc-meridian",
+      "edge-moved-off",
+      "edge-company-divisions"
+    ],
+    "M-09": [
+      "ch-announcements",
+      "ch-general",
+      "ch-wedding-general",
+      "ch-wedding-design",
+      "ch-devconf-general",
+      "ch-devconf-design",
+      "vc-lounge",
+      "vc-wedding",
+      "vc-devconf",
+      "edge-moved-off",
+      "edge-company-divisions"
+    ],
+    "M-10": [
+      "ch-announcements",
+      "ch-general",
+      "ch-gala-general",
+      "ch-gala-field",
+      "vc-lounge",
+      "vc-gala",
+      "edge-blocked"
+    ]
+  },
+  "discoverable": {
+    "M-01": [],
+    "M-02": [
+      "ch-gala-production",
+      "ch-wedding-design",
+      "ch-meridian-design",
+      "edge-invite",
+      "edge-company-divisions",
+      "edge-voice"
+    ],
+    "M-03": [
+      "ch-wedding-field",
+      "ch-devconf-production",
+      "ch-meridian-field"
+    ],
+    "M-04": [
+      "ch-gala-field",
+      "ch-devconf-design",
+      "edge-invite",
+      "edge-company-divisions"
+    ],
+    "M-05": [
+      "ch-gala-production",
+      "ch-meridian-design",
+      "edge-invite",
+      "edge-company-divisions",
+      "edge-voice"
+    ],
+    "M-06": [
+      "ch-gala-field",
+      "ch-devconf-design",
+      "edge-company-divisions"
+    ],
+    "M-07": [
+      "ch-devconf-design",
+      "edge-company-divisions"
+    ],
+    "M-08": [
+      "ch-wedding-field",
+      "ch-devconf-production",
+      "ch-meridian-field"
+    ],
+    "M-09": [
+      "ch-wedding-field",
+      "ch-devconf-production"
+    ],
+    "M-10": [
+      "ch-gala-production",
+      "edge-invite",
+      "edge-company-divisions",
+      "edge-voice"
+    ]
+  },
+  "manage": {
+    "M-01": [
+      "ch-announcements",
+      "ch-general",
+      "ch-leaders",
+      "ch-gala-general",
+      "ch-gala-field",
+      "ch-gala-production",
+      "ch-wedding-general",
+      "ch-wedding-design",
+      "ch-wedding-field",
+      "ch-devconf-general",
+      "ch-devconf-design",
+      "ch-devconf-production",
+      "ch-meridian-general",
+      "ch-meridian-field",
+      "ch-meridian-design",
+      "vc-lounge",
+      "vc-gala",
+      "vc-wedding",
+      "vc-devconf",
+      "vc-meridian",
+      "edge-blocked",
+      "edge-invite",
+      "edge-moved-off",
+      "edge-company-divisions",
+      "edge-unlisted",
+      "edge-voice"
+    ],
+    "M-02": [
+      "ch-gala-general",
+      "ch-gala-field",
+      "ch-gala-production",
+      "ch-wedding-general",
+      "ch-wedding-design",
+      "ch-wedding-field",
+      "ch-meridian-general",
+      "ch-meridian-field",
+      "ch-meridian-design",
+      "vc-gala",
+      "vc-wedding",
+      "vc-meridian",
+      "edge-blocked",
+      "edge-invite",
+      "edge-moved-off",
+      "edge-unlisted",
+      "edge-voice"
+    ],
+    "M-03": [
+      "ch-wedding-general",
+      "ch-wedding-design",
+      "ch-wedding-field",
+      "ch-devconf-general",
+      "ch-devconf-design",
+      "ch-devconf-production",
+      "ch-meridian-general",
+      "ch-meridian-field",
+      "ch-meridian-design",
+      "vc-wedding",
+      "vc-devconf",
+      "vc-meridian",
+      "edge-moved-off"
+    ],
+    "M-04": [
+      "ch-gala-general",
+      "ch-gala-field",
+      "ch-gala-production",
+      "ch-devconf-general",
+      "ch-devconf-design",
+      "ch-devconf-production",
+      "vc-gala",
+      "vc-devconf",
+      "edge-blocked",
+      "edge-invite",
+      "edge-unlisted",
+      "edge-voice"
+    ],
+    "M-05": [],
+    "M-06": [],
+    "M-07": [],
+    "M-08": [],
+    "M-09": [],
+    "M-10": []
+  },
+  "create": {
+    "M-01": {
+      "company": true,
+      "EVT-2026-GALA-01": true,
+      "EVT-2026-WED-02": true,
+      "EVT-2026-CONF-03": true,
+      "EVT-2026-PROD-04": true
+    },
+    "M-02": {
+      "company": false,
+      "EVT-2026-GALA-01": true,
+      "EVT-2026-WED-02": true,
+      "EVT-2026-CONF-03": false,
+      "EVT-2026-PROD-04": true
+    },
+    "M-03": {
+      "company": false,
+      "EVT-2026-GALA-01": false,
+      "EVT-2026-WED-02": true,
+      "EVT-2026-CONF-03": true,
+      "EVT-2026-PROD-04": true
+    },
+    "M-04": {
+      "company": false,
+      "EVT-2026-GALA-01": true,
+      "EVT-2026-WED-02": false,
+      "EVT-2026-CONF-03": true,
+      "EVT-2026-PROD-04": false
+    },
+    "M-05": {
+      "company": false,
+      "EVT-2026-GALA-01": false,
+      "EVT-2026-WED-02": false,
+      "EVT-2026-CONF-03": false,
+      "EVT-2026-PROD-04": false
+    },
+    "M-06": {
+      "company": false,
+      "EVT-2026-GALA-01": false,
+      "EVT-2026-WED-02": false,
+      "EVT-2026-CONF-03": false,
+      "EVT-2026-PROD-04": false
+    },
+    "M-07": {
+      "company": false,
+      "EVT-2026-GALA-01": false,
+      "EVT-2026-WED-02": false,
+      "EVT-2026-CONF-03": false,
+      "EVT-2026-PROD-04": false
+    },
+    "M-08": {
+      "company": false,
+      "EVT-2026-GALA-01": false,
+      "EVT-2026-WED-02": false,
+      "EVT-2026-CONF-03": false,
+      "EVT-2026-PROD-04": false
+    },
+    "M-09": {
+      "company": false,
+      "EVT-2026-GALA-01": false,
+      "EVT-2026-WED-02": false,
+      "EVT-2026-CONF-03": false,
+      "EVT-2026-PROD-04": false
+    },
+    "M-10": {
+      "company": false,
+      "EVT-2026-GALA-01": false,
+      "EVT-2026-WED-02": false,
+      "EVT-2026-CONF-03": false,
+      "EVT-2026-PROD-04": false
+    }
+  }
+}

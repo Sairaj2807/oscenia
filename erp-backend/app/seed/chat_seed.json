@@ -1,0 +1,998 @@
+{
+  "members": [
+    {
+      "id": "M-01",
+      "name": "Agus P.",
+      "workspace_role": "pm",
+      "division": "Management",
+      "title": "Project Manager",
+      "project_ids": []
+    },
+    {
+      "id": "M-02",
+      "name": "Dinda A.",
+      "workspace_role": "leader",
+      "division": "Field",
+      "title": "Field Division Lead",
+      "project_ids": []
+    },
+    {
+      "id": "M-03",
+      "name": "Maya S.",
+      "workspace_role": "leader",
+      "division": "Design",
+      "title": "Design Division Lead",
+      "project_ids": []
+    },
+    {
+      "id": "M-04",
+      "name": "Hendra T.",
+      "workspace_role": "leader",
+      "division": "Production",
+      "title": "Production Division Lead",
+      "project_ids": []
+    },
+    {
+      "id": "M-05",
+      "name": "Rina M.",
+      "workspace_role": "staff",
+      "division": "Field",
+      "title": "Stage Manager",
+      "project_ids": [
+        "EVT-2026-GALA-01",
+        "EVT-2026-PROD-04"
+      ]
+    },
+    {
+      "id": "M-06",
+      "name": "Yoga K.",
+      "workspace_role": "staff",
+      "division": "Production",
+      "title": "Rigging Tech",
+      "project_ids": [
+        "EVT-2026-GALA-01",
+        "EVT-2026-CONF-03"
+      ]
+    },
+    {
+      "id": "M-07",
+      "name": "Sela D.",
+      "workspace_role": "staff",
+      "division": "Production",
+      "title": "Lighting & AV",
+      "project_ids": [
+        "EVT-2026-CONF-03"
+      ]
+    },
+    {
+      "id": "M-08",
+      "name": "Putri L.",
+      "workspace_role": "staff",
+      "division": "Design",
+      "title": "Senior Designer",
+      "project_ids": [
+        "EVT-2026-WED-02",
+        "EVT-2026-CONF-03",
+        "EVT-2026-PROD-04"
+      ]
+    },
+    {
+      "id": "M-09",
+      "name": "Kevin W.",
+      "workspace_role": "intern",
+      "division": "Design",
+      "title": "Design Intern",
+      "project_ids": [
+        "EVT-2026-WED-02",
+        "EVT-2026-CONF-03"
+      ]
+    },
+    {
+      "id": "M-10",
+      "name": "Nadia R.",
+      "workspace_role": "intern",
+      "division": "Field",
+      "title": "Field Intern",
+      "project_ids": [
+        "EVT-2026-GALA-01"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "project_no": "EVT-2026-GALA-01",
+      "name": "Aurora Bank Annual Gala",
+      "client_name": "Aurora Bank",
+      "stage": "Execution Event",
+      "division": "Field",
+      "contract_value": "480000000",
+      "estimated_cost": "336000000",
+      "event_date": "2026-08-14",
+      "stage_since": "2026-07-19"
+    },
+    {
+      "project_no": "EVT-2026-WED-02",
+      "name": "Wibowo–Sari Wedding",
+      "client_name": "Keluarga Wibowo",
+      "stage": "Client Approval",
+      "division": "Design",
+      "contract_value": "265000000",
+      "estimated_cost": "180000000",
+      "event_date": "2026-09-05",
+      "stage_since": "2026-07-12"
+    },
+    {
+      "project_no": "EVT-2026-CONF-03",
+      "name": "TechNusa Developer Conference",
+      "client_name": "TechNusa",
+      "stage": "Design Uploaded",
+      "division": "Design",
+      "contract_value": "720000000",
+      "estimated_cost": "505000000",
+      "event_date": "2026-10-22",
+      "stage_since": "2026-07-22"
+    },
+    {
+      "project_no": "EVT-2026-PROD-04",
+      "name": "Meridian Product Launch",
+      "client_name": "Meridian Cosmetics",
+      "stage": "Finished",
+      "division": "Field",
+      "contract_value": "390000000",
+      "estimated_cost": "275000000",
+      "event_date": "2026-06-30",
+      "stage_since": "2026-06-30"
+    }
+  ],
+  "project_divisions": {
+    "EVT-2026-GALA-01": [
+      "Field",
+      "Production"
+    ],
+    "EVT-2026-WED-02": [
+      "Design",
+      "Field"
+    ],
+    "EVT-2026-CONF-03": [
+      "Design",
+      "Production"
+    ],
+    "EVT-2026-PROD-04": [
+      "Field",
+      "Design"
+    ]
+  },
+  "channels": [
+    {
+      "key": "ch-announcements",
+      "name": "announcements",
+      "project": null,
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Company-wide news. PM and leaders post here.",
+      "requests": []
+    },
+    {
+      "key": "ch-general",
+      "name": "general",
+      "project": null,
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Everyone at Oscenia — questions, chat and the Lounge.",
+      "requests": []
+    },
+    {
+      "key": "ch-leaders",
+      "name": "leaders",
+      "project": null,
+      "dm": false,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-01",
+        "M-02",
+        "M-03",
+        "M-04"
+      ],
+      "blocked_ids": [],
+      "listed": false,
+      "topic": "Division leads and PM only.",
+      "requests": []
+    },
+    {
+      "key": "ch-gala-general",
+      "name": "general",
+      "project": "EVT-2026-GALA-01",
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Everyone on the project.",
+      "requests": []
+    },
+    {
+      "key": "ch-gala-field",
+      "name": "field",
+      "project": "EVT-2026-GALA-01",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Field"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Field team working channel.",
+      "requests": []
+    },
+    {
+      "key": "ch-gala-production",
+      "name": "production",
+      "project": "EVT-2026-GALA-01",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Production"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Production team working channel.",
+      "requests": [
+        {
+          "member": "M-05",
+          "at": "2026-07-25T17:30",
+          "note": "I need the rigging schedule for the stage plan.",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "key": "ch-wedding-general",
+      "name": "general",
+      "project": "EVT-2026-WED-02",
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Everyone on the project.",
+      "requests": []
+    },
+    {
+      "key": "ch-wedding-design",
+      "name": "design",
+      "project": "EVT-2026-WED-02",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Design team working channel.",
+      "requests": []
+    },
+    {
+      "key": "ch-wedding-field",
+      "name": "field",
+      "project": "EVT-2026-WED-02",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Field"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Field team working channel.",
+      "requests": []
+    },
+    {
+      "key": "ch-devconf-general",
+      "name": "general",
+      "project": "EVT-2026-CONF-03",
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Everyone on the project.",
+      "requests": []
+    },
+    {
+      "key": "ch-devconf-design",
+      "name": "design",
+      "project": "EVT-2026-CONF-03",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Design team working channel.",
+      "requests": []
+    },
+    {
+      "key": "ch-devconf-production",
+      "name": "production",
+      "project": "EVT-2026-CONF-03",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Production"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Production team working channel.",
+      "requests": []
+    },
+    {
+      "key": "ch-meridian-general",
+      "name": "general",
+      "project": "EVT-2026-PROD-04",
+      "dm": false,
+      "access": "project",
+      "divisions": [],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Everyone on the project.",
+      "requests": []
+    },
+    {
+      "key": "ch-meridian-field",
+      "name": "field",
+      "project": "EVT-2026-PROD-04",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Field"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Field team working channel.",
+      "requests": []
+    },
+    {
+      "key": "ch-meridian-design",
+      "name": "design",
+      "project": "EVT-2026-PROD-04",
+      "dm": false,
+      "access": "divisions",
+      "divisions": [
+        "Design"
+      ],
+      "member_ids": [],
+      "blocked_ids": [],
+      "listed": true,
+      "topic": "Design team working channel.",
+      "requests": []
+    },
+    {
+      "key": "dm-M-01-M-05",
+      "name": "",
+      "project": null,
+      "dm": true,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-01",
+        "M-05"
+      ],
+      "blocked_ids": [],
+      "listed": false,
+      "topic": "",
+      "requests": []
+    },
+    {
+      "key": "dm-M-02-M-05",
+      "name": "",
+      "project": null,
+      "dm": true,
+      "access": "invite",
+      "divisions": [],
+      "member_ids": [
+        "M-02",
+        "M-05"
+      ],
+      "blocked_ids": [],
+      "listed": false,
+      "topic": "",
+      "requests": []
+    }
+  ],
+  "messages": [
+    {
+      "key": "MSG-001",
+      "channel": "ch-announcements",
+      "author": "M-01",
+      "at": "2026-07-20T08:30",
+      "text": "Morning all. From this week, please log every blocker on the task itself so it shows up on the Blocked board — not only in chat.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {
+        "👍": [
+          "M-02",
+          "M-03",
+          "M-04",
+          "M-05"
+        ]
+      },
+      "quote": null
+    },
+    {
+      "key": "MSG-002",
+      "channel": "ch-announcements",
+      "author": "M-01",
+      "at": "2026-07-24T17:05",
+      "text": "Aurora Gala is 3 weeks out. <@M-02> <@M-04> please review open items with your teams on Monday.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-003",
+      "channel": "ch-leaders",
+      "author": "M-04",
+      "at": "2026-07-23T10:12",
+      "text": "Heads-up: <#T-309> will slip unless the venue sends the ceiling drawings this week.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-004",
+      "channel": "ch-leaders",
+      "author": "M-01",
+      "at": "2026-07-23T10:40",
+      "text": "I’ll call the venue GM today.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-005",
+      "channel": "ch-gala-general",
+      "author": "M-02",
+      "at": "2026-07-22T09:15",
+      "text": "Client confirmed the stage layout. Run-of-show v3 in progress — <#T-101>.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-006",
+      "channel": "ch-gala-general",
+      "author": "M-05",
+      "at": "2026-07-22T09:32",
+      "text": "Noted. I’ll share a draft with <@M-10> for the seating side by Friday.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-007",
+      "channel": "ch-gala-general",
+      "author": "M-10",
+      "at": "2026-07-24T16:20",
+      "text": "Seating plan submitted for approval: <#T-103>",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {
+        "🙌": [
+          "M-05"
+        ]
+      },
+      "quote": null
+    },
+    {
+      "key": "MSG-008",
+      "channel": "ch-gala-production",
+      "author": "M-06",
+      "at": "2026-07-20T14:02",
+      "text": "Still no logo files from Aurora. Marked <#T-102> as blocked.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-009",
+      "channel": "ch-gala-production",
+      "author": "M-04",
+      "at": "2026-07-20T14:20",
+      "text": "<@M-06> thanks — I’ve asked <@M-02> to chase the client comms team.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-010",
+      "channel": "ch-gala-field",
+      "author": "M-02",
+      "at": "2026-07-24T11:00",
+      "text": "Catering needs a headcount. We can’t lock it until RSVP closes on 1 Aug — see <#T-108>.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-011",
+      "channel": "ch-wedding-general",
+      "author": "M-03",
+      "at": "2026-07-22T11:20",
+      "text": "Sent back the arch render — too tall for the pendopo. <@M-09> please keep it under 3 m.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-012",
+      "channel": "ch-wedding-general",
+      "author": "M-09",
+      "at": "2026-07-22T11:34",
+      "text": "On it, will resubmit by Wednesday.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {
+        "👍": [
+          "M-03"
+        ]
+      },
+      "quote": null
+    },
+    {
+      "key": "MSG-013",
+      "channel": "ch-wedding-design",
+      "author": "M-08",
+      "at": "2026-07-25T15:48",
+      "text": "Moodboard rev 2 is up for approval: <#T-201>. Warmer palette as the family asked.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-014",
+      "channel": "ch-devconf-general",
+      "author": "M-03",
+      "at": "2026-07-25T09:05",
+      "text": "Keynote concept is in <#T-301>. Feedback welcome before I pass it to Agus.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-015",
+      "channel": "ch-devconf-production",
+      "author": "M-07",
+      "at": "2026-07-24T13:30",
+      "text": "Three streaming vendors shortlisted so far. Will add the quotes to <#T-302>.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-016",
+      "channel": "ch-devconf-design",
+      "author": "M-09",
+      "at": "2026-07-25T10:10",
+      "text": "Wayfinding is taking longer than planned — the floor plan changed. <@M-03> can we move the deadline?",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-017",
+      "channel": "ch-meridian-general",
+      "author": "M-05",
+      "at": "2026-07-21T16:00",
+      "text": "Survey results are in: 4.2 / 5 overall. Full summary attached to <#T-401>.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-018",
+      "channel": "ch-gala-field",
+      "author": "M-05",
+      "at": "2026-07-24T11:20",
+      "text": "Venue can hold the catering order until 3 Aug if we send a provisional count now — I’ll send 220.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": "MSG-010"
+    },
+    {
+      "key": "MSG-019",
+      "channel": "ch-gala-general",
+      "author": "M-02",
+      "at": "2026-07-24T16:45",
+      "text": "Video call · 18 min · Dinda A., Rina M., Hendra T.",
+      "kind": "call",
+      "meeting": "MTG-1",
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-020",
+      "channel": "ch-devconf-design",
+      "author": "M-03",
+      "at": "2026-07-25T11:12",
+      "text": "Video call · 12 min · Maya S., Putri L., Kevin W.",
+      "kind": "call",
+      "meeting": "MTG-2",
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-021",
+      "channel": "dm-M-01-M-05",
+      "author": "M-01",
+      "at": "2026-07-25T18:10",
+      "text": "Rina, great work on the run-of-show. Can you take the client walkthrough on Tuesday?",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-022",
+      "channel": "dm-M-01-M-05",
+      "author": "M-05",
+      "at": "2026-07-25T18:22",
+      "text": "Yes, happy to. I’ll bring the seating draft too.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-023",
+      "channel": "dm-M-02-M-05",
+      "author": "M-02",
+      "at": "2026-07-26T08:40",
+      "text": "Quick one — are you free for a call at 10 about the stage manager brief?",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    },
+    {
+      "key": "MSG-024",
+      "channel": "ch-devconf-design",
+      "author": "M-03",
+      "at": "2026-07-25T10:25",
+      "text": "Yes — take until 30 Jul, and log the floor-plan change on the task.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": "MSG-016"
+    },
+    {
+      "key": "MSG-025",
+      "channel": "ch-general",
+      "author": "M-01",
+      "at": "2026-07-21T09:00",
+      "text": "Welcome to #general — for everyday questions and chat. #announcements stays for company news. The Lounge voice channel is open any time.",
+      "kind": "text",
+      "meeting": null,
+      "reactions": {},
+      "quote": null
+    }
+  ],
+  "meetings": [
+    {
+      "key": "MTG-1",
+      "channel": "ch-gala-general",
+      "host": "M-02",
+      "participants": [
+        "M-02",
+        "M-05",
+        "M-04"
+      ],
+      "video": true,
+      "started_at": "2026-07-24T16:27",
+      "ended_at": "2026-07-24T16:45",
+      "access": "participants",
+      "readers": [],
+      "files_view_only": false,
+      "transcript": [
+        {
+          "at": "2026-07-24T16:27",
+          "speaker": "M-02",
+          "text": "Thanks for joining. Quick agenda: where we are on Aurora Bank Annual Gala, open issues, and next steps."
+        },
+        {
+          "at": "2026-07-24T16:28",
+          "speaker": "M-05",
+          "text": "From my side the run-of-show draft is ready, but the timings for the second half are still rough."
+        },
+        {
+          "at": "2026-07-24T16:29",
+          "speaker": "M-02",
+          "text": "What is blocking the second half?"
+        },
+        {
+          "at": "2026-07-24T16:30",
+          "speaker": "M-05",
+          "text": "We are waiting on the venue for the load-in window. They promised it this week."
+        },
+        {
+          "at": "2026-07-24T16:31",
+          "speaker": "M-04",
+          "text": "Rigging needs that window too — without it we can’t book the crew."
+        },
+        {
+          "at": "2026-07-24T16:32",
+          "speaker": "M-02",
+          "text": "Agreed: we lock the load-in window before we book anything else."
+        },
+        {
+          "at": "2026-07-24T16:33",
+          "speaker": "M-04",
+          "text": "I’ll call the venue manager tomorrow morning and get it in writing."
+        },
+        {
+          "at": "2026-07-24T16:34",
+          "speaker": "M-02",
+          "text": "Catering asked for a final headcount. RSVPs are at about seventy percent."
+        },
+        {
+          "at": "2026-07-24T16:35",
+          "speaker": "M-02",
+          "text": "Then we send a reminder to everyone who hasn’t answered."
+        },
+        {
+          "at": "2026-07-24T16:36",
+          "speaker": "M-02",
+          "text": "I’ll send the RSVP reminder by Friday."
+        },
+        {
+          "at": "2026-07-24T16:37",
+          "speaker": "M-05",
+          "text": "Budget-wise we are on track, but the lighting quote came in ten percent higher."
+        },
+        {
+          "at": "2026-07-24T16:38",
+          "speaker": "M-02",
+          "text": "Decision: we keep the current lighting vendor and ask for a revised quote."
+        },
+        {
+          "at": "2026-07-24T16:39",
+          "speaker": "M-05",
+          "text": "Can you send me the old quote so I can compare?"
+        },
+        {
+          "at": "2026-07-24T16:40",
+          "speaker": "M-02",
+          "text": "Yes — I’ll share the old lighting quote in the channel after this call."
+        },
+        {
+          "at": "2026-07-24T16:41",
+          "speaker": "M-04",
+          "text": "One more thing: the client wants a walkthrough next week."
+        },
+        {
+          "at": "2026-07-24T16:42",
+          "speaker": "M-02",
+          "text": "Let’s go with Tuesday afternoon for the client walkthrough."
+        },
+        {
+          "at": "2026-07-24T16:43",
+          "speaker": "M-05",
+          "text": "I’ll prepare the walkthrough deck by Monday."
+        },
+        {
+          "at": "2026-07-24T16:44",
+          "speaker": "M-02",
+          "text": "Good. Anything else? … Then that’s it — thanks, everyone."
+        }
+      ],
+      "notes": [
+        {
+          "by": "M-05",
+          "at": "2026-07-24T16:33",
+          "text": "Venue load-in window still unconfirmed — get it in writing."
+        }
+      ],
+      "files": [
+        {
+          "name": "Run-of-show-v3.pdf",
+          "kind": "pdf",
+          "size": 184320,
+          "by": "M-02",
+          "at": "2026-07-24T16:30"
+        }
+      ],
+      "summary": {
+        "overview": "The team met for 18 minutes to review Aurora Bank Annual Gala, covering run-of-show, venue, rigging, catering, budget and client. They agreed to lock the load-in window before booking anything else and send a reminder to every guest who has not answered yet. 4 follow-ups were assigned to Hendra T., Dinda A. and Rina M.",
+        "agenda": [
+          "Progress on Aurora Bank Annual Gala",
+          "Open issues",
+          "Next steps"
+        ],
+        "discussion": [
+          "Run-of-show: the draft is ready; timings for the second half still need work.",
+          "Venue: the load-in window is still unconfirmed, which holds up the second half.",
+          "Rigging: crew booking depends on the same load-in window.",
+          "Catering: a final headcount is needed; RSVPs stand at about 70%.",
+          "Budget: on track overall, but the lighting quote came in 10% higher.",
+          "Client: a walkthrough has been requested for next week.",
+          "Noted during the call (Rina M.): Venue load-in window still unconfirmed — get it in writing."
+        ],
+        "decisions": [
+          "Lock the load-in window before booking anything else.",
+          "Send a reminder to every guest who has not answered yet.",
+          "Keep the current lighting vendor and ask for a revised quote.",
+          "Hold the client walkthrough on Tuesday afternoon."
+        ],
+        "action_items": [
+          {
+            "text": "Confirm the load-in window with the venue manager, in writing",
+            "owner": "M-04",
+            "due": "2026-07-25"
+          },
+          {
+            "text": "Send the RSVP reminder to guests who have not answered",
+            "owner": "M-02",
+            "due": "2026-07-31"
+          },
+          {
+            "text": "Share the previous lighting quote in the channel for comparison",
+            "owner": "M-02",
+            "due": "2026-07-27"
+          },
+          {
+            "text": "Prepare the deck for the client walkthrough",
+            "owner": "M-05",
+            "due": "2026-07-27"
+          }
+        ],
+        "source": "seeded",
+        "at": "2026-07-24T16:50",
+        "by": "M-02"
+      }
+    },
+    {
+      "key": "MTG-2",
+      "channel": "ch-devconf-design",
+      "host": "M-03",
+      "participants": [
+        "M-03",
+        "M-08",
+        "M-09"
+      ],
+      "video": true,
+      "started_at": "2026-07-25T11:00",
+      "ended_at": "2026-07-25T11:12",
+      "access": "channel",
+      "readers": [],
+      "files_view_only": false,
+      "transcript": [
+        {
+          "at": "2026-07-25T11:00",
+          "speaker": "M-03",
+          "text": "Thanks for joining. Quick agenda: where we are on TechNusa Developer Conference, open issues, and next steps."
+        },
+        {
+          "at": "2026-07-25T11:00",
+          "speaker": "M-08",
+          "text": "From my side the run-of-show draft is ready, but the timings for the second half are still rough."
+        },
+        {
+          "at": "2026-07-25T11:01",
+          "speaker": "M-03",
+          "text": "What is blocking the second half?"
+        },
+        {
+          "at": "2026-07-25T11:02",
+          "speaker": "M-08",
+          "text": "We are waiting on the venue for the load-in window. They promised it this week."
+        },
+        {
+          "at": "2026-07-25T11:03",
+          "speaker": "M-09",
+          "text": "Rigging needs that window too — without it we can’t book the crew."
+        },
+        {
+          "at": "2026-07-25T11:04",
+          "speaker": "M-03",
+          "text": "Agreed: we lock the load-in window before we book anything else."
+        },
+        {
+          "at": "2026-07-25T11:05",
+          "speaker": "M-09",
+          "text": "I’ll call the venue manager tomorrow morning and get it in writing."
+        },
+        {
+          "at": "2026-07-25T11:06",
+          "speaker": "M-03",
+          "text": "Catering asked for a final headcount. RSVPs are at about seventy percent."
+        },
+        {
+          "at": "2026-07-25T11:06",
+          "speaker": "M-03",
+          "text": "Then we send a reminder to everyone who hasn’t answered."
+        },
+        {
+          "at": "2026-07-25T11:07",
+          "speaker": "M-03",
+          "text": "I’ll send the RSVP reminder by Friday."
+        },
+        {
+          "at": "2026-07-25T11:08",
+          "speaker": "M-08",
+          "text": "Budget-wise we are on track, but the lighting quote came in ten percent higher."
+        },
+        {
+          "at": "2026-07-25T11:09",
+          "speaker": "M-03",
+          "text": "Decision: we keep the current lighting vendor and ask for a revised quote."
+        },
+        {
+          "at": "2026-07-25T11:10",
+          "speaker": "M-08",
+          "text": "Can you send me the old quote so I can compare?"
+        },
+        {
+          "at": "2026-07-25T11:11",
+          "speaker": "M-03",
+          "text": "Good. Anything else? … Then that’s it — thanks, everyone."
+        }
+      ],
+      "notes": [
+        {
+          "by": "M-08",
+          "at": "2026-07-25T11:06",
+          "text": "Wayfinding signs: reuse last year’s icon set."
+        }
+      ],
+      "files": [],
+      "summary": null
+    }
+  ],
+  "presence": {
+    "M-01": "online",
+    "M-02": "online",
+    "M-03": "idle",
+    "M-04": "dnd",
+    "M-05": "online",
+    "M-06": "offline",
+    "M-07": "online",
+    "M-08": "offline",
+    "M-09": "idle",
+    "M-10": "offline"
+  },
+  "read_through": "2026-07-24T23:59"
+}

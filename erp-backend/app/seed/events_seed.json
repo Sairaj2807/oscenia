@@ -1,0 +1,2531 @@
+{
+ "events": [
+  {
+   "event_no": "EV-01",
+   "name": "Aurora Bank Annual Gala 2026",
+   "client_name": "Aurora Bank",
+   "prototype_project": "EVT-2026-GALA-01",
+   "date": "2026-08-14",
+   "time": "19:00",
+   "venue": "The Ritz-Carlton Jakarta, Mega Kuningan — Grand Ballroom",
+   "status": "Published",
+   "rsvp_deadline": "2026-08-01",
+   "max_pax": 2,
+   "rsvp_fields": {
+    "email": true,
+    "allergies": true,
+    "pax": true
+   },
+   "feedback_url": "https://forms.gle/aurora-gala-2026",
+   "hold_wishes": false,
+   "tables": [
+    "VIP 1",
+    "VIP 2",
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5",
+    "T6"
+   ],
+   "checkpoints": [
+    {
+     "id": "CP-1",
+     "name": "Main Entrance",
+     "categories": []
+    },
+    {
+     "id": "CP-2",
+     "name": "VIP Lounge",
+     "categories": [
+      "VIP"
+     ]
+    },
+    {
+     "id": "CP-3",
+     "name": "Goodie Bag",
+     "categories": []
+    }
+   ],
+   "questions": [
+    {
+     "id": "Q-1",
+     "label": "Meal preference",
+     "type": "dropdown",
+     "options": [
+      "Beef",
+      "Fish",
+      "Vegetarian"
+     ],
+     "multi": false,
+     "required": true,
+     "attendingOnly": true
+    },
+    {
+     "id": "Q-2",
+     "label": "Will you take the shuttle from Senayan?",
+     "type": "choice",
+     "options": [
+      "Yes",
+      "No"
+     ],
+     "multi": false,
+     "required": false,
+     "attendingOnly": true
+    },
+    {
+     "id": "Q-3",
+     "label": "A song you would love to hear",
+     "type": "text",
+     "options": [],
+     "multi": false,
+     "required": false,
+     "attendingOnly": true
+    }
+   ],
+   "question_seq": 0,
+   "invite": {
+    "template_id": "gala",
+    "accent": null,
+    "on": {
+     "hosts": true,
+     "music": true
+    },
+    "content": {
+     "cover": {
+      "eyebrow": "You are cordially invited",
+      "title": "An Evening of Gratitude",
+      "subtitle": "Aurora Bank Annual Gala 2026",
+      "image": null
+     },
+     "message": {
+      "body": "Join us as we celebrate a remarkable year with the partners and friends who made it possible."
+     },
+     "couple": {
+      "a": {
+       "name": "",
+       "parents": "",
+       "photo": null,
+       "ig": ""
+      },
+      "b": {
+       "name": "",
+       "parents": "",
+       "photo": null,
+       "ig": ""
+      }
+     },
+     "hosts": {
+      "names": "Hosted by Aurora Bank · Jakarta",
+      "logos": []
+     },
+     "countdown": {},
+     "details": {
+      "name": "",
+      "date": "2026-08-14",
+      "time": "19:00",
+      "venue": "The Ritz-Carlton Jakarta, Mega Kuningan — Grand Ballroom",
+      "mapUrl": "https://maps.google.com/?q=Ritz-Carlton+Mega+Kuningan",
+      "sessions": []
+     },
+     "agenda": {
+      "rows": [
+       {
+        "time": "18:30",
+        "label": "Arrival & cocktails"
+       },
+       {
+        "time": "19:30",
+        "label": "Welcome address"
+       },
+       {
+        "time": "20:00",
+        "label": "Dinner & performances"
+       }
+      ]
+     },
+     "speakers": {
+      "people": []
+     },
+     "story": {
+      "items": []
+     },
+     "dresscode": {
+      "text": "Black tie"
+     },
+     "gallery": {
+      "photos": []
+     },
+     "video": {
+      "kind": "link",
+      "url": "",
+      "file": null
+     },
+     "music": {
+      "kind": "builtin",
+      "trackId": "warm-strings",
+      "file": null
+     },
+     "rsvp": {},
+     "wishes": {},
+     "gift": {
+      "accounts": [],
+      "address": ""
+     }
+    }
+   },
+   "published": {
+    "template_id": "gala",
+    "accent": null,
+    "on": {
+     "hosts": true,
+     "music": true
+    },
+    "content": {
+     "cover": {
+      "eyebrow": "You are cordially invited",
+      "title": "An Evening of Gratitude",
+      "subtitle": "Aurora Bank Annual Gala 2026",
+      "image": null
+     },
+     "message": {
+      "body": "Join us as we celebrate a remarkable year with the partners and friends who made it possible."
+     },
+     "couple": {
+      "a": {
+       "name": "",
+       "parents": "",
+       "photo": null,
+       "ig": ""
+      },
+      "b": {
+       "name": "",
+       "parents": "",
+       "photo": null,
+       "ig": ""
+      }
+     },
+     "hosts": {
+      "names": "Hosted by Aurora Bank · Jakarta",
+      "logos": []
+     },
+     "countdown": {},
+     "details": {
+      "name": "",
+      "date": "2026-08-14",
+      "time": "19:00",
+      "venue": "The Ritz-Carlton Jakarta, Mega Kuningan — Grand Ballroom",
+      "mapUrl": "https://maps.google.com/?q=Ritz-Carlton+Mega+Kuningan",
+      "sessions": []
+     },
+     "agenda": {
+      "rows": [
+       {
+        "time": "18:30",
+        "label": "Arrival & cocktails"
+       },
+       {
+        "time": "19:30",
+        "label": "Welcome address"
+       },
+       {
+        "time": "20:00",
+        "label": "Dinner & performances"
+       }
+      ]
+     },
+     "speakers": {
+      "people": []
+     },
+     "story": {
+      "items": []
+     },
+     "dresscode": {
+      "text": "Black tie"
+     },
+     "gallery": {
+      "photos": []
+     },
+     "video": {
+      "kind": "link",
+      "url": "",
+      "file": null
+     },
+     "music": {
+      "kind": "builtin",
+      "trackId": "warm-strings",
+      "file": null
+     },
+     "rsvp": {},
+     "wishes": {},
+     "gift": {
+      "accounts": [],
+      "address": ""
+     }
+    }
+   },
+   "review": {
+    "state": "editing",
+    "submittedAt": null,
+    "submittedBy": null,
+    "note": "",
+    "returnedAt": null
+   },
+   "wishes": [
+    {
+     "guest": "G-001",
+     "name": "Dewi Wijaya",
+     "text": "Congratulations on a wonderful year — looking forward to the evening!",
+     "at": "2026-07-21T20:20",
+     "hidden": false,
+     "approved": true
+    },
+    {
+     "guest": "G-004",
+     "name": "Gilang Pratama",
+     "text": "Thank you for having us. See you at the Ritz!",
+     "at": "2026-07-22T09:05",
+     "hidden": false,
+     "approved": true
+    },
+    {
+     "guest": null,
+     "name": "A friend",
+     "text": "Cheers to Aurora Bank 🎉",
+     "at": "2026-07-24T13:40",
+     "hidden": false,
+     "approved": true
+    }
+   ]
+  },
+  {
+   "event_no": "EV-02",
+   "name": "Meridian Rose Collection Launch",
+   "client_name": "Meridian Cosmetics",
+   "prototype_project": "EVT-2026-PROD-04",
+   "date": "2026-06-30",
+   "time": "18:00",
+   "venue": "Hotel Mulia Senayan — The Grand Ballroom",
+   "status": "Published",
+   "rsvp_deadline": "2026-06-23",
+   "max_pax": 1,
+   "rsvp_fields": {
+    "email": true,
+    "allergies": true,
+    "pax": false
+   },
+   "feedback_url": "https://forms.gle/meridian-rose-launch",
+   "hold_wishes": false,
+   "tables": [
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5"
+   ],
+   "checkpoints": [
+    {
+     "id": "CP-1",
+     "name": "Main Entrance",
+     "categories": []
+    },
+    {
+     "id": "CP-2",
+     "name": "Goodie Bag",
+     "categories": []
+    }
+   ],
+   "questions": [
+    {
+     "id": "Q-1",
+     "label": "Which products interest you?",
+     "type": "choice",
+     "options": [
+      "Lipstick",
+      "Skincare",
+      "Fragrance"
+     ],
+     "multi": true,
+     "required": false,
+     "attendingOnly": true
+    }
+   ],
+   "question_seq": 0,
+   "invite": {
+    "template_id": "launch",
+    "accent": null,
+    "on": {
+     "hosts": true
+    },
+    "content": {
+     "cover": {
+      "eyebrow": "Meridian Cosmetics presents",
+      "title": "The Rose Collection",
+      "subtitle": "An exclusive launch evening",
+      "image": null
+     },
+     "message": {
+      "body": "Be among the first to discover our new collection, with live demonstrations and a champagne reception."
+     },
+     "couple": {
+      "a": {
+       "name": "",
+       "parents": "",
+       "photo": null,
+       "ig": ""
+      },
+      "b": {
+       "name": "",
+       "parents": "",
+       "photo": null,
+       "ig": ""
+      }
+     },
+     "hosts": {
+      "names": "Presented by Meridian Cosmetics",
+      "logos": []
+     },
+     "countdown": {},
+     "details": {
+      "name": "",
+      "date": "2026-06-30",
+      "time": "18:00",
+      "venue": "Hotel Mulia Senayan — The Grand Ballroom",
+      "mapUrl": "https://maps.google.com/?q=Hotel+Mulia+Senayan",
+      "sessions": []
+     },
+     "agenda": {
+      "rows": [
+       {
+        "time": "18:00",
+        "label": "Reception"
+       },
+       {
+        "time": "19:00",
+        "label": "Collection reveal"
+       },
+       {
+        "time": "20:00",
+        "label": "Dinner"
+       }
+      ]
+     },
+     "speakers": {
+      "people": []
+     },
+     "story": {
+      "items": []
+     },
+     "dresscode": {
+      "text": "Cocktail — a touch of rose"
+     },
+     "gallery": {
+      "photos": []
+     },
+     "video": {
+      "kind": "link",
+      "url": "",
+      "file": null
+     },
+     "music": {
+      "kind": "builtin",
+      "trackId": "soft-piano",
+      "file": null
+     },
+     "rsvp": {},
+     "wishes": {},
+     "gift": {
+      "accounts": [],
+      "address": ""
+     }
+    }
+   },
+   "published": {
+    "template_id": "launch",
+    "accent": null,
+    "on": {
+     "hosts": true
+    },
+    "content": {
+     "cover": {
+      "eyebrow": "Meridian Cosmetics presents",
+      "title": "The Rose Collection",
+      "subtitle": "An exclusive launch evening",
+      "image": null
+     },
+     "message": {
+      "body": "Be among the first to discover our new collection, with live demonstrations and a champagne reception."
+     },
+     "couple": {
+      "a": {
+       "name": "",
+       "parents": "",
+       "photo": null,
+       "ig": ""
+      },
+      "b": {
+       "name": "",
+       "parents": "",
+       "photo": null,
+       "ig": ""
+      }
+     },
+     "hosts": {
+      "names": "Presented by Meridian Cosmetics",
+      "logos": []
+     },
+     "countdown": {},
+     "details": {
+      "name": "",
+      "date": "2026-06-30",
+      "time": "18:00",
+      "venue": "Hotel Mulia Senayan — The Grand Ballroom",
+      "mapUrl": "https://maps.google.com/?q=Hotel+Mulia+Senayan",
+      "sessions": []
+     },
+     "agenda": {
+      "rows": [
+       {
+        "time": "18:00",
+        "label": "Reception"
+       },
+       {
+        "time": "19:00",
+        "label": "Collection reveal"
+       },
+       {
+        "time": "20:00",
+        "label": "Dinner"
+       }
+      ]
+     },
+     "speakers": {
+      "people": []
+     },
+     "story": {
+      "items": []
+     },
+     "dresscode": {
+      "text": "Cocktail — a touch of rose"
+     },
+     "gallery": {
+      "photos": []
+     },
+     "video": {
+      "kind": "link",
+      "url": "",
+      "file": null
+     },
+     "music": {
+      "kind": "builtin",
+      "trackId": "soft-piano",
+      "file": null
+     },
+     "rsvp": {},
+     "wishes": {},
+     "gift": {
+      "accounts": [],
+      "address": ""
+     }
+    }
+   },
+   "review": {
+    "state": "editing",
+    "submittedAt": null,
+    "submittedBy": null,
+    "note": "",
+    "returnedAt": null
+   },
+   "wishes": []
+  },
+  {
+   "event_no": "EV-03",
+   "name": "Wibowo–Sari Wedding",
+   "client_name": "Keluarga Wibowo",
+   "prototype_project": "EVT-2026-WED-02",
+   "date": "2026-09-05",
+   "time": "10:00",
+   "venue": "Gereja Santa Theresia, Menteng",
+   "status": "Draft",
+   "rsvp_deadline": "2026-08-22",
+   "max_pax": 2,
+   "rsvp_fields": {
+    "email": true,
+    "allergies": true,
+    "pax": true
+   },
+   "feedback_url": "",
+   "hold_wishes": false,
+   "tables": [
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5"
+   ],
+   "checkpoints": [
+    {
+     "id": "CP-1",
+     "name": "Main Entrance",
+     "categories": []
+    }
+   ],
+   "questions": [],
+   "question_seq": 0,
+   "invite": {
+    "template_id": null,
+    "accent": null,
+    "on": {},
+    "content": {
+     "cover": {
+      "eyebrow": "You are invited",
+      "title": "Wibowo–Sari Wedding",
+      "subtitle": "",
+      "image": null
+     },
+     "message": {
+      "body": "We would be delighted to have you with us."
+     },
+     "couple": {
+      "a": {
+       "name": "",
+       "parents": "",
+       "photo": null,
+       "ig": ""
+      },
+      "b": {
+       "name": "",
+       "parents": "",
+       "photo": null,
+       "ig": ""
+      }
+     },
+     "hosts": {
+      "names": "",
+      "logos": []
+     },
+     "countdown": {},
+     "details": {
+      "name": "",
+      "date": "2026-09-05",
+      "time": "10:00",
+      "venue": "Gereja Santa Theresia, Menteng",
+      "mapUrl": "",
+      "sessions": []
+     },
+     "agenda": {
+      "rows": []
+     },
+     "speakers": {
+      "people": []
+     },
+     "story": {
+      "items": []
+     },
+     "dresscode": {
+      "text": ""
+     },
+     "gallery": {
+      "photos": []
+     },
+     "video": {
+      "kind": "link",
+      "url": "",
+      "file": null
+     },
+     "music": {
+      "kind": "builtin",
+      "trackId": "soft-piano",
+      "file": null
+     },
+     "rsvp": {},
+     "wishes": {},
+     "gift": {
+      "accounts": [],
+      "address": ""
+     }
+    }
+   },
+   "published": null,
+   "review": {
+    "state": "editing",
+    "submittedAt": null,
+    "submittedBy": null,
+    "note": "",
+    "returnedAt": null
+   },
+   "wishes": []
+  }
+ ],
+ "guests": [
+  {
+   "key": "G-001",
+   "event_no": "EV-01",
+   "name": "Dewi Wijaya",
+   "phone": "+62 811-6757-9187",
+   "email": "dewi.wijaya@aurorabank.co.id",
+   "category": "VIP",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 2,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Beef",
+    "Q-2": "Yes",
+    "Q-3": "September — Earth, Wind & Fire"
+   },
+   "consent": true,
+   "consent_at": "2026-07-21T20:15",
+   "responded_at": "2026-07-21T20:15",
+   "table": "VIP 1",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-002",
+   "event_no": "EV-01",
+   "name": "Eko Tan",
+   "phone": "+62 818-5676-5916",
+   "email": "eko.tan@gmail.com",
+   "category": "VIP",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Fish",
+    "Q-2": "No"
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-07-22T20:15",
+   "table": "VIP 2",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-003",
+   "event_no": "EV-01",
+   "name": "Fitri Rahman",
+   "phone": "+62 815-4595-2645",
+   "email": "fitri.rahman@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Vegetarian",
+    "Q-2": "No"
+   },
+   "consent": true,
+   "consent_at": "2026-07-23T20:15",
+   "responded_at": "2026-07-23T20:15",
+   "table": "T1",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-004",
+   "event_no": "EV-01",
+   "name": "Gilang Pratama",
+   "phone": "+62 812-3514-8374",
+   "email": "gilang.pratama@aurorabank.co.id",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Fish",
+    "Q-2": "Yes",
+    "Q-3": "Bengawan Solo"
+   },
+   "consent": true,
+   "consent_at": "2026-07-24T20:15",
+   "responded_at": "2026-07-24T20:15",
+   "table": "T2",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-005",
+   "event_no": "EV-01",
+   "name": "Hana Nugroho",
+   "phone": "+62 819-2433-5103",
+   "email": "hana.nugroho@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 2,
+   "allergies": "Peanuts",
+   "answers": {
+    "Q-1": "Beef",
+    "Q-2": "No"
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-07-25T20:15",
+   "table": "T3",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-006",
+   "event_no": "EV-01",
+   "name": "Indra Setiawan",
+   "phone": "+62 816-1352-1832",
+   "email": "indra.setiawan@gmail.com",
+   "category": "Media",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Beef",
+    "Q-2": "No",
+    "Q-3": "Fly Me to the Moon"
+   },
+   "consent": true,
+   "consent_at": "2026-07-21T20:15",
+   "responded_at": "2026-07-21T20:15",
+   "table": "T4",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-007",
+   "event_no": "EV-01",
+   "name": "Joko Halim",
+   "phone": "+62 813-9271-7561",
+   "email": "joko.halim@aurorabank.co.id",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "Vegetarian",
+   "answers": {
+    "Q-1": "Fish",
+    "Q-2": "Yes"
+   },
+   "consent": true,
+   "consent_at": "2026-07-22T20:15",
+   "responded_at": "2026-07-22T20:15",
+   "table": "T5",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-008",
+   "event_no": "EV-01",
+   "name": "Kartika Hartono",
+   "phone": "+62 810-8190-4290",
+   "email": "kartika.hartono@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Vegetarian",
+    "Q-2": "No",
+    "Q-3": "September — Earth, Wind & Fire"
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-07-23T20:15",
+   "table": "T6",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-009",
+   "event_no": "EV-01",
+   "name": "Lukas Purnama",
+   "phone": "+62 817-7109-1019",
+   "email": "lukas.purnama@gmail.com",
+   "category": "VIP",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 2,
+   "allergies": "Seafood",
+   "answers": {
+    "Q-1": "Fish",
+    "Q-2": "No"
+   },
+   "consent": true,
+   "consent_at": "2026-07-24T20:15",
+   "responded_at": "2026-07-24T20:15",
+   "table": "VIP 1",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-010",
+   "event_no": "EV-01",
+   "name": "Mega Kusuma",
+   "phone": "+62 814-6028-6748",
+   "email": "mega.kusuma@aurorabank.co.id",
+   "category": "VIP",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Beef",
+    "Q-2": "Yes"
+   },
+   "consent": true,
+   "consent_at": "2026-07-25T20:15",
+   "responded_at": "2026-07-25T20:15",
+   "table": "VIP 2",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-011",
+   "event_no": "EV-01",
+   "name": "Nanda Siregar",
+   "phone": "+62 811-4947-3477",
+   "email": "nanda.siregar@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Beef",
+    "Q-2": "No",
+    "Q-3": "Bengawan Solo"
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-07-21T20:15",
+   "table": "T1",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-012",
+   "event_no": "EV-01",
+   "name": "Oki Chandra",
+   "phone": "+62 818-3866-9206",
+   "email": "oki.chandra@gmail.com",
+   "category": "Vendor",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "Gluten-free",
+   "answers": {
+    "Q-1": "Fish",
+    "Q-2": "No"
+   },
+   "consent": true,
+   "consent_at": "2026-07-22T20:15",
+   "responded_at": "2026-07-22T20:15",
+   "table": "T2",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-013",
+   "event_no": "EV-01",
+   "name": "Putu Saputra",
+   "phone": "+62 815-2785-5935",
+   "email": "putu.saputra@aurorabank.co.id",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 2,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Vegetarian",
+    "Q-2": "Yes",
+    "Q-3": "Fly Me to the Moon"
+   },
+   "consent": true,
+   "consent_at": "2026-07-23T20:15",
+   "responded_at": "2026-07-23T20:15",
+   "table": "T3",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-014",
+   "event_no": "EV-01",
+   "name": "Rahul Tanoto",
+   "phone": "+62 812-1704-2664",
+   "email": "rahul.tanoto@gmail.com",
+   "category": "Media",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "Halal only",
+   "answers": {
+    "Q-1": "Fish",
+    "Q-2": "No"
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-07-24T20:15",
+   "table": "T4",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-015",
+   "event_no": "EV-01",
+   "name": "Sari Hidayat",
+   "phone": "+62 819-9623-8393",
+   "email": "sari.hidayat@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Beef",
+    "Q-2": "No",
+    "Q-3": "September — Earth, Wind & Fire"
+   },
+   "consent": true,
+   "consent_at": "2026-07-25T20:15",
+   "responded_at": "2026-07-25T20:15",
+   "table": "T5",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-016",
+   "event_no": "EV-01",
+   "name": "Teguh Lestari",
+   "phone": "+62 816-8542-5122",
+   "email": "teguh.lestari@aurorabank.co.id",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Beef",
+    "Q-2": "Yes"
+   },
+   "consent": true,
+   "consent_at": "2026-07-21T20:15",
+   "responded_at": "2026-07-21T20:15",
+   "table": "T6",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-017",
+   "event_no": "EV-01",
+   "name": "Utari Wibisono",
+   "phone": "+62 813-7461-1851",
+   "email": "utari.wibisono@gmail.com",
+   "category": "VIP",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 2,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Fish",
+    "Q-2": "No"
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-07-22T20:15",
+   "table": "VIP 1",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-018",
+   "event_no": "EV-01",
+   "name": "Vina Santoso",
+   "phone": "+62 810-6380-7580",
+   "email": "vina.santoso@gmail.com",
+   "category": "VIP",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Vegetarian",
+    "Q-2": "No",
+    "Q-3": "Bengawan Solo"
+   },
+   "consent": true,
+   "consent_at": "2026-07-23T20:15",
+   "responded_at": "2026-07-23T20:15",
+   "table": "VIP 2",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-019",
+   "event_no": "EV-01",
+   "name": "Wahyu Gunawan",
+   "phone": "+62 817-5299-4309",
+   "email": "wahyu.gunawan@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Declined",
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-07-23T12:00",
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-020",
+   "event_no": "EV-01",
+   "name": "Yudi Susanto",
+   "phone": "+62 814-4218-1038",
+   "email": "yudi.susanto@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Declined",
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-07-23T12:00",
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-021",
+   "event_no": "EV-01",
+   "name": "Zahra Wijaya",
+   "phone": "+62 811-3137-6767",
+   "email": "zahra.wijaya@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Declined",
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-07-23T12:00",
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-022",
+   "event_no": "EV-01",
+   "name": "Arif Tan",
+   "phone": "+62 818-2056-3496",
+   "email": "arif.tan@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Declined",
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-07-23T12:00",
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-023",
+   "event_no": "EV-01",
+   "name": "Bella Rahman",
+   "phone": "+62 815-9975-9225",
+   "email": "bella.rahman@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-024",
+   "event_no": "EV-01",
+   "name": "Dimas Pratama",
+   "phone": "+62 812-8894-5954",
+   "email": "dimas.pratama@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-025",
+   "event_no": "EV-01",
+   "name": "Elsa Nugroho",
+   "phone": "+62 819-7813-2683",
+   "email": "elsa.nugroho@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-026",
+   "event_no": "EV-01",
+   "name": "Fajar Setiawan",
+   "phone": "+62 816-6732-8412",
+   "email": "fajar.setiawan@gmail.com",
+   "category": "Media",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-027",
+   "event_no": "EV-01",
+   "name": "Galih Halim",
+   "phone": "+62 813-5651-5141",
+   "email": "galih.halim@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-028",
+   "event_no": "EV-01",
+   "name": "Intan Hartono",
+   "phone": "+62 810-4570-1870",
+   "email": "intan.hartono@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-029",
+   "event_no": "EV-01",
+   "name": "Kevin Purnama",
+   "phone": "+62 817-3489-7599",
+   "email": "kevin.purnama@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-030",
+   "event_no": "EV-01",
+   "name": "Laras Kusuma",
+   "phone": "+62 814-2408-4328",
+   "email": "",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": "2026-07-20T10:00",
+   "invited_via": "platform"
+  },
+  {
+   "key": "G-031",
+   "event_no": "EV-01",
+   "name": "Yosef Wibisono",
+   "phone": "+62 813-3841-8431",
+   "email": "yosef.wibisono@yahoo.com",
+   "category": "Regular",
+   "on_master_list": false,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": "Fish",
+    "Q-2": "Yes"
+   },
+   "consent": true,
+   "consent_at": "2026-07-25T19:40",
+   "responded_at": "2026-07-25T19:40",
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-032",
+   "event_no": "EV-02",
+   "name": "Lukas Purnama",
+   "phone": "+62 817-7109-1019",
+   "email": "lukas.purnama@meridian.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Lipstick"
+    ]
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-06-18T09:00",
+   "table": "T1",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:10",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-033",
+   "event_no": "EV-02",
+   "name": "Mega Kusuma",
+   "phone": "+62 814-6028-6748",
+   "email": "mega.kusuma@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "Peanuts",
+   "answers": {
+    "Q-1": [
+     "Skincare",
+     "Fragrance"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T2",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:12",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-034",
+   "event_no": "EV-02",
+   "name": "Nanda Siregar",
+   "phone": "+62 811-4947-3477",
+   "email": "nanda.siregar@meridian.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Skincare"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T3",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:14",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-035",
+   "event_no": "EV-02",
+   "name": "Oki Chandra",
+   "phone": "+62 818-3866-9206",
+   "email": "oki.chandra@gmail.com",
+   "category": "Media",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "Vegetarian",
+   "answers": {
+    "Q-1": [
+     "Lipstick",
+     "Skincare",
+     "Fragrance"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T4",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:16",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-036",
+   "event_no": "EV-02",
+   "name": "Putu Saputra",
+   "phone": "+62 815-2785-5935",
+   "email": "putu.saputra@meridian.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Fragrance"
+    ]
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-06-18T09:00",
+   "table": "T5",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:18",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-037",
+   "event_no": "EV-02",
+   "name": "Rahul Tanoto",
+   "phone": "+62 812-1704-2664",
+   "email": "rahul.tanoto@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "Seafood",
+   "answers": {
+    "Q-1": [
+     "Lipstick"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T1",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:20",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-038",
+   "event_no": "EV-02",
+   "name": "Sari Hidayat",
+   "phone": "+62 819-9623-8393",
+   "email": "sari.hidayat@meridian.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Skincare",
+     "Fragrance"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T2",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:22",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-039",
+   "event_no": "EV-02",
+   "name": "Teguh Lestari",
+   "phone": "+62 816-8542-5122",
+   "email": "teguh.lestari@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Skincare"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T3",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:24",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-040",
+   "event_no": "EV-02",
+   "name": "Utari Wibisono",
+   "phone": "+62 813-7461-1851",
+   "email": "utari.wibisono@meridian.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "Gluten-free",
+   "answers": {
+    "Q-1": [
+     "Lipstick",
+     "Skincare",
+     "Fragrance"
+    ]
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-06-18T09:00",
+   "table": "T4",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:26",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-041",
+   "event_no": "EV-02",
+   "name": "Vina Santoso",
+   "phone": "+62 810-6380-7580",
+   "email": "vina.santoso@gmail.com",
+   "category": "Media",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Fragrance"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T5",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:28",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-042",
+   "event_no": "EV-02",
+   "name": "Wahyu Gunawan",
+   "phone": "+62 817-5299-4309",
+   "email": "wahyu.gunawan@meridian.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "Halal only",
+   "answers": {
+    "Q-1": [
+     "Lipstick"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T1",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:30",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-043",
+   "event_no": "EV-02",
+   "name": "Yudi Susanto",
+   "phone": "+62 814-4218-1038",
+   "email": "yudi.susanto@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Skincare",
+     "Fragrance"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T2",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:32",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-044",
+   "event_no": "EV-02",
+   "name": "Zahra Wijaya",
+   "phone": "+62 811-3137-6767",
+   "email": "zahra.wijaya@meridian.com",
+   "category": "Vendor",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Skincare"
+    ]
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-06-18T09:00",
+   "table": "T3",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:34",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-045",
+   "event_no": "EV-02",
+   "name": "Arif Tan",
+   "phone": "+62 818-2056-3496",
+   "email": "arif.tan@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Lipstick",
+     "Skincare",
+     "Fragrance"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T4",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:36",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-046",
+   "event_no": "EV-02",
+   "name": "Bella Rahman",
+   "phone": "+62 815-9975-9225",
+   "email": "bella.rahman@meridian.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Fragrance"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T5",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:38",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-047",
+   "event_no": "EV-02",
+   "name": "Dimas Pratama",
+   "phone": "+62 812-8894-5954",
+   "email": "dimas.pratama@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Lipstick"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T1",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T18:40",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-048",
+   "event_no": "EV-02",
+   "name": "Elsa Nugroho",
+   "phone": "+62 819-7813-2683",
+   "email": "elsa.nugroho@meridian.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "Peanuts",
+   "answers": {
+    "Q-1": [
+     "Skincare",
+     "Fragrance"
+    ]
+   },
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-06-18T09:00",
+   "table": "T2",
+   "note": "Called 1 Jul — flight from Surabaya was delayed. Send the launch kit by courier.",
+   "note_by": "Rina M.",
+   "note_at": "2026-07-01T10:20",
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-049",
+   "event_no": "EV-02",
+   "name": "Fajar Setiawan",
+   "phone": "+62 816-6732-8412",
+   "email": "fajar.setiawan@gmail.com",
+   "category": "Media",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Skincare"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T3",
+   "note": "Beauty editor, sick on the day. Offer a private preview.",
+   "note_by": "Agus P.",
+   "note_at": "2026-07-01T11:05",
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-050",
+   "event_no": "EV-02",
+   "name": "Galih Halim",
+   "phone": "+62 813-5651-5141",
+   "email": "galih.halim@meridian.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "Vegetarian",
+   "answers": {
+    "Q-1": [
+     "Lipstick",
+     "Skincare",
+     "Fragrance"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T4",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-051",
+   "event_no": "EV-02",
+   "name": "Intan Hartono",
+   "phone": "+62 810-4570-1870",
+   "email": "intan.hartono@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Attending",
+   "pax": 1,
+   "allergies": "",
+   "answers": {
+    "Q-1": [
+     "Fragrance"
+    ]
+   },
+   "consent": true,
+   "consent_at": "2026-06-18T09:00",
+   "responded_at": "2026-06-18T09:00",
+   "table": "T5",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-052",
+   "event_no": "EV-02",
+   "name": "Kevin Purnama",
+   "phone": "+62 817-3489-7599",
+   "email": "kevin.purnama@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Declined",
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-06-20T10:00",
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-053",
+   "event_no": "EV-02",
+   "name": "Laras Kusuma",
+   "phone": "+62 814-2408-4328",
+   "email": "laras.kusuma@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": "Declined",
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": "2026-06-20T10:00",
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-054",
+   "event_no": "EV-02",
+   "name": "Made Siregar",
+   "phone": "+62 811-1327-1057",
+   "email": "made.siregar@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T19:05",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-055",
+   "event_no": "EV-02",
+   "name": "Novi Chandra",
+   "phone": "+62 818-9246-6786",
+   "email": "novi.chandra@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T19:05",
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-056",
+   "event_no": "EV-02",
+   "name": "Raka Saputra",
+   "phone": "+62 815-8165-3515",
+   "email": "raka.saputra@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-057",
+   "event_no": "EV-02",
+   "name": "Siti Tanoto",
+   "phone": "+62 812-7084-9244",
+   "email": "siti.tanoto@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-058",
+   "event_no": "EV-02",
+   "name": "Tommy Hidayat",
+   "phone": "+62 819-6003-5973",
+   "email": "tommy.hidayat@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-059",
+   "event_no": "EV-02",
+   "name": "Wulan Lestari",
+   "phone": "+62 816-4922-2702",
+   "email": "wulan.lestari@gmail.com",
+   "category": "Regular",
+   "on_master_list": true,
+   "rsvp": null,
+   "pax": 0,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": null,
+   "walk_in": false,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-060",
+   "event_no": "EV-02",
+   "name": "Andi Santoso",
+   "phone": "+62 810-1000-1000",
+   "email": "andi.santoso@gmail.com",
+   "category": "Regular",
+   "on_master_list": false,
+   "rsvp": null,
+   "pax": 1,
+   "allergies": "",
+   "answers": {},
+   "consent": true,
+   "consent_at": "2026-06-30T19:10",
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T19:10",
+   "walk_in": true,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-061",
+   "event_no": "EV-02",
+   "name": "Budi Gunawan",
+   "phone": "+62 817-8919-6729",
+   "email": "budi.gunawan@gmail.com",
+   "category": "Regular",
+   "on_master_list": false,
+   "rsvp": null,
+   "pax": 1,
+   "allergies": "",
+   "answers": {},
+   "consent": true,
+   "consent_at": "2026-06-30T19:11",
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T19:11",
+   "walk_in": true,
+   "invited_at": null,
+   "invited_via": null
+  },
+  {
+   "key": "G-062",
+   "event_no": "EV-02",
+   "name": "Citra Susanto",
+   "phone": "+62 814-7838-3458",
+   "email": "citra.susanto@gmail.com",
+   "category": "Regular",
+   "on_master_list": false,
+   "rsvp": null,
+   "pax": 1,
+   "allergies": "",
+   "answers": {},
+   "consent": false,
+   "consent_at": null,
+   "responded_at": null,
+   "table": "",
+   "note": "",
+   "note_by": null,
+   "note_at": null,
+   "checked_in_at": "2026-06-30T19:12",
+   "walk_in": true,
+   "invited_at": null,
+   "invited_via": null
+  }
+ ],
+ "scans": [
+  {
+   "event_no": "EV-02",
+   "guest": "G-032",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:10"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-033",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:12"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-034",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:14"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-035",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:16"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-036",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:18"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-037",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:20"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-038",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:22"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-039",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:24"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-040",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:26"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-041",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:28"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-042",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:30"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-043",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:32"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-044",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:34"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-045",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:36"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-046",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:38"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-047",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T18:40"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-054",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T19:05"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-055",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T19:05"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-060",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T19:10"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-061",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T19:11"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-062",
+   "checkpoint": "CP-1",
+   "at": "2026-06-30T19:12"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-032",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:10"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-033",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:11"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-034",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:12"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-036",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:13"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-037",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:14"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-038",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:15"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-040",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:16"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-041",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:17"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-042",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:18"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-044",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:19"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-045",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:20"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-046",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:21"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-054",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:22"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-055",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:23"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-060",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:24"
+  },
+  {
+   "event_no": "EV-02",
+   "guest": "G-062",
+   "checkpoint": "CP-2",
+   "at": "2026-06-30T21:25"
+  }
+ ]
+}

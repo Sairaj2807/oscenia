@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.env
+var/
+
+# The root .gitignore excludes .env.* — this one is meant to be committed.
+!.env.example

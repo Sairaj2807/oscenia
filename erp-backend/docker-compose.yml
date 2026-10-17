@@ -1,0 +1,53 @@
+# Postgres only. The FastAPI app runs on the host during development so that
+# reload, the debugger and pytest all behave normally.
+#
+#   docker compose up -d db
+#   docker compose down          # keeps data
+#   docker compose down -v       # drops the volume — you will re-seed
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: oscenia-erp-db
+    environment:
+      POSTGRES_USER: oscenia
+      POSTGRES_PASSWORD: oscenia
+      POSTGRES_DB: oscenia_erp
+      # Deterministic collation. Report ordering must not depend on the host locale.
+      POSTGRES_INITDB_ARGS: "--locale=C --encoding=UTF8"
+    ports:
+      # 5433 on the host, deliberately. A native PostgreSQL service already holds 5432 on
+      # this machine, and Docker only won the IPv6 half of it — so `localhost:5432` silently
+      # resolved to the other server and failed authentication against a healthy container.
+      # Do not move this back to 5432 without checking what already listens there.
+      - "5433:5432"
+    volumes:
+      - oscenia_erp_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U oscenia -d oscenia_erp"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  # Created empty on first boot so `pytest` never touches the development data.
+  # See tests/conftest.py.
+  db-test-init:
+    image: postgres:16-alpine
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGPASSWORD: oscenia
+    entrypoint:
+      - sh
+      - -c
+      - |
+        psql -h db -U oscenia -d oscenia_erp -tc \
+          "SELECT 1 FROM pg_database WHERE datname = 'oscenia_erp_test'" \
+          | grep -q 1 || psql -h db -U oscenia -d oscenia_erp \
+          -c "CREATE DATABASE oscenia_erp_test OWNER oscenia"
+    restart: "no"
+
+volumes:
+  oscenia_erp_data:
