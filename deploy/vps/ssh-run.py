@@ -35,6 +35,9 @@ TIMEOUT = int(os.environ.get("VPS_TIMEOUT", "900"))
 
 
 def main(argv: list[str]) -> int:
+    # systemctl and journalctl print characters (e.g. the bullet in `systemctl --failed`) that the Windows
+    # console codepage cannot encode; show them as ? instead of crashing.
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     if not PASSWORD:
         sys.exit("Set VPS_PW in the environment of this command (the password is never stored anywhere).")
     if not argv:
