@@ -86,6 +86,23 @@ and runs `alembic upgrade head` before each start. About 120 MB RSS idle.
 | `update-api.sh` | Ship the committed backend and restart (migrations run first) | `VPS_HOST`, SSH |
 | `session-context.sh` | Prints the live repo state for a starting Claude session (SessionStart hook) | nothing |
 
+## Changes made on the server outside Oscenia
+
+The server is shared, so anything done to it beyond Oscenia's own files is listed here with how to undo it.
+
+| Date | Change | Why | Undo |
+|---|---|---|---|
+| 2026-10-17 | 2 GB `/swapfile`, `vm.swappiness=10` (`/etc/sysctl.d/99-oscenia-swap.conf`), `/etc/fstab` line | Memory safety net on a box with no swap | `swapoff /swapfile`, remove the fstab line and the sysctl file |
+| 2026-10-17 | PostgreSQL 16 from apt (+ `libpq5`/`libpq-dev` patch upgrade) | Oscenia's database | Not advised once data exists |
+| 2026-10-19 | `/etc/gai.conf`: `precedence ::ffff:0:0/96  100` | Programs preferred the server's IPv6 address (`2a02:4780:12:cefd::1`); Fyers accepts orders only from the whitelisted IPv4 `194.164.148.203`, so every order was rejected. Now outbound prefers IPv4. Verified with python's lookup order and a real connection; takes effect for newly started processes | Delete the line; backup in `/root/network-backup/gai.conf.20261019.bak` |
+
+### `fyers_v2` is a live trading bot: never interrupt it
+
+- Do no Oscenia server work (deploys, restarts, installs, builds, big copies) during **09:00 to 15:45 IST on weekdays**.
+- Never stop, restart or edit `fyers_v2` or `/root/Fyers_v2`. Starting it again is the owner's decision.
+- On 2026-10-19 its 13:20 exit orders were rejected (IPv6 vs the IPv4 whitelist, fixed as above), the bot marked the trade closed anyway, and it was stopped by hand at 13:51. As of the last check it was still **stopped**. After it is started, watch the first order it places.
+- Proposed, not applied (owner's OK needed): `MemoryMin=256M`, `MemorySwapMax=0`, `OOMScoreAdjust=-900`, `CPUWeight=500` for `fyers_v2` in a drop-in file; a market-hours guard in `ship-static.sh` / `update-api.sh`; an alert if `fyers_v2` goes inactive.
+
 ## Updating
 
 - **Backend:** `VPS_HOST=root@… deploy/vps/update-api.sh` (migrations run on restart).

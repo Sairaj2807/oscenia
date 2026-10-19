@@ -42,6 +42,9 @@ rewrites values like `VITE_API_URL=/api/v1` into `C:/Program Files/Git/api/v1`.
 - **Never write a password, key or secret into any file.** The owner pastes credentials in chat; use them for the task only.
   In a new session, ask for server access again.
 - **Never push, force-push or merge** unless asked. Branch `feature/erp-integration` is local only.
+- **`fyers_v2` is a live trading bot on the same server: never interrupt it.** No Oscenia server work 09:00-15:45 IST on weekdays; never stop,
+  restart or edit it or `/root/Fyers_v2`; starting it again is the owner's call. Its orders go out over IPv4 (`194.164.148.203`, the whitelisted
+  address) thanks to a line in `/etc/gai.conf`; do not undo that. Details: `deploy/vps/README.md` and `docs/GO-LIVE-STATUS.md`.
 - **Backups do not exist yet**; the production database is the only copy of the data.
 - Short chat answers when the owner says "answer in chat"; approvals come one numbered decision at a time.
 

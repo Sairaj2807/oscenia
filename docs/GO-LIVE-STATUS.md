@@ -97,6 +97,16 @@ rerun after the last frontend-only fixes (they did not touch the backend).
 | **Monitoring** | Only `/health`. No uptime alerts, log shipping or error tracking |
 | **Docs** | The dated client-feedback records still use the old paths on purpose; each has a note at the top |
 
+## Neighbour: the `fyers_v2` trading bot (2026-10-19)
+
+The VPS also runs the owner's live trading bot. It must never be interrupted by Oscenia work (no server work 09:00 to 15:45 IST on
+weekdays). On 19 Oct its option exit orders were **rejected by the broker because they left from the server's IPv6 address, while the
+Fyers whitelist holds the IPv4 `194.164.148.203`**. Fixed the same day with an IPv4 preference in `/etc/gai.conf` (verified; undo and
+details in `deploy/vps/README.md`, "Changes made on the server outside Oscenia"). The bot is **still stopped** and starting it is the
+owner's decision. Still to do by the owner: confirm the whitelist, check the Fyers positions and P&L for the failed 13:20 exits.
+Not Oscenia's doing: the server was rebooted on 17 Oct by someone else, which exposed several other broken services (`sessions`, `tele_signals`,
+`cryptopanic_project`, `wg-quick@wg0`) and the owner has since stopped `abhi-tele` (a 1.3 GB memory hog).
+
 ## Decisions still open
 
 1. **Warehouse (and every business role) can still read the whole journal**, projects and vendors. The dashboard
