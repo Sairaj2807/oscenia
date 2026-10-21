@@ -73,7 +73,7 @@ and runs `alembic upgrade head` before each start. About 120 MB RSS idle.
 5. **Backups: NOT DONE, and the database is the only copy of the data.** Nightly `pg_dump -Fc oscenia_erp`
    plus `/srv/oscenia/uploads`, copied off the box, and a tested restore. Do this before real data goes in.
 6. ~~Swap~~ done (see above).
-7. **Merge `main`.** Push `feature/erp-integration`, merge it, and stop using the old checkout
+7. ~~Merge `main`~~ done 2026-10-21 (fast-forward). Stop using the old checkout
    `/var/www/oscenia-web` (its `git pull && npm ci` fails once `main` has the monorepo layout).
 
 ## Helper scripts in this folder

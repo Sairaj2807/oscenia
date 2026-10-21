@@ -9,7 +9,7 @@
 The marketing website, the ERP and its API are **live on one domain, `https://osceniaevents.com`**, on a
 shared VPS. `/` is the website, `/erp/` is the ERP, `/api/*` is the API. Sign-in is real: there are no demo
 accounts and no offline mode in the deployed build. One user exists (the CEO, Sairaj Bangar). **There are
-no backups yet**, the AI minutes key is not set, and the branch is committed but **not pushed or merged**.
+no backups yet**, the AI minutes key is not set, and the code is on GitHub: **merged into `main` on 21 Oct 2026**.
 
 ## What is live
 
@@ -30,7 +30,8 @@ limits (700 MB cap, lowest kill priority), swap, paths and rollback.
 - This folder is now the repo root. The site moved to `website/` (history kept as renames); the ERP came in as
   `erp-frontend/` (React) and `erp-backend/` (FastAPI), with `deploy/`, `docs/` and CI.
 - The committed ERP build (`public/erp`) and the Vercel files are gone: bundles are built from source.
-- Branch `feature/erp-integration`, a series of commits on top of `origin/main` (a fast-forward). **Not pushed.**
+- **On GitHub since 21 Oct 2026:** branch `feature/erp-integration` (14 commits) was fast-forwarded into `main` (it sat directly on
+  `eab6848`, the old website), so `main` is now the monorepo and keeps every commit. The branch is kept on GitHub as well.
 
 **Real login only**
 - Demo mode (offline sign-in, demo accounts, the role switcher, the "Prototype" badge) exists only under
@@ -87,7 +88,7 @@ rerun after the last frontend-only fixes (they did not touch the backend).
 |---|---|
 | **Backups** | **None.** Nightly `pg_dump` plus `/srv/oscenia/uploads`, copied off the box, with a restore rehearsal. Do this before real data goes in |
 | **AI meeting minutes** | Off until `AI_API_KEY` is set in `/srv/oscenia/api.env` (owner will provide it later) |
-| **Push / merge** | Branch is local only. After pushing, merge to `main`. The old server checkout `/var/www/oscenia-web` must not be pulled once `main` has the new layout |
+| **Old server checkout** | Done: `main` has the new layout. So the old checkout `/var/www/oscenia-web` on the server (at the old `eab6848`) must **never be pulled**: it has no `package.json` at its root any more and its update routine would fail. Production is not deployed from GitHub; it is shipped with `deploy/vps/ship-static.sh` and `update-api.sh` |
 | **SSH access** | By root password, which was shared in chat. SSH keys with a non-root deploy user, and a rotated password, are still advised (the owner chose to defer) |
 | **CEO in the workspace/chat** | The CEO has no workspace role, so Team Chat answers 403 ("not in the workspace yet"). Add one if the CEO should use chat and tasks |
 | **Users** | Only the CEO exists. Create the team from the Users screen |
